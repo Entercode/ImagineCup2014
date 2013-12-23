@@ -1,0 +1,2 @@
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\bin\Debug\ServiceConfiguration.cscfg
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\bin\Debug\ServiceDefinition.csdef

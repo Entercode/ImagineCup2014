@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=tokada55;AccountKey=MjOr0gxpiOe2qFI1h7kjcpDpNrxJViP6tKpYku30ru7YDTsO6OIhQ010o5mpQ2hOwihxD85xvBreC5p9yFYPug==" />
+      <Setting name="ConnectionLimit" value="12" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="PageRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=tokada55;AccountKey=MjOr0gxpiOe2qFI1h7kjcpDpNrxJViP6tKpYku30ru7YDTsO6OIhQ010o5mpQ2hOwihxD85xvBreC5p9yFYPug==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

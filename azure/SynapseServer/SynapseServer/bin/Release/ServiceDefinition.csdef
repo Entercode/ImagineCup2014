@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  **********************************************************************************************
+
+  このファイルはツールによってプロジェクト ファイルから生成されました: ServiceDefinition.csdef
+
+  このファイルへの変更は、正しくない動作の原因となる場合があり、ファイルが再生成されると失われます。
+
+  **********************************************************************************************
+-->
+<ServiceDefinition name="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
+  <WorkerRole name="WorkerRole" vmsize="Small">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <Endpoints>
+      <InputEndpoint name="StreetPass" protocol="http" port="4724" />
+    </Endpoints>
+    <ConfigurationSettings>
+      <Setting name="ConnectionLimit" />
+    </ConfigurationSettings>
+    <Contents>
+      <Content destination=".\">
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\WorkerRoleContent\" />
+      </Content>
+    </Contents>
+  </WorkerRole>
+  <WebRole name="PageRole" vmsize="Small">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" localPort="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <Contents>
+      <Content destination=".\">
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\PageRoleContent\" />
+      </Content>
+    </Contents>
+  </WebRole>
+</ServiceDefinition>
