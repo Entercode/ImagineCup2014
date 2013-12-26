@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
   <WorkerRole name="WorkerRole" vmsize="Small">
+		<Runtime executionContext="elevated" />
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
     <Endpoints>
-      <InputEndpoint name="StreetPass" protocol="http" port="4724" />
+      <InputEndpoint name="StreetPass" protocol="http" port="4724" localPort="4724"/>
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="ConnectionLimit" />

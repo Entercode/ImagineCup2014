@@ -75,3 +75,5 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\Microsof
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.pdb
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.csprojResolveAssemblyReference.cache
+D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\PageRole\bin\PageRole.dll.CodeAnalysisLog.xml
+D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\PageRole\bin\PageRole.dll.lastcodeanalysissucceeded

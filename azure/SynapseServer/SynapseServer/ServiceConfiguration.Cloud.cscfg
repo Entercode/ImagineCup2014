@@ -3,14 +3,14 @@
   <Role name="WorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=tokada55;AccountKey=MjOr0gxpiOe2qFI1h7kjcpDpNrxJViP6tKpYku30ru7YDTsO6OIhQ010o5mpQ2hOwihxD85xvBreC5p9yFYPug==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=synapseserver;AccountKey=pNUikVnuc7pUUHxFH+ckoHYCSckGVvShUp8dcR5FZKM7Rh33D9Iq1Q9wocjsX3WaPYUO3NRYTMDJo+NRcubgRg==" />
       <Setting name="ConnectionLimit" value="12" />
     </ConfigurationSettings>
   </Role>
   <Role name="PageRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=tokada55;AccountKey=MjOr0gxpiOe2qFI1h7kjcpDpNrxJViP6tKpYku30ru7YDTsO6OIhQ010o5mpQ2hOwihxD85xvBreC5p9yFYPug==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=synapseserver;AccountKey=pNUikVnuc7pUUHxFH+ckoHYCSckGVvShUp8dcR5FZKM7Rh33D9Iq1Q9wocjsX3WaPYUO3NRYTMDJo+NRcubgRg==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

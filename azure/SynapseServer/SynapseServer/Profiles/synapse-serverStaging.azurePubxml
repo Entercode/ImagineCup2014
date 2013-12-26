@@ -15,8 +15,8 @@
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
     <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
-    <AzureStorageAccountLabel>tokada55</AzureStorageAccountLabel>
-    <AzureStorageAccountName>tokada55</AzureStorageAccountName>
+    <AzureStorageAccountLabel>synapseserver</AzureStorageAccountLabel>
+    <AzureStorageAccountName>synapseserver</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
   </PropertyGroup>
 </Project>

@@ -40,6 +40,6 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\ko\
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\ru\System.Spatial.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\zh-Hans\System.Spatial.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\zh-Hant\System.Spatial.resources.dll
-d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.csprojResolveAssemblyReference.cache
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.pdb
+D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.csprojResolveAssemblyReference.cache

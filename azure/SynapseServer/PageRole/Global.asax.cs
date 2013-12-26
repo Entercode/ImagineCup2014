@@ -30,5 +30,14 @@ namespace PageRole
 			// ハンドルされていないエラーが発生したときに実行するコードです
 
 		}
+
+		void Application_BeginRequest(object sender, EventArgs e)
+		{
+			if (!"POST".Equals(Request.HttpMethod))
+			{
+				Response.StatusCode = 404;
+				Response.End();
+			}
+		}
 	}
 }

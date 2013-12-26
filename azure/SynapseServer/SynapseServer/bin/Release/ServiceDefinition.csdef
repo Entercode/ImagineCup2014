@@ -10,18 +10,19 @@
 -->
 <ServiceDefinition name="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
   <WorkerRole name="WorkerRole" vmsize="Small">
+    <Runtime executionContext="elevated" />
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
     <Endpoints>
-      <InputEndpoint name="StreetPass" protocol="http" port="4724" />
+      <InputEndpoint name="StreetPass" protocol="http" port="4724" localPort="4724" />
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="ConnectionLimit" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\WorkerRoleContent\" />
+        <SourceDirectory path="D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\WorkerRoleContent\" />
       </Content>
     </Contents>
   </WorkerRole>
@@ -41,7 +42,7 @@
     </Imports>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\PageRoleContent\" />
+        <SourceDirectory path="D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\PageRoleContent\" />
       </Content>
     </Contents>
   </WebRole>

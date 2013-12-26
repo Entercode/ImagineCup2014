@@ -12,9 +12,6 @@ namespace WorkerRole
 		AsyncServer server;
 		public override void Run()
 		{
-			// これはワーカーの実装例です。実際のロジックに置き換えてください。
-			Trace.TraceInformation("WorkerRole entry point called", "Information");
-
 			server.Run();
 		}
 
@@ -24,7 +21,10 @@ namespace WorkerRole
 
 			// 同時接続の最大数を設定します
 			ServicePointManager.DefaultConnectionLimit = limit;
-			server = new AsyncServer(limit);
+
+			var endPoint = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["StreetPass"].IPEndpoint;
+
+			server = new AsyncServer("+", endPoint.Port, limit);
 
 			// 構成の変更を処理する方法については、
 			// MSDN トピック (http://go.microsoft.com/fwlink/?LinkId=166357) を参照してください。
