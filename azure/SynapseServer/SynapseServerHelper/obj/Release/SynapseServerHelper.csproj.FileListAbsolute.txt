@@ -1,0 +1,5 @@
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServerHelper\bin\Release\SynapseServerHelper.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServerHelper\bin\Release\SynapseServerHelper.pdb
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServerHelper\obj\Release\SynapseServerHelper.csprojResolveAssemblyReference.cache
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServerHelper\obj\Release\SynapseServerHelper.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServerHelper\obj\Release\SynapseServerHelper.pdb
