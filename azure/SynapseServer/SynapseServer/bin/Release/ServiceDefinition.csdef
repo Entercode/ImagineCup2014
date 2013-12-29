@@ -19,10 +19,11 @@
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="ConnectionLimit" />
+      <Setting name="DatabaseConnectionString" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\WorkerRoleContent\" />
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\WorkerRoleContent\" />
       </Content>
     </Contents>
   </WorkerRole>
@@ -40,9 +41,12 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <ConfigurationSettings>
+      <Setting name="DatabaseConnectionString" />
+    </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\PageRoleContent\" />
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Release\PageRoleContent\" />
       </Content>
     </Contents>
   </WebRole>

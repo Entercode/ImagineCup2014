@@ -75,3 +75,5 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\Microsof
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Release\PageRole.csprojResolveAssemblyReference.cache
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Release\PageRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Release\PageRole.pdb
+d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\SynapseServerHelper.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\SynapseServerHelper.pdb

@@ -43,3 +43,5 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Release\z
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Release\WorkerRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Release\WorkerRole.pdb
 D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\WorkerRole\obj\Release\WorkerRole.csprojResolveAssemblyReference.cache
+d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Release\SynapseServerHelper.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Release\SynapseServerHelper.pdb

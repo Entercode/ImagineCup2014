@@ -21,11 +21,13 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.W
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.WindowsAzure.Configuration.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.WindowsAzure.Diagnostics.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.WindowsAzure.Storage.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\SynapseServerHelper.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\System.Spatial.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\System.Web.Optimization.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\System.Web.Providers.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\WebGrease.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\SynapseServerHelper.pdb
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.Data.Edm.xml
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.Data.OData.xml
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\Microsoft.WindowsAzure.Diagnostics.xml
@@ -72,8 +74,6 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\System.W
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\System.Web.Providers.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\Microsoft.AspNet.Membership.OpenAuth.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\bin\ja\Microsoft.AspNet.FriendlyUrls.resources.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.csprojResolveAssemblyReference.cache
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.pdb
-d:\mydocument\visual studio 2012\Projects\SynapseServer\PageRole\obj\Debug\PageRole.csprojResolveAssemblyReference.cache
-D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\PageRole\bin\PageRole.dll.CodeAnalysisLog.xml
-D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\PageRole\bin\PageRole.dll.lastcodeanalysissucceeded

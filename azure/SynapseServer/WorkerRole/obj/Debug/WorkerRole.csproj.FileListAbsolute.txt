@@ -6,8 +6,10 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Mic
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.WindowsAzure.Diagnostics.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.WindowsAzure.Storage.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\SynapseServerHelper.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\System.Spatial.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\SynapseServerHelper.pdb
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.Data.Edm.xml
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.Data.OData.xml
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\Microsoft.WindowsAzure.Diagnostics.xml
@@ -40,6 +42,6 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\ko\
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\ru\System.Spatial.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\zh-Hans\System.Spatial.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\bin\Debug\zh-Hant\System.Spatial.resources.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.csprojResolveAssemblyReference.cache
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.pdb
-D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\WorkerRole\obj\Debug\WorkerRole.csprojResolveAssemblyReference.cache

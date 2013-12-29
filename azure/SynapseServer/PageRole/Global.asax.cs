@@ -33,6 +33,11 @@ namespace PageRole
 
 		void Application_BeginRequest(object sender, EventArgs e)
 		{
+			if (Request.FilePath.Contains("/test/"))
+			{
+				return;
+			}
+
 			if (!"POST".Equals(Request.HttpMethod))
 			{
 				Response.StatusCode = 404;

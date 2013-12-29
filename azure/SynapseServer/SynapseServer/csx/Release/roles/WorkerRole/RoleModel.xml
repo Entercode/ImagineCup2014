@@ -30,7 +30,7 @@
     <Property name="Configuration" value="Release" />
     <Property name="Platform" value="AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="D:\MyDocument\Visual Studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\WorkerRole\" />
+    <Property name="OutputDir" value="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\WorkerRole\" />
     <Property name="EntryPoint" value="WorkerRole.dll" />
     <Property name="SourceDir" value="" />
     <Property name="SitePhysicalPath" value="" />

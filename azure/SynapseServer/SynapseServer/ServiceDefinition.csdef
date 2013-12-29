@@ -10,6 +10,7 @@
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="ConnectionLimit" />
+			<Setting name="DatabaseConnectionString" />
     </ConfigurationSettings>
   </WorkerRole>
   <WebRole name="PageRole" vmsize="Small">
@@ -26,5 +27,8 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+		<ConfigurationSettings>
+			<Setting name="DatabaseConnectionString" />
+		</ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>
