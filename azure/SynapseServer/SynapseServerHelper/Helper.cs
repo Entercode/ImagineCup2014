@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Data.SqlClient;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SynapseServer
 {
@@ -74,5 +76,47 @@ namespace SynapseServer
 		public const string MailAddress = "mail";
 		public const string Nickname = "nn";
 		public const string Hash = "hash";
+
+		public static string StringConvertOfNumberToDateTime(string number)
+		{
+			if (number.Length != 14)
+			{
+				throw new ArgumentException("桁数が異常です。");
+			}
+
+			if (!Regex.IsMatch(number, @"\D"))
+			{
+				throw new ArgumentException("数字以外の文字が混入しています。");
+			}
+
+			StringBuilder sb = new StringBuilder();
+			sb.Append(number.Substring(0, 4));
+			sb.Append("/");
+			sb.Append(number.Substring(4, 2));
+			sb.Append("/");
+			sb.Append(number.Substring(6, 2));
+			sb.Append(" ");
+			sb.Append(number.Substring(8, 2));
+			sb.Append(":");
+			sb.Append(number.Substring(10, 2));
+			sb.Append(":");
+			sb.Append(number.Substring(12, 2));
+			return sb.ToString();
+		}
+
+		public static string StringConvertOfDateTimeToNumber(string dateTime)
+		{
+			if (dateTime.Length != 19)
+			{
+				throw new ArgumentException("桁数が異常です。");
+			}
+
+			if (Regex.IsMatch(dateTime, @"[^\d/ :]"))
+			{
+				throw new ArgumentException("日付を構成する文字以外の文字が混入しています。");
+			}
+
+			return string.Join(string.Empty, dateTime.Split('/', ' ', ':'));
+		}
 	}
 }

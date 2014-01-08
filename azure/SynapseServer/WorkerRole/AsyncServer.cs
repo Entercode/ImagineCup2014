@@ -101,8 +101,9 @@ namespace WorkerRole
 								{
 									try
 									{
+										string passedTime = Helper.StringConvertOfNumberToDateTime(data[Helper.PassedTime]);
 										string query = string.Format("INSERT StreetPass(UserBindId, PassedDeviceId, PassedTime) VALUES ((SELECT BindId FROM AccountDevice WHERE UserId = '{0}' AND DeviceId = {1}), {2},'{3}')",
-												data[Helper.UserId], data[Helper.DeviceId], data[Helper.PassedDeviceId], data[Helper.PassedTime]);
+												data[Helper.UserId], data[Helper.DeviceId], data[Helper.PassedDeviceId], passedTime);
 										Helper.ExecuteSqlQuery(query);
 										sendMessage += "And saved new account data.";
 									}
