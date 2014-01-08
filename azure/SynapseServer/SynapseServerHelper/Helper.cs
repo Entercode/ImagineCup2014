@@ -84,7 +84,7 @@ namespace SynapseServer
 				throw new ArgumentException("桁数が異常です。");
 			}
 
-			if (!Regex.IsMatch(number, @"\D"))
+			if (Regex.IsMatch(number, @"\D"))
 			{
 				throw new ArgumentException("数字以外の文字が混入しています。");
 			}
