@@ -32,7 +32,7 @@ namespace PageRole
 																data[Helper.UserId], data[Helper.Nickname], data[Helper.MailAddress], data[Helper.PasswordHash].GetHashCode());//GetHashCode()は仮である。
 					Helper.ExecuteSqlQuery(signUpQuery);
 
-					string deviceBindQuery = string.Format("INSERT AccountDevice (UserId, DeviceId) VALUES ('{0}',{1});", data["uid"], data["did"]);
+					string deviceBindQuery = string.Format("INSERT AccountDevice (UserId, DeviceId) VALUES ('{0}',{1});", data[Helper.UserId], data[Helper.DeviceId]);
 					Helper.ExecuteSqlQuery(deviceBindQuery);
 
 					Response.Write("And saved new account data.");
