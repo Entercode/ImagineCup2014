@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="605" y="1367"/>
         </scene>
-        <!--View Controller - Debug-->
+        <!--Debug View Controller - Debug-->
         <scene sceneID="mff-VC-MyI">
             <objects>
-                <viewController id="dwt-aE-ufk" sceneMemberID="viewController">
+                <viewController id="dwt-aE-ufk" customClass="DebugViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2lG-tA-Qes"/>
                         <viewControllerLayoutGuide type="bottom" id="0v6-Yy-pPY"/>
@@ -201,8 +201,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebi-Uk-1sA">
-                                        <rect key="frame" x="20" y="146" width="280" height="65"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="ebi-Uk-1sA">
+                                        <rect key="frame" x="20" y="146" width="280" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -221,6 +221,9 @@
                                         <state key="normal" title="SHA-1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pushedSHA1Button:" destination="dwt-aE-ufk" eventType="touchUpInside" id="TKL-s6-9fe"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>
@@ -229,6 +232,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Debug" image="first" id="U5B-4R-Hym"/>
                     <navigationItem key="navigationItem" title="Debug" id="Pyf-1t-1eU"/>
+                    <connections>
+                        <outlet property="sha1Field" destination="jq1-hB-dqY" id="tbq-gO-5Un"/>
+                        <outlet property="sha1Label" destination="ebi-Uk-1sA" id="2fT-RJ-hBV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4O-AJ-jFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

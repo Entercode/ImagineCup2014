@@ -26,6 +26,7 @@
 		3B71EFAF1868769000D5A44F /* profile2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B71EFAE1868769000D5A44F /* profile2.png */; };
 		3B74CBA5187FBA2F0012A3DC /* SHA1Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CBA4187FBA2F0012A3DC /* SHA1Generator.m */; };
 		3B74CBA7187FBA8C0012A3DC /* libSystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B74CBA6187FBA8C0012A3DC /* libSystem.dylib */; };
+		3B74CBAA187FBC380012A3DC /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CBA9187FBC380012A3DC /* DebugViewController.m */; };
 		3BB43948187D425A00CFE184 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB43947187D425A00CFE184 /* LoginViewController.m */; };
 		3BB4394B187D427D00CFE184 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4394A187D427D00CFE184 /* SignupViewController.m */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,8 @@
 		3B74CBA3187FBA2F0012A3DC /* SHA1Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1Generator.h; sourceTree = "<group>"; };
 		3B74CBA4187FBA2F0012A3DC /* SHA1Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHA1Generator.m; sourceTree = "<group>"; };
 		3B74CBA6187FBA8C0012A3DC /* libSystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.dylib; path = usr/lib/libSystem.dylib; sourceTree = SDKROOT; };
+		3B74CBA8187FBC380012A3DC /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
+		3B74CBA9187FBC380012A3DC /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
 		3BB43946187D425A00CFE184 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3BB43947187D425A00CFE184 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3BB43949187D427D00CFE184 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				3B71EF761868464600D5A44F /* Main_iPhone.storyboard */,
 				3B71EF791868464600D5A44F /* Main_iPad.storyboard */,
 				3B71EF7C1868464600D5A44F /* FirstViewController.h */,
+				3B74CBA8187FBC380012A3DC /* DebugViewController.h */,
+				3B74CBA9187FBC380012A3DC /* DebugViewController.m */,
 				3B71EF7D1868464600D5A44F /* FirstViewController.m */,
 				3BB43946187D425A00CFE184 /* LoginViewController.h */,
 				3BB43947187D425A00CFE184 /* LoginViewController.m */,
@@ -287,6 +292,7 @@
 				3B71EF711868464600D5A44F /* main.m in Sources */,
 				3B74CBA5187FBA2F0012A3DC /* SHA1Generator.m in Sources */,
 				3BB4394B187D427D00CFE184 /* SignupViewController.m in Sources */,
+				3B74CBAA187FBC380012A3DC /* DebugViewController.m in Sources */,
 				3B71EFA118685A1100D5A44F /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

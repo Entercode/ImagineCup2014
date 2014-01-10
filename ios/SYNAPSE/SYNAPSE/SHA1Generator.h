@@ -10,6 +10,6 @@
 
 @interface SHA1Generator : NSObject
 
-+ (NSString *) sha1WithString:(NSString *)input
++ (NSString *) sha1WithString:(NSString *)input;
 
 @end
