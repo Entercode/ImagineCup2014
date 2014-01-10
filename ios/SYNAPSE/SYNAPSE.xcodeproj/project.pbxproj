@@ -25,6 +25,7 @@
 		3B71EFA118685A1100D5A44F /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71EFA018685A1100D5A44F /* TimelineViewController.m */; };
 		3B71EFAF1868769000D5A44F /* profile2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B71EFAE1868769000D5A44F /* profile2.png */; };
 		3B74CB9F187FB25C0012A3DC /* hoge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CB9E187FB25C0012A3DC /* hoge.m */; };
+		3B74CBA2187FB4900012A3DC /* hoge2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CBA1187FB4900012A3DC /* hoge2.m */; };
 		3BB43948187D425A00CFE184 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB43947187D425A00CFE184 /* LoginViewController.m */; };
 		3BB4394B187D427D00CFE184 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB4394A187D427D00CFE184 /* SignupViewController.m */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,8 @@
 		3B71EFAE1868769000D5A44F /* profile2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile2.png; sourceTree = "<group>"; };
 		3B74CB9D187FB25C0012A3DC /* hoge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoge.h; sourceTree = "<group>"; };
 		3B74CB9E187FB25C0012A3DC /* hoge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hoge.m; sourceTree = "<group>"; };
+		3B74CBA0187FB4900012A3DC /* hoge2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoge2.h; sourceTree = "<group>"; };
+		3B74CBA1187FB4900012A3DC /* hoge2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hoge2.m; sourceTree = "<group>"; };
 		3BB43946187D425A00CFE184 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3BB43947187D425A00CFE184 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3BB43949187D427D00CFE184 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				3B71EF761868464600D5A44F /* Main_iPhone.storyboard */,
 				3B71EF791868464600D5A44F /* Main_iPad.storyboard */,
 				3B71EF7C1868464600D5A44F /* FirstViewController.h */,
+				3B74CBA0187FB4900012A3DC /* hoge2.h */,
+				3B74CBA1187FB4900012A3DC /* hoge2.m */,
 				3B71EF7D1868464600D5A44F /* FirstViewController.m */,
 				3B74CB9D187FB25C0012A3DC /* hoge.h */,
 				3B74CB9E187FB25C0012A3DC /* hoge.m */,
@@ -284,6 +289,7 @@
 				3BB4394B187D427D00CFE184 /* SignupViewController.m in Sources */,
 				3B74CB9F187FB25C0012A3DC /* hoge.m in Sources */,
 				3B71EFA118685A1100D5A44F /* TimelineViewController.m in Sources */,
+				3B74CBA2187FB4900012A3DC /* hoge2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
