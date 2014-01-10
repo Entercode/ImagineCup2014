@@ -1,5 +1,5 @@
 //
-//  hoge.h
+//  SHA1Generator.h
 //  SYNAPSE
 //
 //  Created by 青井 佑 on 2014/01/10.
@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface hoge : NSObject
+@interface SHA1Generator : NSObject
+
++ (NSString *) sha1WithString:(NSString *)input
 
 @end
