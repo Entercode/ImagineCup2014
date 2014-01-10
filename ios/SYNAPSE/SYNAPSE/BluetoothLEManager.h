@@ -1,5 +1,5 @@
 //
-//  BluetoothController.h
+//  BluetoothLEManager.h
 //  SYNAPSE
 //
 //  Created by 青井 佑 on 2014/01/10.
@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BluetoothController : NSObject
+@interface BluetoothLEManager : NSObject
+
+- (void) searchPeripherals;
 
 @end
