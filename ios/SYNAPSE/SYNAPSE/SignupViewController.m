@@ -7,6 +7,7 @@
 //
 
 #import "SignupViewController.h"
+#import "SHA1Generator.h"
 
 @interface SignupViewController ()
 
@@ -37,15 +38,22 @@
 }
 
 - (IBAction)pushedSignupButton:(id)sender {
+    
+    // Generate SHA-1 hash from UUID
+    NSUUID *uuid = [[UIDevice currentDevice] identifierForVendor];
+    NSString *did = [SHA1Generator sha1WithString:[uuid UUIDString]];
+    
+    
+    // Send signup data with POST
     NSURL *url = [NSURL URLWithString:@"http://synapse-server.cloudapp.net/SignUp.aspx"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    NSString *keyValue = [NSString stringWithFormat:@"uid=%@&nn=%@&mail=%@&ph=%@&did=999999", self.userIDField.text, self.nicknameField.text, self.mailAddressField.text, self.passwordField1.text];
+    NSString *keyValue = [NSString stringWithFormat:@"uid=%@&nn=%@&mail=%@&ph=%@&did=%@", self.userIDField.text, self.nicknameField.text, self.mailAddressField.text, self.passwordField1.text, did];
     NSData *post = [keyValue dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:post];
     
-    // Post Data
+    // Post data
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 }
 
