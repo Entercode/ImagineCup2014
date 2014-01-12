@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  **********************************************************************************************
+
+  このファイルはツールによってプロジェクト ファイルから生成されました: ServiceConfiguration.Cloud.cscfg
+
+  このファイルへの変更は、正しくない動作の原因となる場合があり、ファイルが再生成されると失われます。
+
+  **********************************************************************************************
+-->
+<ServiceConfiguration serviceName="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=synapseserver;AccountKey=pNUikVnuc7pUUHxFH+ckoHYCSckGVvShUp8dcR5FZKM7Rh33D9Iq1Q9wocjsX3WaPYUO3NRYTMDJo+NRcubgRg==" />
+      <Setting name="ConnectionLimit" value="12" />
+      <Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="PageRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=synapseserver;AccountKey=pNUikVnuc7pUUHxFH+ckoHYCSckGVvShUp8dcR5FZKM7Rh33D9Iq1Q9wocjsX3WaPYUO3NRYTMDJo+NRcubgRg==" />
+      <Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
