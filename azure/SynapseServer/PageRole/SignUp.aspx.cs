@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 using SynapseServer;
 
@@ -11,7 +12,7 @@ namespace PageRole
 {
 	public partial class SignUp : System.Web.UI.Page
 	{
-		readonly string[] keys = new string[] { Helper.DeviceId, Helper.PasswordHash, Helper.UserId, Helper.MailAddress, Helper.Nickname };
+		readonly string[] keys = new string[] { Helper.UserId, Helper.Nickname, Helper.MailAddress, Helper.Password, Helper.DeviceIdHash };
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -28,23 +29,40 @@ namespace PageRole
 			{
 				try
 				{
-					string signUpQuery = string.Format("INSERT AccountTable (UserId, Nickname, MailAddress, PasswordHash, AuthHash) VALUES ('{0}',N'{1}','{2}',{3}, null)",
-																data[Helper.UserId], data[Helper.Nickname], data[Helper.MailAddress], data[Helper.PasswordHash].GetHashCode());//GetHashCode()は仮である。
-					Helper.ExecuteSqlQuery(signUpQuery);
+					//string signUpQuery = string.Format("INSERT Account (UserId, Nickname, MailAddress, PasswordHash) VALUES ('{0}', N'{1}', '{2}', HASHBYTES('SHA1', '{3}'))",
+					//											data[Helper.UserId], data[Helper.Nickname], data[Helper.MailAddress], data[Helper.Password]);
+					string signUpQuery = @"INSERT Account(UserId, Nickname, MailAddress, PasswordHash) VALUES (@UserId, @Nickname, @MailAddress, HASHBYTES('SHA1', @Password))";
+					Helper.ExecuteSqlQuery(signUpQuery,
+						setAction: (param) =>
+						{
+							param.Add("@UserId", SqlDbType.VarChar).Value = data[Helper.UserId];
+							param.Add("@Nickname", SqlDbType.NVarChar).Value = data[Helper.Nickname];
+							param.Add("@MailAddress", SqlDbType.VarChar).Value = data[Helper.MailAddress];
+							param.Add("@Password", SqlDbType.VarChar).Value = data[Helper.Password];
+						});
+					Response.Write("Insert Account Finished.<br />\n");
 
-					string deviceBindQuery = string.Format("INSERT AccountDevice (UserId, DeviceId) VALUES ('{0}',{1});", data[Helper.UserId], data[Helper.DeviceId]);
-					Helper.ExecuteSqlQuery(deviceBindQuery);
+					//string deviceBindQuery = string.Format("INSERT AccountDevice (UserId, DeviceIdHash, SessionId) VALUES ('{0}', '{1}', null);", data[Helper.UserId], data[Helper.DeviceIdHash]);
+					string deviceBindQuery = @"INSERT AccountDevice(UserId, DeviceIdHash) VALUES(@UserId, CONVERT(varbinary, @DeviceIdHash, 2))";
+					Helper.ExecuteSqlQuery(deviceBindQuery,
+						setAction: (param) =>
+						{
+							param.Add("@UserId", SqlDbType.VarChar).Value = data[Helper.UserId];
+							param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.DeviceIdHash];
+						});
+					Response.Write("Insert AccountData Finished.<br />\n");
 
-					Response.Write("And saved new account data.");
+					Response.Write("SignUp Successed.<br />");
 				}
 				catch (Exception ex)
 				{
-					Response.Write(ex.Message);
+					Response.Write("#Error has occured#<br />\n");
+					Response.Write(ex.Message + "<br />\n");
 				}
 			}
 			else
 			{
-				Response.Write("But necessary data lacks.\n");
+				Response.Write("But necessary data lacks.<br />\n");
 				Response.Write(Helper.WriteNeedKeys(keys));
 			}
 		}

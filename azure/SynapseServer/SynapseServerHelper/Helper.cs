@@ -3,10 +3,12 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace SynapseServer
 {
-	public static class Helper//TODO ポストされたデータのインデックスをconstでここに定義
+	public static class Helper
 	{
 		static string connectionString;
 
@@ -69,13 +71,17 @@ namespace SynapseServer
 		}
 
 		public const string UserId = "uid";
+		public const string UserIdHash = "uid_h";
 		public const string DeviceId = "did";
+		public const string DeviceIdHash = "did_h";
 		public const string PassedDeviceId = "pdid";
+		public const string PassedDeviceIdHash = "pdid_h";
 		public const string PassedTime = "pt";
-		public const string PasswordHash = "ph";
+		public const string Password = "pass";
+		public const string PasswordHash = "pass_h";
 		public const string MailAddress = "mail";
 		public const string Nickname = "nn";
-		public const string Hash = "hash";
+		public const string SessionId = "sid";
 
 		public static string StringConvertOfNumberToDateTime(string number)
 		{
@@ -117,6 +123,28 @@ namespace SynapseServer
 			}
 
 			return string.Join(string.Empty, dateTime.Split('/', ' ', ':'));
+		}
+
+		public static byte[] StringToBytes(string str)
+		{
+			List<byte> bytes = new List<byte>(str.Length / 2);
+			for (int i = 0; i < str.Length; i += 2)
+			{
+				bytes.Add(Convert.ToByte(str.Substring(i, 2), 16));
+			}
+			return bytes.ToArray();
+		}
+
+		public static string BytesToString(byte[] bytes)
+		{
+			return BitConverter.ToString(bytes).Replace("-", string.Empty);
+		}
+
+		public static byte[] StringHashing(string origin)
+		{
+			byte[] bytes = Encoding.UTF8.GetBytes(origin);
+			SHA1 crypto = new SHA1CryptoServiceProvider();
+			return crypto.ComputeHash(bytes);
 		}
 	}
 }

@@ -7,6 +7,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Data;
+
 using SynapseServer;
 
 namespace WorkerRole
@@ -69,58 +71,66 @@ namespace WorkerRole
 							}
 							sendMessage = sb.ToString();
 
-							string[] keys = new string[] { Helper.UserId, Helper.DeviceId, Helper.PassedDeviceId, Helper.PassedTime, Helper.Hash };//すれ違いのときのkey
+							string[] keys = new string[] { Helper.UserIdHash, Helper.DeviceIdHash, Helper.PassedDeviceIdHash, Helper.PassedTime, Helper.SessionId };//すれ違いのときのkey
 
 							Dictionary<string, string> data = keys.ToDictionary(x => x, x => (postedData.ContainsKey(x) ? postedData[x] : string.Empty));
 
-							bool isAuthed = false;
-							if (data.Any(x => Helper.Hash.Equals(x.Key)))
+							if (!data.Any(x => string.IsNullOrEmpty(x.Value)))
 							{
 								try
 								{
-									string checkAuthQuery = string.Format("IF (SELECT COUNT(A.AuthHash) FROM AccountTable A WHERE A.AuthHash = {0}) = 1 SELECT 1 AS 'Result' ELSE SELECT 0 AS 'Result'", data[Helper.Hash]);
-									Helper.ExecuteSqlQuery(checkAuthQuery,
+									//string checkSessionQuery = string.Format("IF (SELECT COUNT(*) FROM AccountTable A WHERE CONVERT(NVARCHAR(40), HashBytes('SHA1', A.UserId), 2) = '{0}' AND A.DeviceIdHash = '{1}' AND A.SessionId = '{2}') = 1 SELECT 1 AS 'Result' ELSE SELECT 0 AS 'Result'", data[Helper.UserIdHash], data[Helper.DeviceIdHash], data[Helper.SessionId]);
+									string checkSessionQuery = @"IF (SELECT D.SessionId FROM AccountDevice D WHERE HASHBYTES('SHA1', D.UserId) = CONVERT(varbinary, @UserIdHash, 2) AND D.DeviceIdHash = CONVERT(varbinary, @DeviceIdHash, 2)) = CONVERT(varbinary, @SessionId, 2) SELECT 1 AS Result ELSE SELECT 0 AS Result";
+									bool isLogin = false;
+									Helper.ExecuteSqlQuery(checkSessionQuery,
+										setAction: (param) =>
+										{
+											param.Add("@UserIdHash", SqlDbType.VarChar, 40).Value = data[Helper.UserIdHash];
+											param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.DeviceIdHash];
+											param.Add("@SessionId", SqlDbType.VarChar, 40).Value = data[Helper.SessionId];
+										},
 										getAction: (reader) =>
 										{
 											if (reader.Read())
 											{
-												isAuthed = int.Parse(reader["Result"].ToString()) == 1;
+												isLogin = int.Parse(reader["Result"].ToString()) == 1;
 											}
 										});
+									sendMessage += "Check Session Finished.<br />\n";
+
+									if (isLogin)
+									{
+										string passedTime = Helper.StringConvertOfNumberToDateTime(data[Helper.PassedTime]);
+										//string streetPassQuery = string.Format("INSERT StreetPass(UserBindId, PassedDeviceIdHash, PassedTime) VALUES ((SELECT BindId FROM AccountDevice WHERE UserId = '{0}' AND DeviceIdHash = '{1}'), '{2}' ,'{3}')",
+										//		data[Helper.UserId], data[Helper.DeviceId], data[Helper.PassedDeviceId], passedTime);
+										string streetPassQuery = @"INSERT StreetPass(UserBindId, PassedDeviceIdHash, PassedTime) VALUES ((SELECT BindId FROM AccountDevice WHERE HASHBYTES('SHA1', UserId) = CONVERT(varbinary, @UserIdHash, 2) AND DeviceIdHash = CONVERT(varbinary, @DeviceIdHash, 2)), CONVERT(varbinary, @PassedDeviceIdHash, 2) ,@PassedTime)";
+										Helper.ExecuteSqlQuery(streetPassQuery,
+											setAction: (param) =>
+											{
+												param.Add("@UserIdHash", SqlDbType.VarChar, 40).Value = data[Helper.UserIdHash];
+												param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.DeviceIdHash];
+												param.Add("@PassedDeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.PassedDeviceIdHash];
+												param.Add("@PassedTime", SqlDbType.VarChar).Value = passedTime;
+											});
+										sendMessage += "StreetPass Query Finished.<br />\n";
+
+										sendMessage += "Saved new street pass data.<br />\n";
+									}
+									else
+									{
+										sendMessage += "SessionId is different.<br />\n";
+									}
 								}
 								catch (Exception ex)
 								{
-									sendMessage += ex.Message;
-								}
-							}
-
-							if (isAuthed)
-							{
-								//POSTされたkeysに対応する値がすべて正しく受信できている場合
-								if (!data.Any(x => string.IsNullOrEmpty(x.Value)))
-								{
-									try
-									{
-										string passedTime = Helper.StringConvertOfNumberToDateTime(data[Helper.PassedTime]);
-										string query = string.Format("INSERT StreetPass(UserBindId, PassedDeviceId, PassedTime) VALUES ((SELECT BindId FROM AccountDevice WHERE UserId = '{0}' AND DeviceId = {1}), {2},'{3}')",
-												data[Helper.UserId], data[Helper.DeviceId], data[Helper.PassedDeviceId], passedTime);
-										Helper.ExecuteSqlQuery(query);
-										sendMessage += "And saved new account data.";
-									}
-									catch (Exception ex)
-									{
-										sendMessage += ex.Message;
-									}
-								}
-								else
-								{
-									sendMessage += "But necessary data lacks.<br />\n";
-									sendMessage += Helper.WriteNeedKeys(keys);
+									sendMessage += "#Error has occured<br />\n";
+									sendMessage += ex.Message + "<br />\n";
 								}
 							}
 							else
 							{
-								sendMessage += "But AuthHash is different.";
+								sendMessage += "But necessary data lacks.<br />\n";
+								sendMessage += Helper.WriteNeedKeys(keys);
 							}
 						}
 					}

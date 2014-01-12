@@ -19,7 +19,7 @@
 				<asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Delete" />
 			</Columns>
 		</asp:GridView>
-		<p>"password" => -733234769</p>
+		<p>"password" => 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8</p>
 		<h2>AccountDevice(アカウントとデバイスのひも付け情報)</h2>
 		<asp:ObjectDataSource ID="AccountDeviceSource" runat="server" SelectMethod="GetAccountDevices" TypeName="PageRole.test.GridViewObject" DeleteMethod="DeleteAccountDevice" OnDeleting="DataDeleting">
 			<DeleteParameters><asp:Parameter Name="BindId" Type="Int32" /></DeleteParameters> 
@@ -39,7 +39,7 @@
 			</Columns>
 		</asp:GridView>
 		<hr />
-		応答：<%=Message %>
+		メッセージ：<%=Message %>
 	</form>
 </body>
 </html>

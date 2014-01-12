@@ -96,7 +96,7 @@ namespace PageRole.test
 		{
 			var result = new List<Account>();
 
-			string query = "SELECT * FROM AccountTable";
+			string query = "SELECT * FROM Account";
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
 				{
@@ -106,15 +106,7 @@ namespace PageRole.test
 						a.UserId = reader["UserId"] as string;
 						a.Nickname = reader["Nickname"] as string;
 						a.MailAddress = reader["MailAddress"] as string;
-						a.PasswordHash = Convert.ToInt64(reader["PasswordHash"]);
-						if (DBNull.Value.Equals(reader["AuthHash"]))
-						{
-							a.AuthHash = null;
-						}
-						else
-						{
-							a.AuthHash = Convert.ToInt64(reader["AuthHash"]);
-						}
+						a.PasswordHash = Helper.BytesToString(reader["PasswordHash"] as byte[]);
 						result.Add(a);
 					}
 				});
@@ -149,7 +141,7 @@ namespace PageRole.test
 
 		public static void DeleteAccount(string UserId, Action<string> MessageAction)
 		{
-			string query = string.Format("DELETE AccountTable WHERE UserId = '{0}'", UserId);
+			string query = string.Format("DELETE Account WHERE UserId = '{0}'", UserId);
 
 			try
 			{
@@ -175,8 +167,16 @@ namespace PageRole.test
 					{
 						AccountDevice a = new AccountDevice();
 						a.UserId = reader["UserId"] as string;
-						a.DeviceId = Convert.ToInt64(reader["DeviceId"]);
-						a.BindId = Convert.ToInt32(reader["BindId"]);
+						a.DeviceIdHash = Helper.BytesToString(reader["DeviceIdHash"] as byte[]);
+						a.BindId = Convert.ToInt64(reader["BindId"]);
+						if (DBNull.Value.Equals(reader["SessionId"]))
+						{
+							a.SessionId = "#None#";
+						}
+						else
+						{
+							a.SessionId = Helper.BytesToString(reader["SessionId"] as byte[]);
+						}
 						result.Add(a);
 					}
 				});
@@ -239,7 +239,7 @@ namespace PageRole.test
 					{
 						StreetPassInformation s = new StreetPassInformation();
 						s.UserBindId = Convert.ToInt32(reader["UserBindId"]);
-						s.PassedDeviceId = Convert.ToInt64(reader["PassedDeviceId"]);
+						s.PassedDeviceIdHash = Helper.BytesToString(reader["PassedDeviceIdHash"] as byte[]);
 						s.PassedTime = DateTime.Parse(reader["PassedTime"].ToString());
 						result.Add(s);
 					}
@@ -294,21 +294,21 @@ namespace PageRole.test
 		public string UserId { get; set; }
 		public string Nickname { get; set; }
 		public string MailAddress { get; set; }
-		public long PasswordHash { get; set; }
-		public long? AuthHash { get; set; }//null許容
+		public string PasswordHash { get; set; }
 	}
 
 	public class AccountDevice
 	{
 		public string UserId { get; set; }
-		public long DeviceId { get; set; }
-		public int BindId { get; set; }
+		public string DeviceIdHash { get; set; }
+		public long BindId { get; set; }
+		public string SessionId { get; set; }
 	}
 
 	public class StreetPassInformation
 	{
 		public int UserBindId { get; set; }
-		public long PassedDeviceId { get; set; }
+		public string PassedDeviceIdHash { get; set; }
 		public DateTime PassedTime { get; set; }
 	}
 }
