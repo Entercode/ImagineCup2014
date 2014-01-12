@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="SynapseServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="ConnectionLimit" value="5" />
+			<Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"/>
+    </ConfigurationSettings>
+  </Role>
+  <Role name="PageRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+			<Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"/>
+		</ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
