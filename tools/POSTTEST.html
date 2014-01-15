@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<title></title>
+</head>
+<body>
+	<h1>POSTテスト</h1>
+	<h2>Signup</h2>
+	<form action="http://synapse-server.cloudapp.net/SignUp.aspx" method="post">
+		<input type="text" name="uid" value="uid" /><br />
+		<input type="text" name="did" value="did" /><br />
+		<input type="text" name="ph" value="passwordhash" /><br />
+		<input type="text" name="mail" value="mailaddress" /><br />
+		<input type="text" name="nn" value="nickname" /><br />
+		<input type="submit" name="submit" value="送信" />
+	</form>
+
+	<h2>ハッシュ化ツール</h2>
+
+		<div>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+		<script type="text/javascript">
+			function generateHash() {
+				var hash = CryptoJS.SHA1(document.getElementById("string").value);
+				var hashfield = document.getElementById("hashfield");
+				var hashdata = document.getElementById("hashdata");
+				hashfield.value = hash;
+				hashdata.innerHTML = hashfield.value;
+			}
+		</script>
+		<script type="text/javascript">
+			function postHash() {
+				//var hash = CryptoJS.SHA1(document.getElementById("string").value);
+				//var hashfield = document.getElementById("hashfield");
+				//hashfield.value = hash;
+
+				var postform = document.getElementById("postform");
+				var posturl = document.getElementById("posturl");
+				//var hashdata = document.getElementById("hashdata");
+				//hashdata.innerHTML = document.getElementById("hashfield").value;
+
+
+				postform.setAttribute("action", posturl.value);
+
+				postform.submit();
+			}
+		</script>
+		</div>
+		<p>ハッシュ生成に使う文字列:</p>
+		<form onsubmit="return false;">
+			<input type="text" id="string" style="width:300px" onchange="generateHash();" />
+		</form>
+		<p>生成されたハッシュ:</p>
+		<form action="" id="postform" method="post" >
+		<!-- うまく行かない場合はpostformのonsubmit="return false"を消して下さい -->
+			<input type="text" id="hashfield" name="did" style="width:300px" /><br />
+			<!-- hashfieldのnameの値がPOST時のデータの名前になっています。自由に変更してください -->
+			<input type="text" id="posturl" style="width:300px" value="http://synapse-server.cloudapp.net/" /><br />
+			<input type="submit" name="submit" value="ハッシュをURLにPOST" onclick="postHash();" />
+		</form>
+		<p>&quot<span id="postname"><script type="text/javascript">document.getElementById("postname").innerHTML = document.getElementById("hashfield").name</script></span>=<span id="hashdata">NULL</span>&quotをPOSTで送信します</p>
+
+</body>
+</html>
