@@ -41,13 +41,13 @@
     
     // Generate SHA-1 hash from UUID
     NSUUID *uuid = [[UIDevice currentDevice] identifierForVendor];
-    NSString *did = [SHA1Generator sha1WithString:[uuid UUIDString]];
+    NSString *did_h = [SHA1Generator sha1WithString:[uuid UUIDString]];
     
     
     // Send signup data with POST
     NSURL *url = [NSURL URLWithString:@"http://synapse-server.cloudapp.net/SignUp.aspx"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    NSString *keyValue = [NSString stringWithFormat:@"uid=%@&nn=%@&mail=%@&ph=%@&did=%@", self.userIDField.text, self.nicknameField.text, self.mailAddressField.text, self.passwordField1.text, did];
+    NSString *keyValue = [NSString stringWithFormat:@"uid=%@&nn=%@&mail=%@&pass=%@&did_h=%@", self.userIDField.text, self.nicknameField.text, self.mailAddressField.text, self.passwordField1.text, did_h];
     NSData *post = [keyValue dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     [request setHTTPMethod:@"POST"];
