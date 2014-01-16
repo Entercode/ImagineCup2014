@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web;
+using System.Linq;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System.Data.SqlClient;
 using System.Text;
@@ -8,17 +10,9 @@ using System.Collections.Generic;
 
 namespace SynapseServer
 {
-	public static class Helper
+	public static partial class Helper
 	{
 		static string connectionString;
-
-		public static string SQLConnectionString
-		{
-			get
-			{
-				return connectionString;
-			}
-		}
 
 		static Helper()
 		{
@@ -58,30 +52,6 @@ namespace SynapseServer
 				}
 			}
 		}
-
-		public static string WriteNeedKeys(string[] keys)
-		{
-			var sb = new System.Text.StringBuilder("<ul>\n");
-			foreach (var key in keys)
-			{
-				sb.AppendLine("<li>" + key + "</li>\n");
-			}
-			sb.AppendLine("</ul>");
-			return sb.ToString();
-		}
-
-		public const string UserId = "uid";
-		public const string UserIdHash = "uid_h";
-		public const string DeviceId = "did";
-		public const string DeviceIdHash = "did_h";
-		public const string PassedDeviceId = "pdid";
-		public const string PassedDeviceIdHash = "pdid_h";
-		public const string PassedTime = "pt";
-		public const string Password = "pass";
-		public const string PasswordHash = "pass_h";
-		public const string MailAddress = "mail";
-		public const string Nickname = "nn";
-		public const string SessionId = "sid";
 
 		public static string StringConvertOfNumberToDateTime(string number)
 		{
