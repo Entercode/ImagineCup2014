@@ -22,13 +22,13 @@ namespace PageRole.test {
         protected global::System.Web.UI.HtmlControls.HtmlForm AccountTableForm;
         
         /// <summary>
-        /// AccountTableSource コントロール。
+        /// AccountSource コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource AccountTableSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource AccountSource;
         
         /// <summary>
         /// AccountTable コントロール。
@@ -74,5 +74,41 @@ namespace PageRole.test {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView StreetPassInformation;
+        
+        /// <summary>
+        /// AccountProfileSource コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource AccountProfileSource;
+        
+        /// <summary>
+        /// AccountProfiles コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView AccountProfiles;
+        
+        /// <summary>
+        /// TweetInformationSource コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource TweetInformationSource;
+        
+        /// <summary>
+        /// TweetInformations コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView TweetInformations;
     }
 }

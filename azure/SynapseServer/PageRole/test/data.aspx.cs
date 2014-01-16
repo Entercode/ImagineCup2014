@@ -18,57 +18,6 @@ namespace PageRole.test
 
 		}
 
-		/*
-		protected void AccountTable_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			TableCell cell = AccountTable.Rows[e.RowIndex].Cells[1];//UserId
-			string query = string.Format("DELETE AccountTable WHERE UserId = '{0}'", cell.Text);
-			Helper.ExecuteSqlQuery(query);
-			//TODO: class GridViewObjectに書く datasourceタグのdeletemethodで指定
-			AccountTableSource.Delete();
-			AccountTable.DataBind();
-		}
-
-		protected void AccountDevices_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			TableCell cell = AccountDevices.Rows[e.RowIndex].Cells[3];//BindId
-			string query = string.Format("DELETE AccountDevice WHERE BindId = {0}", int.Parse(cell.Text));
-			Helper.ExecuteSqlQuery(query);
-			AccountDeviceSource.Delete();
-			AccountDevices.DataBind();
-		}
-
-		protected void StreetPassInformation_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			TableCell bindIdCell = StreetPassInformation.Rows[e.RowIndex].Cells[1];//UserBindId
-			TableCell passedTimecell = StreetPassInformation.Rows[e.RowIndex].Cells[3];//PassedTime
-			string query = string.Format("DELETE StreetPass WHERE UserBindId = '{0}' AND PassedTime = '{1}'", bindIdCell.Text, passedTimecell.Text);
-			Helper.ExecuteSqlQuery(query);
-			StreetPassInformationSource.Delete();
-			StreetPassInformation.DataBind();
-		}
-		*/
-		
-		/*
-		protected void AccountTableSource_Deleting(object sender, ObjectDataSourceMethodEventArgs e)
-		{
-			var param = e.InputParameters;
-			param.Add("Message", message);
-		}
-
-		protected void AccountDeviceSource_Deleting(object sender, ObjectDataSourceMethodEventArgs e)
-		{
-			var param = e.InputParameters;
-			param.Add("Message", message);
-		}
-
-		protected void StreetPassInformationSource_Deleting(object sender, ObjectDataSourceMethodEventArgs e)
-		{
-			var param = e.InputParameters;
-			param.Add("MessageAction", (Action<string>)((string x) => { this.message = x; }));
-		}
-		*/
-
 		protected void DataDeleting(object sender, ObjectDataSourceMethodEventArgs e)
 		{
 			var param = e.InputParameters;
@@ -114,38 +63,17 @@ namespace PageRole.test
 			return result;
 		}
 
-		/*
-		public static void DeleteAccount(Account a)
-		{
-			string query = string.Format("DELETE AccountTable WHERE UserId = '{0}'", a.UserId);
-			Helper.ExecuteSqlQuery(query);
-		}
-		*/
-
-		/*
-		public static void DeleteAccount(string UserId, string Message)
-		{
-			string query = string.Format("DELETE AccountTable WHERE UserId = '{0}'", UserId);
-
-			try
-			{
-				Helper.ExecuteSqlQuery(query);
-				Message = "Deleted Account Successfully.";
-			}
-			catch (Exception ex)
-			{
-				Message = ex.Message;
-			}
-		}
-		*/
-
 		public static void DeleteAccount(string UserId, Action<string> MessageAction)
 		{
-			string query = string.Format("DELETE Account WHERE UserId = '{0}'", UserId);
+			string query = "DELETE Account WHERE UserId = @UserId";
 
 			try
 			{
-				Helper.ExecuteSqlQuery(query);
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@UserId", SqlDbType.VarChar).Value = UserId;
+					});
 				MessageAction("Deleted Account Successfully.");
 			}
 			catch (Exception ex)
@@ -153,6 +81,7 @@ namespace PageRole.test
 				MessageAction(ex.Message);
 			}
 		}
+
 
 		public static List<AccountDevice> GetAccountDevices()
 		{
@@ -168,7 +97,7 @@ namespace PageRole.test
 						AccountDevice a = new AccountDevice();
 						a.UserId = reader["UserId"] as string;
 						a.DeviceIdHash = Helper.BytesToString(reader["DeviceIdHash"] as byte[]);
-						a.BindId = Convert.ToInt64(reader["BindId"]);
+						a.BindId = Convert.ToInt32(reader["BindId"]);
 						if (DBNull.Value.Equals(reader["SessionId"]))
 						{
 							a.SessionId = "#None#";
@@ -184,39 +113,17 @@ namespace PageRole.test
 			return result;
 		}
 
-		/*
-		public static void DeleteAccountDevice(AccountDevice ad)
-		{
-			string query = string.Format("DELETE AccountDevice WHERE BindId = {0}", ad.BindId);
-			Helper.ExecuteSqlQuery(query);
-		}
-		*/
-
-		/*
-		public static void DeleteAccountDevice(int BindId,string Message)
-		{
-			string query = string.Format("DELETE AccountDevice WHERE BindId = {0}", BindId);
-
-			try
-			{
-				Helper.ExecuteSqlQuery(query);
-				Message = "Deleted Device Successfully";
-				
-			}
-			catch (Exception ex)
-			{
-				Message = ex.Message;
-			}
-		}
-		*/
-
 		public static void DeleteAccountDevice(int BindId, Action<string> MessageAction)
 		{
-			string query = string.Format("DELETE AccountDevice WHERE BindId = {0}", BindId);
+			string query = "DELETE AccountDevice WHERE BindId = @BindId";
 
 			try
 			{
-				Helper.ExecuteSqlQuery(query);
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@BindId", SqlDbType.Int).Value = BindId;
+					});
 				MessageAction("Deleted Device Successfully");
 
 			}
@@ -226,7 +133,8 @@ namespace PageRole.test
 			}
 		}
 
-		public static List<StreetPassInformation> GetStreetPassInformation()
+
+		public static List<StreetPassInformation> GetStreetPassInformations()
 		{
 			var result = new List<StreetPassInformation>();
 
@@ -248,38 +156,104 @@ namespace PageRole.test
 			return result;
 		}
 
-		/*
-		public static void DeleteStreetPassInformation(StreetPassInformation info)
+		public static void DeleteStreetPassInformation(int UserBindId, DateTime PassedTime, Action<string> MessageAction)
 		{
-			string query = string.Format("DELETE StreetPass WHERE UserBindId = '{0}' AND PassedTime = '{1}'", info.UserBindId, info.PassedTime);
-			Helper.ExecuteSqlQuery(query);
-		}
-		*/
-
-		/*
-		public static void DeleteStreetPassInformation(int UserBindId, DateTime PassedTime,string Message)
-		{
-			string query = string.Format("DELETE StreetPass WHERE UserBindId = '{0}' AND PassedTime = '{1}'", UserBindId, PassedTime);
+			string query = "DELETE StreetPass WHERE UserBindId = @UserBindId AND PassedTime = @PassedTime";
 
 			try
 			{
-				Helper.ExecuteSqlQuery(query);
-				Message = "Deleted Pass-Information Successfully";
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@UserBindId", SqlDbType.Int).Value = UserBindId;
+						param.Add("@PassedTime", SqlDbType.DateTime2).Value = PassedTime;
+					});
+				MessageAction("Deleted Pass-Information Successfully");
 			}
 			catch (Exception ex)
 			{
-				Message = ex.Message;
+				MessageAction(ex.Message);
 			}
 		}
-		*/
 
-		public static void DeleteStreetPassInformation(int UserBindId, DateTime PassedTime, Action<string> MessageAction)
+
+		public static List<AccountProfile> GetAccountProfiles()
 		{
-			string query = string.Format("DELETE StreetPass WHERE UserBindId = '{0}' AND PassedTime = '{1}'", UserBindId, PassedTime);
+			var result = new List<AccountProfile>();
+
+			string query = "SELECT * FROM AccountProfile";
+
+			Helper.ExecuteSqlQuery(query,
+				getAction: (reader) =>
+				{
+					while (reader.Read())
+					{
+						AccountProfile a = new AccountProfile();
+						a.UserId = reader["UserId"] as string;
+						a.Profile = reader["Profile"] as string;
+						a.ImagePath = reader["ImagePath"] as string;
+						result.Add(a);
+					}
+				});
+
+			return result;
+		}
+
+		public static void DeleteAccountProfile(string UserId,Action<string> MessageAction)
+		{
+			string query = "DELETE AccountProfile WHERE UserId = @UserId";
 
 			try
 			{
-				Helper.ExecuteSqlQuery(query);
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@UserId", SqlDbType.VarChar).Value = UserId;
+					});
+				MessageAction("Deleted Pass-Information Successfully");
+			}
+			catch (Exception ex)
+			{
+				MessageAction(ex.Message);
+			}
+		}
+
+
+		public static List<TweetInformation> GetTweetInformations()
+		{
+			var result = new List<TweetInformation>();
+
+			string query = "SELECT * FROM Tweet";
+
+			Helper.ExecuteSqlQuery(query,
+				getAction: (reader) =>
+				{
+					while (reader.Read())
+					{
+						TweetInformation t = new TweetInformation();
+						t.BindId = Convert.ToInt32(reader["BindId"]);
+						t.ClientTweetTime = DateTime.Parse(reader["ClientTweetTime"].ToString());
+						t.ServerRecievedTime = DateTime.Parse(reader["ServerRecievedTime"].ToString());
+						t.Tweet = reader["Tweet"] as string;
+						result.Add(t);
+					}
+				});
+
+			return result;
+		}
+
+		public static void DeleteTweet(int UserBindId, DateTime ServerRecievedTime,Action<string> MessageAction)
+		{
+			string query = "DELETE Tweet WHERE UserBindId = @UserBindId AND ServerRecievedTime = @ServerRecievedTime";
+
+			try
+			{
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@UserBindId", SqlDbType.Int).Value = UserBindId;
+						param.Add("@ServerRecievedTime", SqlDbType.DateTime2).Value = ServerRecievedTime;
+					});
 				MessageAction("Deleted Pass-Information Successfully");
 			}
 			catch (Exception ex)
@@ -301,7 +275,7 @@ namespace PageRole.test
 	{
 		public string UserId { get; set; }
 		public string DeviceIdHash { get; set; }
-		public long BindId { get; set; }
+		public int BindId { get; set; }
 		public string SessionId { get; set; }
 	}
 
@@ -310,5 +284,20 @@ namespace PageRole.test
 		public int UserBindId { get; set; }
 		public string PassedDeviceIdHash { get; set; }
 		public DateTime PassedTime { get; set; }
+	}
+
+	public class AccountProfile
+	{
+		public string UserId { get; set; }
+		public string Profile { get; set; }
+		public string ImagePath { get; set; }
+	}
+
+	public class TweetInformation
+	{
+		public int BindId { get; set; }
+		public DateTime ClientTweetTime { get; set; }
+		public DateTime ServerRecievedTime { get; set; }
+		public string Tweet { get; set; }
 	}
 }
