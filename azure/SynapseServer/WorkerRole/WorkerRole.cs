@@ -9,10 +9,10 @@ namespace WorkerRole
 {
 	public class WorkerRole : RoleEntryPoint
 	{
-		AsyncServer server;
+		//AsyncServer server;
 		public override void Run()
 		{
-			server.Run();
+			//server.Run();
 		}
 
 		public override bool OnStart()
@@ -24,7 +24,7 @@ namespace WorkerRole
 
 			var endPoint = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["StreetPass"].IPEndpoint;
 
-			server = new AsyncServer("+", endPoint.Port, limit);
+			//server = new AsyncServer("+", endPoint.Port, limit);
 
 			// 構成の変更を処理する方法については、
 			// MSDN トピック (http://go.microsoft.com/fwlink/?LinkId=166357) を参照してください。

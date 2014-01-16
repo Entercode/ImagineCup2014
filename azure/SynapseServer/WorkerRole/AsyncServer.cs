@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 
 using SynapseServer;
-
+/*
 namespace WorkerRole
 {
 	/// <summary>すれ違い用のHTTPサーバー</summary>
@@ -177,3 +177,4 @@ namespace WorkerRole
 		}
 	}
 }
+*/

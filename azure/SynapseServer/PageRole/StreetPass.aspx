@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StreetPass.aspx.cs" Inherits="PageRole.StreetPass" %>
