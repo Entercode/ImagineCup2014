@@ -4,7 +4,7 @@ Himagine
 Azure
 -----
 
-ファイル内訳
+フォルダ内訳
 
 * packages
  > NuGetパッケージによるdllがあるフォルダ
@@ -19,21 +19,10 @@ Azure
  > バックグラウンドで動く処理のプロジェクト 近い人の情報の受け渡しで使用
 
 * SynapseServerHelper
- > 雑多なヘルパークラス 定数定義とSQL処理のシンタックスシュガー
-
-ページ一覧
-
-* 新規登録
- > http://synapse-server.cloudapp.net/SignUp.aspx
-
-* ログイン
- > http://synapse-server.cloudapp.net/Login.aspx
-
-* ログアウト
- > http://synapse-server.cloudapp.net/Logout.aspx
-
-* すれ違い情報送信(ログイン中)
- > http://synapse-server.cloudapp.net:4724/
-
-* データ閲覧(POSTでない)
- > http://synapse-server.cloudapp.net/test/data.aspx
+ > 雑多なヘルパークラス 定数定義とSQL処理のシンタックスシュガー＆System.Web.Pageの拡張クラス
+ 
+ * SQLQuery
+ > データベースのテーブルやビューの定義
+ 
+使用法
+https://github.com/Quotenter/Himagine/wiki/AzureServer%E3%81%A8%E3%81%AE%E5%85%A5%E5%87%BA%E5%8A%9B%E6%93%8D%E4%BD%9C
