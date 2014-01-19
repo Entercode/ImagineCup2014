@@ -38,6 +38,11 @@ namespace PageRole
 				return;
 			}
 
+			if (Request.FilePath.Contains("/Get/") && "GET".Equals(Request.HttpMethod))
+			{
+				return;
+			}
+
 			if (!"POST".Equals(Request.HttpMethod))
 			{
 				Response.StatusCode = 404;
