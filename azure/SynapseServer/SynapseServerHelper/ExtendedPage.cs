@@ -17,39 +17,98 @@ namespace SynapseServer
 		/// <summary>
 		/// 必要なname
 		/// </summary>
-		private string[] keys;
+		private string[] valueKeys;
 
 		/// <summary>
-		/// 正常に取得できたデータ
+		/// 必要なname(ファイル)
 		/// </summary>
-		private Dictionary<string, string> postedData;
+		private string[] fileKeys;
+
+		/// <summary>
+		/// 取得したBindId
+		/// </summary>
+		private int? bindId;
+
+		/// <summary>
+		/// 正常に取得できた値
+		/// </summary>
+		protected Dictionary<string, string> postedValue;
+
+		/// <summary>
+		/// 正常に取得できたファイル
+		/// </summary>
+		protected Dictionary<string,Content> postedFile;
 
 		/// <summary>
 		/// POSTされたデータを整形して保持する
 		/// </summary>
 		/// <param name="keys">必要なname</param>
-		public void Initialize(string[] keys)
+		public void Initialize(string[] valueKeys, string[] fileKeys = null)
 		{
-			this.keys = keys;
-			this.postedData = GetPostedDataKeyValuePair();
+			this.valueKeys = valueKeys ?? new string[0];
+			this.fileKeys = fileKeys ?? new string[0];
+
+			this.postedValue = GetPostedValueKeyValuePair();
+			this.postedFile = GetPostedFileKeyValuePair();
 		}
 
 		/// <summary>
-		/// POSTされたデータから必要なものを抜き出して保持する
+		/// POSTされた値から必要なものを抜き出して保持する
 		/// </summary>
-		/// <returns>保持すべきデータ</returns>
-		private Dictionary<string, string> GetPostedDataKeyValuePair()
+		/// <returns>保持すべき値</returns>
+		private Dictionary<string, string> GetPostedValueKeyValuePair()
 		{
-			return keys.ToDictionary(x => x, x => Request.Form.Get(x));
+			var a = new Dictionary<string, string>();
+			if (valueKeys.Any())
+			{
+				a = valueKeys.ToDictionary(x => x, x => Request.Form.Get(x));
+			}
+			if (Request.Cookies[Helper.SessionId] != null)
+			{
+				a.Add(Helper.SessionId, Request.Cookies[Helper.SessionId].Value);
+			}
+			return a;
 		}
 
 		/// <summary>
-		/// 整形したデータをクライアントに表示する
+		/// POSTされたファイルから必要なものを抜き出して保管する
+		/// </summary>
+		/// <returns>保持すべきファイル</returns>
+		private Dictionary<string, Content> GetPostedFileKeyValuePair()
+		{
+			if (fileKeys.Any())
+			{
+				var files = fileKeys.ToDictionary(x => x, x => Request.Files[x]);
+				Dictionary<string, Content> filesBytes = new Dictionary<string, Content>(files.Count);
+				foreach (var file in files.AsParallel())
+				{
+					Content c = new Content();
+					if (file.Value == null)
+					{
+						filesBytes.Add(file.Key, null);
+						continue;
+					}
+					c.ContentType = file.Value.ContentType;
+					byte[] b = new byte[file.Value.ContentLength];
+					file.Value.InputStream.Read(b, 0, file.Value.ContentLength);
+					c.Binary = b;
+					filesBytes.Add(file.Key, c);
+				}
+				return filesBytes;
+			}
+			else
+			{
+				return new Dictionary<string, Content>();
+			}
+		}
+
+		/// <summary>
+		/// 整形した値をクライアントに表示する
 		/// </summary>
 		public void ShowPostedDataResponse()
 		{
 			Response.Write("I recieved..." + Helper.NewLine);
-			foreach (var pair in postedData)
+			foreach (var pair in postedValue)
 			{
 				Response.Write(pair.Key + ":" + pair.Value + Helper.NewLine);
 			}
@@ -61,14 +120,14 @@ namespace SynapseServer
 		/// <returns>必要なデータがすべてそろっているか</returns>
 		private bool IsPostedDataValid()
 		{
-			return !postedData.Any(x => string.IsNullOrEmpty(x.Value));
+			return !postedValue.Any(x => string.IsNullOrEmpty(x.Value));
 		}
 
 		/// <summary>
 		/// メインとなる処理を実行する
 		/// </summary>
 		/// <param name="process">実行するアクション</param>
-		public void RunProcess(Action<Action<string>, Dictionary<string, string>> process, bool checkSession = false)
+		public void RunProcess(Action<Action<string>, Dictionary<string, string>, Dictionary<string, Content>, int?> process, bool checkSession = false)
 		{
 			if (IsPostedDataValid())
 			{
@@ -79,7 +138,7 @@ namespace SynapseServer
 						process((str) =>
 						{
 							this.Response.Write(str + Helper.NewLine);
-						}, this.postedData);
+						}, this.postedValue, this.postedFile, bindId);
 					}
 					catch (KeyNotFoundException ex)
 					{
@@ -88,7 +147,8 @@ namespace SynapseServer
 					catch (AggregateException ex)
 					{
 						Response.Write("#Error has occured#" + Helper.NewLine);
-						foreach(var error in ex.InnerExceptions){
+						foreach (var error in ex.InnerExceptions)
+						{
 							Response.Write(error.Message + Helper.NewLine);
 						}
 					}
@@ -117,7 +177,11 @@ namespace SynapseServer
 		private string WriteNeedKeys()
 		{
 			var sb = new System.Text.StringBuilder("<ul>\n");
-			foreach (var key in keys)
+			foreach (var key in valueKeys)
+			{
+				sb.AppendLine("<li>" + key + "</li>\n");
+			}
+			foreach (var key in fileKeys)
 			{
 				sb.AppendLine("<li>" + key + "</li>\n");
 			}
@@ -131,44 +195,48 @@ namespace SynapseServer
 		/// <returns>セッションが妥当かどうか</returns>
 		private bool CheckSessionQuery()
 		{
-			try
+			if (!postedValue.ContainsKey(Helper.SessionId))
 			{
-				string checkSessionQuery
-					= "IF "
-					+ "(SELECT D.SessionId FROM AccountDevice D WHERE HASHBYTES('SHA1', D.UserId) = CONVERT(varbinary, @UserIdHash, 2) AND D.DeviceIdHash = CONVERT(varbinary, @DeviceIdHash, 2)) = CONVERT(varbinary, @SessionId, 2)"
-					+ "SELECT 1 AS Result "
-					+ "ELSE "
-					+ "SELECT 0 AS Result";
-				bool isLogin = false;
-
-				Helper.ExecuteSqlQuery(checkSessionQuery,
-					setAction: (param) =>
-					{
-						param.Add("@UserIdHash", SqlDbType.VarChar, 40).Value = postedData[Helper.UserIdHash];
-						param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = postedData[Helper.DeviceIdHash];
-						param.Add("@SessionId", SqlDbType.VarChar, 40).Value = postedData[Helper.SessionId];
-					},
-					getAction: (reader) =>
-					{
-						if (reader.Read())
-						{
-							isLogin = int.Parse(reader["Result"].ToString()) == 1;
-						}
-					});
-				Response.Write("Check Session Finished." + Helper.NewLine);
-
-				return isLogin;
-			}
-			catch (KeyNotFoundException ex)
-			{
-				throw ex;
-			}
-			catch (Exception ex)
-			{
-				Response.Write("#Error has occured#" + Helper.NewLine);
-				Response.Write(ex.Message + Helper.NewLine);
 				return false;
 			}
+			else
+			{
+				try
+				{
+					string checkSessionQuery = "SELECT D.BindId FROM AccountDevice D WHERE D.SessionId = CONVERT(varbinary, @SessionId, 2)";
+
+					Helper.ExecuteSqlQuery(checkSessionQuery,
+						setAction: (param) =>
+						{
+							param.Add("@SessionId", SqlDbType.VarChar, 40).Value = postedValue[Helper.SessionId];
+						},
+						getAction: (reader) =>
+						{
+							if (reader.Read())
+							{
+								bindId = Convert.ToInt32(reader["BindId"]);
+							}
+						});
+					Response.Write("Check Session Finished." + Helper.NewLine);
+				}
+				catch (KeyNotFoundException ex)
+				{
+					throw ex;
+				}
+				catch (Exception ex)
+				{
+					Response.Write("#Error has occured#" + Helper.NewLine);
+					Response.Write(ex.Message + Helper.NewLine);
+				}
+
+				return bindId != null;
+			}
+		}
+
+		public sealed class Content
+		{
+			public string ContentType { get; set; }
+			public byte[] Binary { get; set; }
 		}
 	}
 }

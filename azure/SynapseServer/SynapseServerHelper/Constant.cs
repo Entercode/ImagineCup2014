@@ -22,6 +22,8 @@ namespace SynapseServer
 		public const string SessionId = "sid";
 		public const string ClientTweetTime = "tt";
 		public const string Tweet = "tweet";
+		public const string Profile = "prf";
+		public const string ProfileImage = "prfimg";
 
 		public const string NewLine = "<br />\n";
 	}

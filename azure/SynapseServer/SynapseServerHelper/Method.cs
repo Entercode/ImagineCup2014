@@ -55,9 +55,13 @@ namespace SynapseServer
 
 		public static string StringConvertOfNumberToDateTime(string number)
 		{
+			if (number.Length == 13)
+			{
+				number = number.Substring(0, 8) + "0" + number.Substring(8, 5);
+			}
 			if (number.Length != 14)
 			{
-				throw new ArgumentException("桁数が異常です。");
+				throw new ArgumentException("数列の桁数が異常です。" + "#" + number);
 			}
 
 			if (Regex.IsMatch(number, @"\D"))
@@ -80,11 +84,16 @@ namespace SynapseServer
 			return sb.ToString();
 		}
 
+		public static string DateTimeToString(DateTime time)
+		{
+			return time.ToString("yyyyMMddHHmmss");
+		}
+
 		public static string StringConvertOfDateTimeToNumber(string dateTime)
 		{
 			if (dateTime.Length != 19)
 			{
-				throw new ArgumentException("桁数が異常です。");
+				throw new ArgumentException("日付の文字列の桁数が異常です。" + "#" + dateTime);
 			}
 
 			if (Regex.IsMatch(dateTime, @"[^\d/ :]"))
