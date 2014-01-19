@@ -56,6 +56,7 @@ namespace PageRole.test
 						a.Nickname = reader["Nickname"] as string;
 						a.MailAddress = reader["MailAddress"] as string;
 						a.PasswordHash = Helper.BytesToString(reader["PasswordHash"] as byte[]);
+						a.UserIdHash = Helper.BytesToString(Helper.StringHashing(a.UserId));
 						result.Add(a);
 					}
 				});
@@ -147,7 +148,7 @@ namespace PageRole.test
 					{
 						StreetPassInformation s = new StreetPassInformation();
 						s.UserBindId = Convert.ToInt32(reader["UserBindId"]);
-						s.PassedDeviceIdHash = Helper.BytesToString(reader["PassedDeviceIdHash"] as byte[]);
+						s.PassedBindId = Convert.ToInt32(reader["PassedBindId"]);
 						s.PassedTime = DateTime.Parse(reader["PassedTime"].ToString());
 						result.Add(s);
 					}
@@ -191,7 +192,7 @@ namespace PageRole.test
 						AccountProfile a = new AccountProfile();
 						a.UserId = reader["UserId"] as string;
 						a.Profile = reader["Profile"] as string;
-						a.ImagePath = reader["ImagePath"] as string;
+						a.UserIdHash = Helper.BytesToString(Helper.StringHashing(a.UserId));
 						result.Add(a);
 					}
 				});
@@ -210,7 +211,7 @@ namespace PageRole.test
 					{
 						param.Add("@UserId", SqlDbType.VarChar).Value = UserId;
 					});
-				MessageAction("Deleted Pass-Information Successfully");
+				MessageAction("Deleted Profile Successfully");
 			}
 			catch (Exception ex)
 			{
@@ -223,7 +224,7 @@ namespace PageRole.test
 		{
 			var result = new List<TweetInformation>();
 
-			string query = "SELECT * FROM Tweet";
+			string query = "SELECT * FROM Tweet ORDER BY ServerRecievedTime";
 
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
@@ -242,19 +243,19 @@ namespace PageRole.test
 			return result;
 		}
 
-		public static void DeleteTweet(int UserBindId, DateTime ServerRecievedTime,Action<string> MessageAction)
+		public static void DeleteTweetInformation(int BindId, DateTime ServerRecievedTime,Action<string> MessageAction)
 		{
-			string query = "DELETE Tweet WHERE UserBindId = @UserBindId AND ServerRecievedTime = @ServerRecievedTime";
+			string query = "DELETE Tweet WHERE BindId = @BindId AND ServerRecievedTime = @ServerRecievedTime";
 
 			try
 			{
 				Helper.ExecuteSqlQuery(query,
 					setAction: (param) =>
 					{
-						param.Add("@UserBindId", SqlDbType.Int).Value = UserBindId;
+						param.Add("@BindId", SqlDbType.Int).Value = BindId;
 						param.Add("@ServerRecievedTime", SqlDbType.DateTime2).Value = ServerRecievedTime;
 					});
-				MessageAction("Deleted Pass-Information Successfully");
+				MessageAction("Deleted Tweet Successfully");
 			}
 			catch (Exception ex)
 			{
@@ -269,6 +270,7 @@ namespace PageRole.test
 		public string Nickname { get; set; }
 		public string MailAddress { get; set; }
 		public string PasswordHash { get; set; }
+		public string UserIdHash { get; set; }
 	}
 
 	public class AccountDevice
@@ -282,7 +284,7 @@ namespace PageRole.test
 	public class StreetPassInformation
 	{
 		public int UserBindId { get; set; }
-		public string PassedDeviceIdHash { get; set; }
+		public int PassedBindId { get; set; }
 		public DateTime PassedTime { get; set; }
 	}
 
@@ -290,7 +292,7 @@ namespace PageRole.test
 	{
 		public string UserId { get; set; }
 		public string Profile { get; set; }
-		public string ImagePath { get; set; }
+		public string UserIdHash { get; set; }
 	}
 
 	public class TweetInformation

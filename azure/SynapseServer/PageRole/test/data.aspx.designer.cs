@@ -31,13 +31,13 @@ namespace PageRole.test {
         protected global::System.Web.UI.WebControls.ObjectDataSource AccountSource;
         
         /// <summary>
-        /// AccountTable コントロール。
+        /// Accounts コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AccountTable;
+        protected global::System.Web.UI.WebControls.GridView Accounts;
         
         /// <summary>
         /// AccountDeviceSource コントロール。
@@ -67,13 +67,13 @@ namespace PageRole.test {
         protected global::System.Web.UI.WebControls.ObjectDataSource StreetPassInformationSource;
         
         /// <summary>
-        /// StreetPassInformation コントロール。
+        /// StreetPassInformations コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StreetPassInformation;
+        protected global::System.Web.UI.WebControls.GridView StreetPassInformations;
         
         /// <summary>
         /// AccountProfileSource コントロール。
