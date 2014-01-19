@@ -13,6 +13,10 @@ namespace WorkerRole
 		public override void Run()
 		{
 			//server.Run();
+			while (true)
+			{
+				System.Threading.Thread.Sleep(10000);
+			}
 		}
 
 		public override bool OnStart()
