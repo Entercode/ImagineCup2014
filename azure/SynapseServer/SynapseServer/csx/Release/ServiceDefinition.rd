@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SynapseServer" generation="1" functional="0" release="0" Id="b7b46bdc-3a7f-44a1-a14d-e693333827f0" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SynapseServer" generation="1" functional="0" release="0" Id="0d64ce53-2841-4725-8180-db5972f2faf6" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="SynapseServerGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -156,14 +156,14 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="8e5d0cc1-0536-4b67-8f54-f0eefd64ce6d" ref="Microsoft.RedDog.Contract\ServiceContract\SynapseServerContract@ServiceDefinition">
+    <implementation Id="a644ac73-b02f-4950-8d16-87e8533b728e" ref="Microsoft.RedDog.Contract\ServiceContract\SynapseServerContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="d7d1798c-44df-402c-908a-10162f91ab5a" ref="Microsoft.RedDog.Contract\Interface\PageRole:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="45636ecd-a243-4538-8a07-21c082b44618" ref="Microsoft.RedDog.Contract\Interface\PageRole:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SynapseServer/SynapseServerGroup/PageRole:Endpoint1" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="cbf41cf4-9f83-4efb-9846-4fa7f6234660" ref="Microsoft.RedDog.Contract\Interface\WorkerRole:StreetPass@ServiceDefinition">
+        <interfaceReference Id="dadfa858-1af4-4ade-b42f-ab377850bc67" ref="Microsoft.RedDog.Contract\Interface\WorkerRole:StreetPass@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SynapseServer/SynapseServerGroup/WorkerRole:StreetPass" />
           </inPort>

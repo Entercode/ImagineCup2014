@@ -5,14 +5,14 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="ConnectionLimit" value="5" />
-			<Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"/>
+			<Setting name="DatabaseConnectionString" value="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\LocalDb.mdf;Integrated Security=True"/>
     </ConfigurationSettings>
   </Role>
   <Role name="PageRole">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-			<Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"/>
+			<Setting name="DatabaseConnectionString" value="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\LocalDb.mdf;Integrated Security=True"/>
 		</ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

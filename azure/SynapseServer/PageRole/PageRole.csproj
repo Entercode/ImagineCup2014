@@ -147,17 +147,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\LocalDb.mdf" />
+    <None Include="App_Data\LocalDb_log.ldf">
+      <DependentUpon>LocalDb.mdf</DependentUpon>
+    </None>
+    <Content Include="Get\ProfileImage.aspx" />
+    <Content Include="Get\Timeline.aspx" />
+    <Content Include="Set\Profile.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Login.aspx" />
-    <Content Include="Logout.aspx" />
+    <Content Include="Set\Login.aspx" />
+    <Content Include="Set\Logout.aspx" />
     <Content Include="packages.config" />
-    <Content Include="SignUp.aspx" />
+    <Content Include="Set\SignUp.aspx" />
+    <Content Include="Set\StreetPass.aspx" />
     <Content Include="test\data.aspx" />
+    <Content Include="Set\Tweet.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\TimelineSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,30 +181,58 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Get\ProfileImage.aspx.cs">
+      <DependentUpon>ProfileImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Get\ProfileImage.aspx.designer.cs">
+      <DependentUpon>ProfileImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Get\Timeline.aspx.cs">
+      <DependentUpon>Timeline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Get\Timeline.aspx.designer.cs">
+      <DependentUpon>Timeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Set\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Set\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
+    <Compile Include="Set\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
+    <Compile Include="Set\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Logout.aspx.cs">
+    <Compile Include="Set\Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Logout.aspx.designer.cs">
+    <Compile Include="Set\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignUp.aspx.cs">
+    <Compile Include="Set\SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SignUp.aspx.designer.cs">
+    <Compile Include="Set\SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Set\StreetPass.aspx.cs">
+      <DependentUpon>StreetPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Set\StreetPass.aspx.designer.cs">
+      <DependentUpon>StreetPass.aspx</DependentUpon>
     </Compile>
     <Compile Include="test\data.aspx.cs">
       <DependentUpon>data.aspx</DependentUpon>
@@ -201,11 +241,16 @@
     <Compile Include="test\data.aspx.designer.cs">
       <DependentUpon>data.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Set\Tweet.aspx.cs">
+      <DependentUpon>Tweet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Set\Tweet.aspx.designer.cs">
+      <DependentUpon>Tweet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SynapseServerHelper\SynapseServerHelper.csproj">
       <Project>{107720ab-dca4-442c-bcca-cd35fa3f86c8}</Project>
