@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://synapse-server.cloudapp.net/Timeline" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Timeline">
+		<xsd:complexType>
+			<xsd:sequence>
+				
+				<xsd:element name="TweetData">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Tweet" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:string">
+												<xsd:attribute name="UserId" type="xsd:string" />
+												<xsd:attribute name="Nickname" type="xsd:string" />
+												<xsd:attribute name="Time" type="xsd:string" />
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="MetaData">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="UpdateTime" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Timeline xmlns="http://synapse-server.cloudapp.net/Timeline">
+  <TweetData xmlns="">
+    <Tweet UserId="Stalin" Nickname="ヨシフスターリン" Time="20140118223900">Ураа</Tweet>
+    <Tweet UserId="KimJongil" Nickname="金正日" Time="20140118223500">テポドン</Tweet>
+    <Tweet UserId="SinzoAbe" Nickname="安倍晋三" Time="20140118215736">あ＾～</Tweet>
+    <Tweet UserId="KimJongil" Nickname="金正日" Time="20100118175100">うんこなう</Tweet>
+    <Tweet UserId="KimJongil" Nickname="金正日" Time="20100101175056">コンギョ</Tweet>
+  </TweetData>
+  <MetaData xmlns="">
+    <UpdateTime>20140119002136</UpdateTime>
+  </MetaData>
+</Timeline>
