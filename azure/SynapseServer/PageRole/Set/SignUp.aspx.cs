@@ -18,10 +18,10 @@ namespace PageRole
 
 			ShowPostedDataResponse();
 
-			RunProcess((WriteLine, data) =>
+			RunProcess((WriteLine, data, file, bindId) =>
 			{
 				string signUpQuery = "INSERT Account(UserId, Nickname, MailAddress, PasswordHash) VALUES (@UserId, @Nickname, @MailAddress, HASHBYTES('SHA1', @Password))";
-				
+
 				Helper.ExecuteSqlQuery(signUpQuery,
 					setAction: (param) =>
 					{
@@ -33,7 +33,7 @@ namespace PageRole
 				WriteLine("Insert Account Finished.");
 
 				string deviceBindQuery = "INSERT AccountDevice(UserId, DeviceIdHash) VALUES(@UserId, CONVERT(varbinary, @DeviceIdHash, 2))";
-				
+
 				Helper.ExecuteSqlQuery(deviceBindQuery,
 					setAction: (param) =>
 					{
@@ -41,6 +41,15 @@ namespace PageRole
 						param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.DeviceIdHash];
 					});
 				WriteLine("Insert AccountData Finished.");
+
+				string profileQuery = "INSERT AccountProfile(UserId) VALUES(@UserId)";
+
+				Helper.ExecuteSqlQuery(profileQuery,
+					setAction: (param) =>
+					{
+						param.Add("@UserId", SqlDbType.VarChar).Value = data[Helper.UserId];
+					});
+				WriteLine("Insert AccountProfile Finished.");
 
 				WriteLine("SignUp Successed.");
 			});

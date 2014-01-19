@@ -18,7 +18,7 @@ namespace PageRole
 
 			ShowPostedDataResponse();
 
-			RunProcess((WriteLine, data) =>
+			RunProcess((WriteLine, data, file, bindId) =>
 			{
 				string checkPasswordQuery
 					= "IF "
@@ -66,7 +66,8 @@ namespace PageRole
 					if (isLogin)
 					{
 						WriteLine("Login successed.");
-						WriteLine("your SessionId:#" + Helper.BytesToString(sessionId) + "#");
+						Response.Cookies[Helper.SessionId].Value = Helper.BytesToString(sessionId);
+						//WriteLine("your SessionId:" + Helper.BytesToString(sessionId) + "");
 					}
 					else
 					{

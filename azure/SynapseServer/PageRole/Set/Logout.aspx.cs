@@ -14,24 +14,22 @@ namespace PageRole
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Initialize(new[] { Helper.UserIdHash, Helper.DeviceIdHash, Helper.SessionId });
+			Initialize(null);
 
 			ShowPostedDataResponse();
 
-			RunProcess((WriteLine, data) =>
+			RunProcess((WriteLine, data, file, bindId) =>
 			{
-				string logoutQuery
-					= "UPDATE AccountDevice SET SessionId = NULL "
-					+ "WHERE HASHBYTES('SHA1', UserId) = CONVERT(varbinary, @UserIdHash, 2) AND DeviceIdHash = CONVERT(varbinary, @DeviceIdHash, 2)";
+				string logoutQuery = "UPDATE AccountDevice SET SessionId = NULL WHERE BindId = @BindId";
 
 				Helper.ExecuteSqlQuery(logoutQuery,
 					setAction: (param) =>
 					{
-						param.Add("@UserIdHash", SqlDbType.VarChar, 40).Value = data[Helper.UserIdHash];
-						param.Add("@DeviceIdHash", SqlDbType.VarChar, 40).Value = data[Helper.DeviceIdHash];
+						param.Add("@BindId", SqlDbType.Int).Value = bindId;
 					});
 				WriteLine("Logout Query Finished.");
 
+				Response.Cookies.Remove(Helper.SessionId);
 				WriteLine("Logout successed.");
 			},
 			checkSession: true);
