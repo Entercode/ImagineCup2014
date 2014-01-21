@@ -43,10 +43,10 @@
     NSString *did_h = [SHA1Generator sha1WithString:[uuid UUIDString]];
     
     
-    // Send signup data with POST
-    NSURL *url = [NSURL URLWithString:@"http://synapse-server.cloudapp.net/Login.aspx"];
+    // Send login data with POST
+    NSURL *url = [NSURL URLWithString:@"http://synapse-server.cloudapp.net/Set/Login.aspx"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    NSString *keyValue = [NSString stringWithFormat:@"uid=%@&mail=%@&pass=%@&did_h=%@", self.userIDField.text, self.mailAddressField.text, self.passwordField.text, did_h];
+    NSString *keyValue = [NSString stringWithFormat:@"uid_h=%@&did_h=%@&pass_h=%@", [SHA1Generator sha1WithString:self.userIDField.text], did_h, [SHA1Generator sha1WithString:self.passwordField.text]];
     NSData *post = [keyValue dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     [request setHTTPMethod:@"POST"];
@@ -58,13 +58,14 @@
         // Get Cookie
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        NSLog(@"%@", httpResponse);
         NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:httpResponse.allHeaderFields forURL:response.URL];
-        
-        for (int i = 0; i < cookies.count; i++) {
+        NSLog(@"%@", cookies);
+        /*for (int i = 0; i < cookies.count; i++) {
             NSHTTPCookie *cookie = [cookies objectAtIndex:i];
             NSLog(@"cookie: name=%@, value=%@", cookie.name, cookie.value);
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-        }
+        }*/
     
     }];
     

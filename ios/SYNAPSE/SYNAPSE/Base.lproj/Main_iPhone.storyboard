@@ -483,7 +483,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSB-dZ-mqj">
-                                        <rect key="frame" x="149" y="300" width="40" height="30"/>
+                                        <rect key="frame" x="214" y="242" width="40" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Close">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -550,7 +550,6 @@
                     <navigationItem key="navigationItem" id="231-il-nDL"/>
                     <connections>
                         <outlet property="loginButton" destination="xB0-xv-XG1" id="fdz-fn-NdP"/>
-                        <outlet property="mailAddressField" destination="UL8-jB-ywn" id="N7w-2p-Kj2"/>
                         <outlet property="navBar" destination="v69-ue-Jdu" id="JSD-Lm-bp9"/>
                         <outlet property="passwordField" destination="l7y-Qm-PkY" id="kiG-Ci-MUq"/>
                         <outlet property="userIDField" destination="31A-Rn-Yoe" id="Ghw-Bl-qAP"/>
