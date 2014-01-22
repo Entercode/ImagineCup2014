@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>TOMOKI2-PC</Machine>
+    <WindowsUser>tomoki</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff</PackageIdentityName>
+    <RegisteredManifestChecksum>A084F5690518582FABB2C13A50D2D691C029D432AC6BEFC9B3C0CC263450DD75</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff_1.0.0.0_neutral__way6adnv8ekgy</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff_way6adnv8ekgy!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=tomoki</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-20T08:58:44.226</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
+      <PackagePath>SYNAPSE.exe</PackagePath>
+      <Modified>2014-01-20T09:08:08.540</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-30T23:01:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-30T23:01:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-30T23:01:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-30T23:01:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Common\ReadMe.txt">
+      <PackagePath>Common\ReadMe.txt</PackagePath>
+      <Modified>2013-12-29T10:06:01.674</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2013-12-29T14:19:29.286</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\LogInPage.xbf">
+      <PackagePath>LogInPage.xbf</PackagePath>
+      <Modified>2014-01-15T11:25:50.402</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2014-01-16T09:50:33.406</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
+      <PackagePath>UserInformationPage.xbf</PackagePath>
+      <Modified>2014-01-16T09:50:33.408</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2014-01-20T08:58:44.110</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
