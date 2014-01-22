@@ -50,5 +50,7 @@
         </Grid>
         <Button Content="Log In " HorizontalAlignment="Left" Margin="154,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="LogInButton_clik"/>
         <Button Content="Sing up" HorizontalAlignment="Left" Margin="405,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="SingUpButton_Clike"/>
+        <Button x:Name="LogOut" Content="Log Out" HorizontalAlignment="Left" Margin="583,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="LogOutButton_clik"/>
+        <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="408,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="270" Height="108"/>
     </Grid>
 </Page>

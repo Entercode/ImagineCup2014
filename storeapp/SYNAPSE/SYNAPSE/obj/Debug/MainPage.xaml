@@ -50,6 +50,8 @@
         </Grid>
         <Button x:ConnectionId='1' Content="Log In " HorizontalAlignment="Left" Margin="154,77,0,0" Grid.Row="1" VerticalAlignment="Top"                         />
         <Button x:ConnectionId='2' Content="Sing up" HorizontalAlignment="Left" Margin="405,77,0,0" Grid.Row="1" VerticalAlignment="Top"                           />
+        <Button x:ConnectionId='3' x:Name="LogOut" Content="Log Out" HorizontalAlignment="Left" Margin="583,77,0,0" Grid.Row="1" VerticalAlignment="Top"                          />
+        <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="408,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="270" Height="108"/>
     </Grid>
 </Page>
 

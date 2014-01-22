@@ -170,6 +170,22 @@ namespace SYNAPSE
             {
             }
 
+            //cookieの取得
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(ressorceAddress);
+
+            foreach (HttpCookie cookie in cookieCollection)
+            {
+                result.Text += "--------------------\r\n";
+                result.Text += "Name: " + cookie.Name + "\r\n";
+                result.Text += "Domain: " + cookie.Domain + "\r\n";
+                result.Text += "Path: " + cookie.Path + "\r\n";
+                result.Text += "Value: " + cookie.Value + "\r\n";
+                result.Text += "Expires: " + cookie.Expires + "\r\n";
+                result.Text += "Secure: " + cookie.Secure + "\r\n";
+                result.Text += "HttpOnly: " + cookie.HttpOnly + "\r\n";
+            }
+
         }
     }
 }

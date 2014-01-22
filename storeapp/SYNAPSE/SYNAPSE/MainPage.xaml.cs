@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -116,6 +117,22 @@ namespace SYNAPSE
             if(this.Frame != null)
             {
                 this.Frame.Navigate(typeof(UserInformationPage));
+            }
+        }
+
+        async private void LogOutButton_clik(object sender, RoutedEventArgs e)
+        {
+            var Client = new HttpClient();
+            HttpResponseMessage response;
+
+            Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogOut.aspx");
+            try
+            {
+                response = await Client.PostAsync(ressorceAddress,new HttpStringContent(""));
+                result.Text = await response.Content.ReadAsStringAsync();
+            }
+            catch
+            {
             }
         }
     }
