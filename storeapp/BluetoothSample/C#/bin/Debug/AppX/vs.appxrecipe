@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>TAKESHITA-WIN8</Machine>
+    <WindowsUser>江崎</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>Microsoft.SDKSamples.BluetoothGattHeartRate.CS</PackageIdentityName>
+    <RegisteredManifestChecksum>665A7C0CDBC548B86781917209B33949C16ABEE2188F18DC00263E1984AA6C42</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>Microsoft.SDKSamples.BluetoothGattHeartRate.CS_1.0.0.0_neutral__8wekyb3d8bbwe</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>Microsoft.SDKSamples.BluetoothGattHeartRate.CS_8wekyb3d8bbwe!SDKSample.App</RegisteredUserModeAppID>
+    <RegisteredPackageID>Microsoft.SDKSamples.BluetoothGattHeartRate.CS</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-21T06:10:03.864</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\BluetoothGattHeartRate.exe">
+      <PackagePath>BluetoothGattHeartRate.exe</PackagePath>
+      <Modified>2014-01-21T06:10:02.536</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\microsoft-sdk.png">
+      <PackagePath>Assets\microsoft-sdk.png</PackagePath>
+      <Modified>2014-01-21T06:09:02.270</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\placeholder-sdk.png">
+      <PackagePath>Assets\placeholder-sdk.png</PackagePath>
+      <Modified>2014-01-21T06:09:02.332</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\smallTile-sdk.png">
+      <PackagePath>Assets\smallTile-sdk.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-21T06:09:02.379</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\splash-sdk.png">
+      <PackagePath>Assets\splash-sdk.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-21T06:09:02.426</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\squareTile-sdk.png">
+      <PackagePath>Assets\squareTile-sdk.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-21T06:09:02.489</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\storeLogo-sdk.png">
+      <PackagePath>Assets\storeLogo-sdk.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-21T06:09:02.551</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\tile-sdk.png">
+      <PackagePath>Assets\tile-sdk.png</PackagePath>
+      <Modified>2014-01-21T06:09:02.895</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\Assets\windows-sdk.png">
+      <PackagePath>Assets\windows-sdk.png</PackagePath>
+      <Modified>2014-01-21T06:09:02.942</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.161</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\Scenario3.xbf">
+      <PackagePath>Scenario3.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.176</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\Scenario2.xbf">
+      <PackagePath>Scenario2.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.176</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\Scenario1.xbf">
+      <PackagePath>Scenario1.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.192</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.207</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\Common\StandardStyles.xbf">
+      <PackagePath>Common\StandardStyles.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.207</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\Sample-Utils\SampleTemplateStyles.xbf">
+      <PackagePath>Sample-Utils\SampleTemplateStyles.xbf</PackagePath>
+      <Modified>2014-01-21T06:10:01.223</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2014-01-21T06:10:03.504</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

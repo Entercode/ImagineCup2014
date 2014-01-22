@@ -1,0 +1,1 @@
+C:\Users\江崎\Documents\Visual Studio 2013\Projects\BluetoothSample\C#\BluetoothGattHeartRate.csproj;neutral
