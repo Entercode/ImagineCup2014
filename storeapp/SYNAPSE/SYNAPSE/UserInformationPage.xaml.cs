@@ -123,7 +123,7 @@ namespace SYNAPSE
 
             //デバイスIDをファイルに出力
             StorageFolder storageFolder = KnownFolders.MusicLibrary;
-            StorageFile storageFile = await storageFolder.CreateFileAsync("deviceID.txt");
+            StorageFile storageFile = await storageFolder.CreateFileAsync("deviceID.txt",CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(storageFile, id, UnicodeEncoding.Utf8);
 
 

@@ -20,6 +20,7 @@ using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
 using SYNAPSE;
 using Windows.System.Profile;
+using Windows.Storage;
 
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
@@ -116,15 +117,14 @@ namespace SYNAPSE
             var Client = new HttpClient();
             HttpResponseMessage response;
 
-            Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Login.aspx");
+            Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogIn.aspx");
             string str;
 
-            //デバイスIDの取得開始
-            var token = HardwareIdentification.GetPackageSpecificToken(null);
-            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(token.Id);
-            byte[] bytes = new byte[token.Id.Length];
-            dataReader.ReadBytes(bytes);
-            var id = BitConverter.ToString(bytes);
+            //deviceIDファイルを開いてdidを取得
+            StorageFolder storageFolder = KnownFolders.MusicLibrary;
+            StorageFile storageFile = await storageFolder.GetFileAsync("deviceID.txt");
+            string id = await FileIO.ReadTextAsync(storageFile);
+            
 
             //ハッシュ生成
             //SHA1のハッシュプロバイダーを取得
