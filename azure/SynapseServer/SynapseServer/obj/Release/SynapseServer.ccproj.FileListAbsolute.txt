@@ -61,6 +61,7 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Releas
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\Microsoft.Data.OData.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\System.Spatial.resources.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\IsLogin.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\ProfileImage.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\Timeline.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Global.asax
@@ -72,6 +73,9 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Releas
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Set\StreetPass.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Set\Tweet.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\data.aspx
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\data.css
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\timeline.aspx
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\timeline.css
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Web.config
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\WorkerRole\de\Microsoft.Data.Edm.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\WorkerRole\de\Microsoft.Data.OData.resources.dll

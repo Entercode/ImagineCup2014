@@ -55,10 +55,6 @@ namespace SynapseServer
 
 		public static string StringConvertOfNumberToDateTime(string number)
 		{
-			if (number.Length == 13)
-			{
-				number = number.Substring(0, 8) + "0" + number.Substring(8, 5);
-			}
 			if (number.Length != 14)
 			{
 				throw new ArgumentException("数列の桁数が異常です。" + "#" + number);
@@ -84,24 +80,10 @@ namespace SynapseServer
 			return sb.ToString();
 		}
 
-		public static string DateTimeToString(DateTime time)
-		{
-			return time.ToString("yyyyMMddHHmmss");
-		}
-
 		public static string StringConvertOfDateTimeToNumber(string dateTime)
 		{
-			if (dateTime.Length != 19)
-			{
-				throw new ArgumentException("日付の文字列の桁数が異常です。" + "#" + dateTime);
-			}
-
-			if (Regex.IsMatch(dateTime, @"[^\d/ :]"))
-			{
-				throw new ArgumentException("日付を構成する文字以外の文字が混入しています。");
-			}
-
-			return string.Join(string.Empty, dateTime.Split('/', ' ', ':'));
+			var time = DateTime.Parse(dateTime);
+			return time.ToString("yyyyMMddHHmmss");
 		}
 
 		public static byte[] StringToBytes(string str)
@@ -121,6 +103,10 @@ namespace SynapseServer
 
 		public static byte[] StringHashing(string origin)
 		{
+			if (string.IsNullOrEmpty(origin))
+			{
+				return new byte[0];
+			}
 			byte[] bytes = Encoding.UTF8.GetBytes(origin);
 			SHA1 crypto = new SHA1CryptoServiceProvider();
 			return crypto.ComputeHash(bytes);

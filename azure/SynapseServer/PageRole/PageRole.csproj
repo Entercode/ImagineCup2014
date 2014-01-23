@@ -151,6 +151,7 @@
     <None Include="App_Data\LocalDb_log.ldf">
       <DependentUpon>LocalDb.mdf</DependentUpon>
     </None>
+    <Content Include="Get\IsLogin.aspx" />
     <Content Include="Get\ProfileImage.aspx" />
     <Content Include="Get\Timeline.aspx" />
     <Content Include="Set\Profile.aspx" />
@@ -162,6 +163,9 @@
     <Content Include="Set\StreetPass.aspx" />
     <Content Include="test\data.aspx" />
     <Content Include="Set\Tweet.aspx" />
+    <Content Include="test\data.css" />
+    <Content Include="test\timeline.aspx" />
+    <Content Include="test\timeline.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -181,6 +185,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Get\IsLogin.aspx.cs">
+      <DependentUpon>IsLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Get\IsLogin.aspx.designer.cs">
+      <DependentUpon>IsLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Get\ProfileImage.aspx.cs">
       <DependentUpon>ProfileImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,6 +258,13 @@
     </Compile>
     <Compile Include="Set\Tweet.aspx.designer.cs">
       <DependentUpon>Tweet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test\timeline.aspx.cs">
+      <DependentUpon>timeline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test\timeline.aspx.designer.cs">
+      <DependentUpon>timeline.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>

@@ -21,6 +21,11 @@
       <Setting name="ConnectionLimit" />
       <Setting name="DatabaseConnectionString" />
     </ConfigurationSettings>
+    <Contents>
+      <Content destination=".\">
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Debug\WorkerRoleContent\" />
+      </Content>
+    </Contents>
   </WorkerRole>
   <WebRole name="PageRole" vmsize="Small">
     <Sites>
@@ -39,5 +44,10 @@
     <ConfigurationSettings>
       <Setting name="DatabaseConnectionString" />
     </ConfigurationSettings>
+    <Contents>
+      <Content destination=".\">
+        <SourceDirectory path="d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\rcf\Debug\PageRoleContent\" />
+      </Content>
+    </Contents>
   </WebRole>
 </ServiceDefinition>
