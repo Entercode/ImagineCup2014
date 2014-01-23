@@ -107,6 +107,7 @@ namespace PageRole.test
 						{
 							a.SessionId = Helper.BytesToString(reader["SessionId"] as byte[]);
 						}
+						a.UserIdHash = Helper.BytesToString(Helper.StringHashing(a.UserId));
 						result.Add(a);
 					}
 				});
@@ -149,7 +150,7 @@ namespace PageRole.test
 						StreetPassInformation s = new StreetPassInformation();
 						s.UserBindId = Convert.ToInt32(reader["UserBindId"]);
 						s.PassedBindId = Convert.ToInt32(reader["PassedBindId"]);
-						s.PassedTime = DateTime.Parse(reader["PassedTime"].ToString());
+						s.PassedTime = reader["PassedTime"].ToString();
 						result.Add(s);
 					}
 				});
@@ -224,7 +225,11 @@ namespace PageRole.test
 		{
 			var result = new List<TweetInformation>();
 
-			string query = "SELECT * FROM Tweet ORDER BY ServerRecievedTime";
+			string query
+				= "SELECT T.BindId, T.ClientTweetTime, T.ServerRecievedTime, T.Tweet, V.UserId, V.Nickname "
+				+ "FROM Tweet T, TimelineView V "
+				+ "WHERE T.BindId = V.BindId AND T.ClientTweetTime = V.ClientTweetTime "
+				+ "ORDER BY ServerRecievedTime;";
 
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
@@ -233,9 +238,11 @@ namespace PageRole.test
 					{
 						TweetInformation t = new TweetInformation();
 						t.BindId = Convert.ToInt32(reader["BindId"]);
-						t.ClientTweetTime = DateTime.Parse(reader["ClientTweetTime"].ToString());
-						t.ServerRecievedTime = DateTime.Parse(reader["ServerRecievedTime"].ToString());
+						t.ClientTweetTime = reader["ClientTweetTime"].ToString();
+						t.ServerRecievedTime = reader["ServerRecievedTime"].ToString();
 						t.Tweet = reader["Tweet"] as string;
+						t.UserId = reader["UserId"] as string;
+						t.Nickname = reader["Nickname"] as string;
 						result.Add(t);
 					}
 				});
@@ -279,13 +286,14 @@ namespace PageRole.test
 		public string DeviceIdHash { get; set; }
 		public int BindId { get; set; }
 		public string SessionId { get; set; }
+		public string UserIdHash { get; set; }
 	}
 
 	public class StreetPassInformation
 	{
 		public int UserBindId { get; set; }
 		public int PassedBindId { get; set; }
-		public DateTime PassedTime { get; set; }
+		public string PassedTime { get; set; }
 	}
 
 	public class AccountProfile
@@ -298,8 +306,10 @@ namespace PageRole.test
 	public class TweetInformation
 	{
 		public int BindId { get; set; }
-		public DateTime ClientTweetTime { get; set; }
-		public DateTime ServerRecievedTime { get; set; }
+		public string ClientTweetTime { get; set; }
+		public string ServerRecievedTime { get; set; }
 		public string Tweet { get; set; }
+		public string UserId { get; set; }
+		public string Nickname { get; set; }
 	}
 }

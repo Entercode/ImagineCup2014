@@ -1,0 +1,36 @@
+﻿body{
+	color:darkslategray;
+	background-color:aliceblue;
+}
+
+table {
+	border:0px;
+	border-collapse:collapse;
+}
+
+th{
+	border:1px solid darkgray;
+	background-color:lightgray;
+}
+
+td{
+	border:1px solid lightgray;
+	background-color:whitesmoke;
+}
+
+th.meta{
+	color:slategray;
+}
+
+td.meta{
+	color:darkgray;
+}
+
+td input{
+	color:aliceblue;
+	background-color:crimson;
+}
+
+td a{
+	color:dodgerblue;
+}

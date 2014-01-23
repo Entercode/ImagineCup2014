@@ -31,15 +31,6 @@ namespace PageRole.test {
         protected global::System.Web.UI.WebControls.ObjectDataSource AccountSource;
         
         /// <summary>
-        /// Accounts コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Accounts;
-        
-        /// <summary>
         /// AccountDeviceSource コントロール。
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace PageRole.test {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource AccountDeviceSource;
-        
-        /// <summary>
-        /// AccountDevices コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AccountDevices;
         
         /// <summary>
         /// StreetPassInformationSource コントロール。
@@ -67,15 +49,6 @@ namespace PageRole.test {
         protected global::System.Web.UI.WebControls.ObjectDataSource StreetPassInformationSource;
         
         /// <summary>
-        /// StreetPassInformations コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StreetPassInformations;
-        
-        /// <summary>
         /// AccountProfileSource コントロール。
         /// </summary>
         /// <remarks>
@@ -83,15 +56,6 @@ namespace PageRole.test {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource AccountProfileSource;
-        
-        /// <summary>
-        /// AccountProfiles コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AccountProfiles;
         
         /// <summary>
         /// TweetInformationSource コントロール。
@@ -103,12 +67,12 @@ namespace PageRole.test {
         protected global::System.Web.UI.WebControls.ObjectDataSource TweetInformationSource;
         
         /// <summary>
-        /// TweetInformations コントロール。
+        /// ListView1 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView TweetInformations;
+        protected global::System.Web.UI.WebControls.ListView ListView1;
     }
 }
