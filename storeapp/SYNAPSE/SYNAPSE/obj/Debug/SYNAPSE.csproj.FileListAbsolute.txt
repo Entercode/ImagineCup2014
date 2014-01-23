@@ -39,3 +39,8 @@ C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\
 C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\UserInformationPage.g.cs
 C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\UserInformationPage.xaml
 C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\UserInformationPage.xbf
+C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\Profile.xbf
+C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\Profile.g.i.cs
+C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\Profile.g.cs
+C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\Profile.xaml
+C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\obj\Debug\Profile.xbf

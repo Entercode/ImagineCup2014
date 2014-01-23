@@ -13,16 +13,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
-using Windows.Web.Http.Filters;
-using Windows.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
-using SYNAPSE;
-using Windows.System.Profile;
-using Windows.Storage;
-
-
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -31,12 +21,11 @@ namespace SYNAPSE
     /// <summary>
     /// 多くのアプリケーションに共通の特性を指定する基本ページ。
     /// </summary>
-    public sealed partial class LogInPage : Page
+    public sealed partial class Profile : Page
     {
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        string id;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -56,7 +45,7 @@ namespace SYNAPSE
         }
 
 
-        public LogInPage()
+        public Profile()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -77,12 +66,6 @@ namespace SYNAPSE
         /// セッション。ページに初めてアクセスするとき、状態は null になります。</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            //デバイスIDを復元
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            if(localSettings.Values.ContainsKey("did"))
-            {
-               id = localSettings.Values["did"].ToString();
-            }
         }
 
         /// <summary>
@@ -120,82 +103,8 @@ namespace SYNAPSE
 
         #endregion
 
-        async private void LogInOKButton_clik(object sender, RoutedEventArgs e)
+        private void ProfileImage_doubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            var Client = new HttpClient();
-            HttpResponseMessage response;
-
-            Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogIn.aspx");
-            string str;
-
-            /*
-            //deviceIDファイルを開いてdidを取得
-            StorageFolder storageFolder = KnownFolders.MusicLibrary;
-            StorageFile storageFile = await storageFolder.GetFileAsync("deviceID.txt");
-            string id = await FileIO.ReadTextAsync(storageFile);
-            */
-
-            //ハッシュ生成
-            //SHA1のハッシュプロバイダーを取得
-
-            var algorithm = HashAlgorithmProvider.OpenAlgorithm("SHA1");
-
-            //暗号化前の文字列をバイナリ形式のバッファに変換する
-
-            IBuffer uid = CryptographicBuffer.ConvertStringToBinary(username.Text, BinaryStringEncoding.Utf8);
-            IBuffer pass = CryptographicBuffer.ConvertStringToBinary(password.Text, BinaryStringEncoding.Utf8);
-            IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
-
-            //バッファからハッシュ化されたデータを取得する
-
-            var hash_uid = algorithm.HashData(uid);
-            var hash_pass = algorithm.HashData(pass);
-            var hash_did = algorithm.HashData(did);
-
-            //ハッシュ化されたデータを16進数の文字列に変換
-
-            string uid_h = CryptographicBuffer.EncodeToHexString(hash_uid);
-            string pass_h = CryptographicBuffer.EncodeToHexString(hash_pass);
-            string did_h = CryptographicBuffer.EncodeToHexString(hash_did);
-            
-            //送信するデータの生成
-
-            HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string,string>("uid_h",uid_h),
-                new KeyValuePair<string,string>("pass_h",pass_h),
-                new KeyValuePair<string,string>("did_h",did_h),
-            });
-            
-            try
-            {
-                //通信開始
-                
-                response = await Client.PostAsync(ressorceAddress, content);
-                str = await response.Content.ReadAsStringAsync();
-                result.Text = str;
-            }
-            catch
-            {
-                result.Text = "ログイン失敗\n";
-                return;
-            }
-
-            //cookieの取得
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
-            HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(ressorceAddress);
-
-            foreach (HttpCookie cookie in cookieCollection)
-            {
-                result.Text += "--------------------\r\n";
-                result.Text += "Name: " + cookie.Name + "\r\n";
-                result.Text += "Domain: " + cookie.Domain + "\r\n";
-                result.Text += "Path: " + cookie.Path + "\r\n";
-                result.Text += "Value: " + cookie.Value + "\r\n";
-                result.Text += "Expires: " + cookie.Expires + "\r\n";
-                result.Text += "Secure: " + cookie.Secure + "\r\n";
-                result.Text += "HttpOnly: " + cookie.HttpOnly + "\r\n";
-            }
 
         }
     }

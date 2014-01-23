@@ -121,11 +121,16 @@ namespace SYNAPSE
             dataReader.ReadBytes(bytes);
             var id = BitConverter.ToString(bytes);
 
+            /*
             //デバイスIDをファイルに出力
             StorageFolder storageFolder = KnownFolders.MusicLibrary;
             StorageFile storageFile = await storageFolder.CreateFileAsync("deviceID.txt",CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(storageFile, id, UnicodeEncoding.Utf8);
+            */
 
+            //デバイスIDをアプリデータとして保存
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values["did"] = id;
 
             HttpClient client = new HttpClient();
             HttpResponseMessage response;
@@ -147,8 +152,16 @@ namespace SYNAPSE
 
             });
 
-            response = await client.PostAsync(ressoceAddress, content);
-            result.Text = await response.Content.ReadAsStringAsync();
+            try
+            {
+                response = await client.PostAsync(ressoceAddress, content);
+                result.Text = await response.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                result.Text = "ユーザー登録失敗\n";
+                return;
+            }
 
         }
     }

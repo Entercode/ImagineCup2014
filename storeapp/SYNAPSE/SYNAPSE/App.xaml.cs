@@ -57,6 +57,7 @@ namespace SYNAPSE
             {
                 // ナビゲーション コンテキストとして動作するフレームを作成し、最初のページに移動します
                 rootFrame = new Frame();
+                SYNAPSE.Common.SuspensionManager.RegisterFrame(rootFrame, "appFrame");
                 // 既定の言語を設定します
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
@@ -99,10 +100,11 @@ namespace SYNAPSE
         /// </summary>
         /// <param name="sender">中断要求の送信元。</param>
         /// <param name="e">中断要求の詳細。</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        async private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
+            await SYNAPSE.Common.SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }
