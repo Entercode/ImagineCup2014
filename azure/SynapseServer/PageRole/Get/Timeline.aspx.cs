@@ -49,7 +49,7 @@ namespace PageRole.Get
 						{
 							string userId = reader["UserId"] as string;
 							string nickname = reader["Nickname"] as string;
-							string clientTweetTime = Helper.DateTimeToString(DateTime.Parse(reader["ClientTweetTime"].ToString()));
+							string clientTweetTime = Helper.StringConvertOfDateTimeToNumber(reader["ClientTweetTime"].ToString());
 							string tweet = reader["Tweet"] as string;
 							tweetData.Add(new XElement("Tweet", new XAttribute("UserId", userId), new XAttribute("Nickname", nickname), new XAttribute("Time", clientTweetTime), tweet));
 						}
@@ -58,7 +58,7 @@ namespace PageRole.Get
 				result.Add(timeline);
 
 				var metaData = new XElement(empty + "MetaData");
-				var updateTime = new XElement("UpdateTime", Helper.DateTimeToString(DateTime.Now));
+				var updateTime = new XElement("UpdateTime", DateTime.Now.ToString("yyyyMMddHHmmss"));
 				metaData.Add(updateTime);
 				timeline.Add(metaData);
 
