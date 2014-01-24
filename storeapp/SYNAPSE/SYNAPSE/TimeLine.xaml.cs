@@ -13,10 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Popups;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 
@@ -27,12 +25,12 @@ namespace SYNAPSE
     /// <summary>
     /// 多くのアプリケーションに共通の特性を指定する基本ページ。
     /// </summary>
-    public sealed partial class Profile : Page
+    public sealed partial class TimeLine : Page
     {
+
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private IRandomAccessStream filestream;
-        private BitmapImage bitmapImage;
+        private string thisTime;
         private string sidValue;
         private string domainValue;
 
@@ -54,7 +52,7 @@ namespace SYNAPSE
         }
 
 
-        public Profile()
+        public TimeLine()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -77,11 +75,11 @@ namespace SYNAPSE
         {
             ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
             ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;
-            if (localSid.Values.ContainsKey("sid"))
+            if(localSid.Values.ContainsKey("sid"))
             {
                 sidValue = localSid.Values["sid"].ToString();
             }
-            if (localDomain.Values.ContainsKey("Domain"))
+            if(localDomain.Values.ContainsKey("Domain"))
             {
                 domainValue = localDomain.Values["Domain"].ToString();
             }
@@ -122,78 +120,60 @@ namespace SYNAPSE
 
         #endregion
 
-        async private void ProfileImage_doubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+
+        async private void TweetDone(object sender, KeyRoutedEventArgs e)
         {
-            //ファイルピッカーオブジェクトの生成
-            FileOpenPicker openPicker = new FileOpenPicker();
-            //ディレクトリの設定
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            //ビューモードの設定
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            //開けるファイルの種類の設定
-            openPicker.FileTypeFilter.Clear();
-            openPicker.FileTypeFilter.Add(".bmp");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            //ファイルを一つ選べるようにする。
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            //画像の表示開始
-            if(file != null)
+            switch(e.Key)
             {
-                //streamを開く
-                filestream = await file.OpenAsync(FileAccessMode.Read);
-                //画像をbitmapにセットする
-                bitmapImage = new BitmapImage();
-                bitmapImage.SetSource(filestream);
-                //ApplicationDataContainer prfimg = ApplicationData.Current.LocalSettings;
-                //prfimg.Values["prfimg"] = bitmapImage;
-                if(bitmapImage.PixelHeight >64 && bitmapImage.PixelWidth > 64)
-                {
-                    return;
-                }
-                profileimage.Source = bitmapImage;
-                
-
+                case Windows.System.VirtualKey.Enter:
+                    if(e.KeyStatus.RepeatCount == 1)
+                    {
+                        System.DateTime ntime = System.DateTime.Now;
+                        string year = ntime.Year.ToString();
+                        string month = ntime.Month.ToString();
+                        if (ntime.Month < 10)
+                            month = '0' + month;
+                        string day = ntime.Day.ToString();
+                        if (ntime.Day < 10)
+                            day = '0' + day;
+                        string hour = ntime.Hour.ToString();
+                        if (ntime.Hour < 10)
+                            hour = '0' + hour;
+                        string minute = ntime.Minute.ToString();
+                        if (ntime.Minute < 10)
+                            minute = '0' + minute;
+                        string second = ntime.Second.ToString();
+                        if (ntime.Second < 10)
+                            second = '0' + second;
+                        thisTime = year + month + day + hour + minute + second;
+                        //var messageDialog = new MessageDialog(thisTime);
+                        //await messageDialog.ShowAsync();
+                        HttpClient client = new HttpClient();
+                        Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Tweet.aspx");
+                        HttpResponseMessage responseMessage;
+                        HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(new[]
+                        {
+                            new KeyValuePair<string,string>("tt",thisTime),
+                            new KeyValuePair<string,string>("tweet",tweetBox.Text),
+                        });
+                        try
+                        {
+                            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+                            cookie.Value = sidValue;
+                            cookie.Secure = false;
+                            cookie.HttpOnly = false;
+                            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                            var replaced = filter.CookieManager.SetCookie(cookie, false);
+                            responseMessage = await client.PostAsync(targetAdresse, content);
+                            tweetBox.Text = await responseMessage.Content.ReadAsStringAsync();
+                        }
+                        catch
+                        {
+                            return;
+                        }
+                    }
+                    break;
             }
-
-        }
-
-        async private void SendButton_clik(object sender, RoutedEventArgs e)
-        {
-            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Profile.aspx");
-            try
-            {
-                //コンテンツの生成
-                HttpMultipartFormDataContent content = new HttpMultipartFormDataContent();
-                content.Add(new HttpStringContent(profileText.Text), "prf");
-                content.Add(new HttpStreamContent(filestream), "prfimg");
-
-                HttpCookie cookie = new HttpCookie("sid", domainValue, "");
-                cookie.Value = sidValue;
-                cookie.Secure = false;
-                cookie.HttpOnly = false;
-                HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
-                var replaced = filter.CookieManager.SetCookie(cookie, false);
-                
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post,targetAdresse);
-                requestMessage.Content = content;
-
-                HttpClient Client = new HttpClient();
-                HttpResponseMessage responseMessage;
-                //responseMessage = await Client.PostAsync(targetAdresse, content);
-                //result.Text = await responseMessage.Content.ReadAsStringAsync();
-                responseMessage = await Client.SendRequestAsync(requestMessage);
-                if(responseMessage == null)
-                {
-                    result.Text = "失敗\n";
-                }
-                result.Text = await responseMessage.Content.ReadAsStringAsync();
-            }
-            catch
-            {
-                //return;
-            }
-
         }
     }
 }

@@ -135,5 +135,21 @@ namespace SYNAPSE
             {
             }
         }
+
+        private void ProfileSettingButton_clik(object sender, RoutedEventArgs e)
+        {
+            if(this.Frame != null)
+            {
+                this.Frame.Navigate(typeof(Profile));
+            }
+        }
+
+        private void TweetButton_clik(object sender, RoutedEventArgs e)
+        {
+            if(this.Frame != null)
+            {
+                this.Frame.Navigate(typeof(TimeLine));
+            }
+        }
     }
 }

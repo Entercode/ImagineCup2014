@@ -46,7 +46,10 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <Image x:Name="profileimage" Height="64" Grid.Row="1" Width="64" Margin="651,112,651,452" HorizontalAlignment="Center" DoubleTapped="ProfileImage_doubleTapped"/>
-        <TextBox Margin="438,197,428,241" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" Width="500" HorizontalAlignment="Center"/>
+        <Image x:Name="profileimage" Height="64" Grid.Row="1" Width="64" Margin="651,112,651,452" HorizontalAlignment="Center" DoubleTapped="ProfileImage_doubleTapped" Source="Assets/Logo.png"/>
+        <TextBox x:Name="profileText" Margin="438,197,428,241" Grid.Row="1" TextWrapping="Wrap" Width="500" HorizontalAlignment="Center"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="64" Margin="651,112,0,0" Grid.Row="1" VerticalAlignment="Top" Width="64"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="648,437,0,0" Grid.Row="1" VerticalAlignment="Top" Click="SendButton_clik"/>
+        <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="1018,197,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="210" Width="136"/>
     </Grid>
 </Page>

@@ -1,6 +1,6 @@
 ﻿<Page
     x:Name="pageRoot"
-    x:Class="SYNAPSE.MainPage"
+    x:Class="SYNAPSE.TimeLine"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,9 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">Log In</x:String>
-        <x:String x:Key="PassWord">TextBlock</x:String>
-        <x:String x:Key="Home">Log In</x:String>
+        <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
 
     <!--
@@ -45,14 +43,11 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" Text="Main Page"/>
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <Button Content="Log In " HorizontalAlignment="Left" Margin="154,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="LogInButton_clik"/>
-        <Button Content="Sing up" HorizontalAlignment="Left" Margin="405,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="SingUpButton_Clike"/>
-        <Button x:Name="LogOut" Content="Log Out" HorizontalAlignment="Left" Margin="583,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="LogOutButton_clik"/>
-        <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="408,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="270" Height="108"/>
-        <Button Content="Profile Setting" HorizontalAlignment="Left" Margin="745,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="ProfileSettingButton_clik"/>
-        <Button Content="Tweet" HorizontalAlignment="Left" Margin="278,77,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TweetButton_clik"/>
+        <TextBlock HorizontalAlignment="Left" Margin="93,36,0,0" Grid.Row="1" TextWrapping="Wrap" Text="つぶやく" VerticalAlignment="Top" Height="31" Width="130" FontSize="30"/>
+        <TextBox x:ConnectionId='1' x:Name="tweetBox" HorizontalAlignment="Left" Margin="93,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="330"                   />
     </Grid>
 </Page>
+

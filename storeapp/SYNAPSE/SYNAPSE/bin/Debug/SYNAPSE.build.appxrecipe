@@ -48,6 +48,9 @@
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\Profile.xbf">
       <PackagePath>Profile.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
+      <PackagePath>TimeLine.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
       <PackagePath>UserInformationPage.xbf</PackagePath>
     </AppxPackagedFile>

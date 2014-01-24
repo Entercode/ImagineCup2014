@@ -52,6 +52,8 @@
         <Button x:ConnectionId='2' Content="Sing up" HorizontalAlignment="Left" Margin="405,77,0,0" Grid.Row="1" VerticalAlignment="Top"                           />
         <Button x:ConnectionId='3' x:Name="LogOut" Content="Log Out" HorizontalAlignment="Left" Margin="583,77,0,0" Grid.Row="1" VerticalAlignment="Top"                          />
         <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="408,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="270" Height="108"/>
+        <Button x:ConnectionId='4' Content="Profile Setting" HorizontalAlignment="Left" Margin="745,77,0,0" Grid.Row="1" VerticalAlignment="Top"                                  />
+        <Button x:ConnectionId='5' Content="Tweet" HorizontalAlignment="Left" Margin="278,77,0,0" Grid.Row="1" VerticalAlignment="Top"                         />
     </Grid>
 </Page>
 
