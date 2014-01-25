@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ComboBox x:Name="FoundDeviceList" HorizontalAlignment="Left" Margin="270,255,0,0" VerticalAlignment="Top" Width="auto">
+            <ComboBox Height="100" Width="120"/>
+        </ComboBox>
+        <Button x:Name="Button" Content="Search WiFiDirect Device"  HorizontalAlignment="Center" Click="Button_Click" Height="50" Width="251" FontSize="18" Margin="563,359,552,359"/>
+    </Grid>
+</Page>
