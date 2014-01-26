@@ -13,15 +13,6 @@ namespace PageRole.test {
     public partial class timeline {
         
         /// <summary>
-        /// uid_h コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal uid_h;
-        
-        /// <summary>
         /// TimelineForm コントロール。
         /// </summary>
         /// <remarks>

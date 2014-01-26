@@ -14,26 +14,22 @@ namespace PageRole.test
 {
 	public partial class timeline : System.Web.UI.Page
 	{
-		string userIdHash;
 		string sessionId;
 		string url;
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			userIdHash = Request.QueryString.Get(Helper.UserIdHash);
 			sessionId = Request.QueryString.Get(Helper.SessionId);
 			url = "http://" + Request.Url.Host + "/Get/Timeline.aspx";
-			if (string.IsNullOrEmpty(userIdHash) || string.IsNullOrEmpty(sessionId))
+			if (string.IsNullOrEmpty(sessionId))
 			{
 				Response.Write("ログインしていないので表示できません。。。");
 				Response.End();
 			}
-			uid_h.Text = userIdHash;
 		}
 
 		protected void TimelineSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
 		{
 			var param = e.InputParameters;
-			param.Add("UserIdHash", userIdHash);
 			param.Add("SessionId", sessionId);
 			param.Add("Url", url);
 		}
@@ -41,7 +37,7 @@ namespace PageRole.test
 
 	public class ListViewObject
 	{
-		public static List<TweetData> GetTimeline(string UserIdHash, string SessionId, string Url)
+		public static List<TweetData> GetTimeline(string SessionId, string Url)
 		{
 			var result = new List<TweetData>();
 			XDocument xml;
@@ -51,7 +47,6 @@ namespace PageRole.test
 				cc.Add(new Cookie("sid", SessionId) { Domain = (new Uri(Url).Host) });
 				wc.CookieContainer = cc;
 				var col = new System.Collections.Specialized.NameValueCollection();
-				col.Add("uid_h", UserIdHash);
 				byte[] data = wc.UploadValues(Url, col);
 				if (data == null)
 				{
