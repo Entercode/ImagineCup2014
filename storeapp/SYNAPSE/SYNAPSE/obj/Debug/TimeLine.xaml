@@ -48,6 +48,7 @@
         </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="93,36,0,0" Grid.Row="1" TextWrapping="Wrap" Text="つぶやく" VerticalAlignment="Top" Height="31" Width="130" FontSize="30"/>
         <TextBox x:ConnectionId='1' x:Name="tweetBox" HorizontalAlignment="Left" Margin="93,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="330"                   />
+        <Button x:ConnectionId='2' Content="つぶやく" HorizontalAlignment="Left" Margin="350,241,0,0" Grid.Row="1" VerticalAlignment="Top"                         />
     </Grid>
 </Page>
 

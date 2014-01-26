@@ -23,7 +23,7 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
       <PackagePath>SYNAPSE.exe</PackagePath>
-      <Modified>2014-01-24T18:30:27.789</Modified>
+      <Modified>2014-01-26T15:50:28.627</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
@@ -67,7 +67,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
       <PackagePath>TimeLine.xbf</PackagePath>
-      <Modified>2014-01-24T17:38:37.935</Modified>
+      <Modified>2014-01-26T15:50:28.368</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
       <PackagePath>UserInformationPage.xbf</PackagePath>

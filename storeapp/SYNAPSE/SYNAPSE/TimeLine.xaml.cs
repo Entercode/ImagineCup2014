@@ -123,7 +123,7 @@ namespace SYNAPSE
 
         async private void TweetDone(object sender, KeyRoutedEventArgs e)
         {
-            switch(e.Key)
+            /*switch(e.Key)
             {
                 case Windows.System.VirtualKey.Enter:
                     if(e.KeyStatus.RepeatCount == 1)
@@ -173,6 +173,53 @@ namespace SYNAPSE
                         }
                     }
                     break;
+            }*/
+        }
+
+        async private void TweetButton_clik(object sender, RoutedEventArgs e)
+        {
+            System.DateTime ntime = System.DateTime.Now;
+            string year = ntime.Year.ToString();
+            string month = ntime.Month.ToString();
+            if (ntime.Month < 10)
+                month = '0' + month;
+            string day = ntime.Day.ToString();
+            if (ntime.Day < 10)
+                day = '0' + day;
+            string hour = ntime.Hour.ToString();
+            if (ntime.Hour < 10)
+                hour = '0' + hour;
+            string minute = ntime.Minute.ToString();
+            if (ntime.Minute < 10)
+                minute = '0' + minute;
+            string second = ntime.Second.ToString();
+            if (ntime.Second < 10)
+                second = '0' + second;
+            thisTime = year + month + day + hour + minute + second;
+            //var messageDialog = new MessageDialog(thisTime);
+            //await messageDialog.ShowAsync();
+            HttpClient client = new HttpClient();
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Tweet.aspx");
+            HttpResponseMessage responseMessage;
+            HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(new[]
+                        {
+                            new KeyValuePair<string,string>("tt",thisTime),
+                            new KeyValuePair<string,string>("tweet",tweetBox.Text),
+                        });
+            try
+            {
+                HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+                cookie.Value = sidValue;
+                cookie.Secure = false;
+                cookie.HttpOnly = false;
+                HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                var replaced = filter.CookieManager.SetCookie(cookie, false);
+                responseMessage = await client.PostAsync(targetAdresse, content);
+                tweetBox.Text = await responseMessage.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                return;
             }
         }
     }
