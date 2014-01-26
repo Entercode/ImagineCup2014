@@ -7,6 +7,7 @@
     <ConfigurationSettings>
       <Setting name="DatabaseConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="PassedTimeParameter" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" localPort="80" />

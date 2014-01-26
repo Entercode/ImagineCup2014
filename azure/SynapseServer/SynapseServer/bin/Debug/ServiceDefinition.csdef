@@ -43,6 +43,7 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="DatabaseConnectionString" />
+      <Setting name="PassedTimeParameter" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">

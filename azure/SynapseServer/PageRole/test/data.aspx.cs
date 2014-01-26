@@ -107,7 +107,6 @@ namespace PageRole.test
 						{
 							a.SessionId = Helper.BytesToString(reader["SessionId"] as byte[]);
 						}
-						a.UserIdHash = Helper.BytesToString(Helper.StringHashing(a.UserId));
 						result.Add(a);
 					}
 				});
@@ -226,10 +225,9 @@ namespace PageRole.test
 			var result = new List<TweetInformation>();
 
 			string query
-				= "SELECT T.BindId, T.ClientTweetTime, T.ServerRecievedTime, T.Tweet, V.UserId, V.Nickname "
-				+ "FROM Tweet T, TimelineView V "
-				+ "WHERE T.BindId = V.BindId AND T.ClientTweetTime = V.ClientTweetTime "
-				+ "ORDER BY ServerRecievedTime;";
+				= "SELECT A.UserId, A.Nickname, T.Tweet, T.ClientTweetTime, T.BindId, T.ServerRecievedTime "
+				+ "FROM Tweet T, AccountDevice D, Account A "
+				+ "WHERE T.BindId = D.BindId AND D.UserId = A.UserId";
 
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
@@ -286,7 +284,6 @@ namespace PageRole.test
 		public string DeviceIdHash { get; set; }
 		public int BindId { get; set; }
 		public string SessionId { get; set; }
-		public string UserIdHash { get; set; }
 	}
 
 	public class StreetPassInformation

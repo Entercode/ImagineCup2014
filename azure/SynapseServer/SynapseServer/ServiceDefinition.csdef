@@ -29,6 +29,7 @@
     </Imports>
 		<ConfigurationSettings>
 			<Setting name="DatabaseConnectionString" />
+			<Setting name="PassedTimeParameter"/>
 		</ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

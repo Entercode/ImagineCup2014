@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SynapseServer" generation="1" functional="0" release="0" Id="867c44ce-a445-4b95-bd3b-425998f2334c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SynapseServer" generation="1" functional="0" release="0" Id="26d2f5f9-b04e-4628-9fc0-e75f3bf009d6" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="SynapseServerGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -23,6 +23,11 @@
         <aCS name="PageRole:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="">
           <maps>
             <mapMoniker name="/SynapseServer/SynapseServerGroup/MapPageRole:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+          </maps>
+        </aCS>
+        <aCS name="PageRole:PassedTimeParameter" defaultValue="">
+          <maps>
+            <mapMoniker name="/SynapseServer/SynapseServerGroup/MapPageRole:PassedTimeParameter" />
           </maps>
         </aCS>
         <aCS name="PageRoleInstances" defaultValue="[1,1,1]">
@@ -74,6 +79,11 @@
             <aCSMoniker name="/SynapseServer/SynapseServerGroup/PageRole/Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
           </setting>
         </map>
+        <map name="MapPageRole:PassedTimeParameter" kind="Identity">
+          <setting>
+            <aCSMoniker name="/SynapseServer/SynapseServerGroup/PageRole/PassedTimeParameter" />
+          </setting>
+        </map>
         <map name="MapPageRoleInstances" kind="Identity">
           <setting>
             <sCSPolicyIDMoniker name="/SynapseServer/SynapseServerGroup/PageRoleInstances" />
@@ -109,6 +119,7 @@
             <settings>
               <aCS name="DatabaseConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
+              <aCS name="PassedTimeParameter" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;PageRole&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;PageRole&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;/r&gt;&lt;r name=&quot;WorkerRole&quot;&gt;&lt;e name=&quot;StreetPass&quot; /&gt;&lt;/r&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -156,14 +167,14 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="45ce3499-d38e-4b70-aba0-7c98923e8a0a" ref="Microsoft.RedDog.Contract\ServiceContract\SynapseServerContract@ServiceDefinition">
+    <implementation Id="02149c71-cc19-424e-83b5-d7576f134680" ref="Microsoft.RedDog.Contract\ServiceContract\SynapseServerContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="cbd3f581-92a9-464d-be87-14be5ca09831" ref="Microsoft.RedDog.Contract\Interface\PageRole:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="a3ca1828-cdff-4664-875d-aef1b3b3a793" ref="Microsoft.RedDog.Contract\Interface\PageRole:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SynapseServer/SynapseServerGroup/PageRole:Endpoint1" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="95571aa2-e135-4ad9-a766-5dcda8c10883" ref="Microsoft.RedDog.Contract\Interface\WorkerRole:StreetPass@ServiceDefinition">
+        <interfaceReference Id="8cbd716f-e3c4-490f-887c-843ba0c24369" ref="Microsoft.RedDog.Contract\Interface\WorkerRole:StreetPass@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/SynapseServer/SynapseServerGroup/WorkerRole:StreetPass" />
           </inPort>

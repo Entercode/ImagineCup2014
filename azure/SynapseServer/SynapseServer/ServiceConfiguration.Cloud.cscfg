@@ -13,6 +13,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=synapseserver;AccountKey=pNUikVnuc7pUUHxFH+ckoHYCSckGVvShUp8dcR5FZKM7Rh33D9Iq1Q9wocjsX3WaPYUO3NRYTMDJo+NRcubgRg==" />
 			<Setting name="DatabaseConnectionString" value="Server=tcp:zalqzvui56.database.windows.net,1433;Database=synapse-database;User ID=synapse@zalqzvui56;Password=1procon#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"/>
+			<Setting name="PassedTimeParameter" value="100000"/>
 		</ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

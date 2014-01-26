@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Data;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 using SynapseServer;
 
@@ -33,15 +34,12 @@ namespace PageRole.Get
 				var timeline = new XElement(space + "Timeline");
 				var tweetData = new XElement(empty + "TweetData");
 
-				string timelineQuery
-					= "SELECT T.UserId, T.Nickname, T.ClientTweetTime, T.Tweet "
-					+ "FROM TimelineView T "
-					+ "WHERE T.BindId = @BindId OR T.BindId IN(SELECT S.PassedBindId FROM StreetPass S WHERE S.UserBindId = @BindId) "
-					+ "ORDER BY T.ClientTweetTime DESC;";
+				string timelineQuery = "SELECT * FROM Timeline(@BindId, @Param) ORDER BY TweetTime DESC";
 				Helper.ExecuteSqlQuery(timelineQuery,
 					setAction: (param) =>
 					{
 						param.Add("@BindId", SqlDbType.Int).Value = bindId;
+						param.Add("@Param", SqlDbType.Float).Value = double.Parse(RoleEnvironment.GetConfigurationSettingValue("PassedTimeParameter"));
 					},
 					getAction: (reader) =>
 					{
@@ -49,9 +47,9 @@ namespace PageRole.Get
 						{
 							string userId = reader["UserId"] as string;
 							string nickname = reader["Nickname"] as string;
-							string clientTweetTime = Helper.StringConvertOfDateTimeToNumber(reader["ClientTweetTime"].ToString());
+							string tweetTime = Helper.StringConvertOfDateTimeToNumber(reader["TweetTime"].ToString());
 							string tweet = reader["Tweet"] as string;
-							tweetData.Add(new XElement("Tweet", new XAttribute("UserId", userId), new XAttribute("Nickname", nickname), new XAttribute("Time", clientTweetTime), tweet));
+							tweetData.Add(new XElement("Tweet", new XAttribute("UserId", userId), new XAttribute("Nickname", nickname), new XAttribute("Time", tweetTime), tweet));
 						}
 					});
 				timeline.Add(tweetData);

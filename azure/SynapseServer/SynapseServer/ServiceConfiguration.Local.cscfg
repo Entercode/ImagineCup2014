@@ -13,6 +13,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
 			<Setting name="DatabaseConnectionString" value="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\LocalDb.mdf;Integrated Security=True"/>
+			<Setting name="PassedTimeParameter" value="100000"/>
 		</ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
