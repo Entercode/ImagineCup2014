@@ -14,8 +14,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Popups;
-using Windows.Devices.Enumeration;
-using Windows.Devices.WiFiDirect;
+//using Windows.Devices.Enumeration;
+//using Windows.Devices.WiFiDirect;
 using Windows.Networking.Proximity;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234238 を参照してください
@@ -31,7 +31,9 @@ namespace App1
         public MainPage()
         {
             this.InitializeComponent();
+            //自機のDisplayNameを表示
             textblock.Text+=PeerFinder.DisplayName;
+
         }
         
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -47,6 +49,7 @@ namespace App1
 
 
             PeerFinder.ConnectionRequested +=new TypedEventHandler<object, ConnectionRequestedEventArgs>(PeerFinder_ConnectionRequested);
+            //他端末から自機端末がブラウズできるようにする
             PeerFinder.Start();
             
             //同じストアアプリが動いていて、Start()メソッドをコール済みのPCを探す
@@ -57,6 +60,7 @@ namespace App1
             {
                 for (int i = 0; i < peers.Count; i++)
                 {
+                    //ListBoxにDisplayNameを表示
                     FoundDeviceList.Items.Add(peers[i].DisplayName);
                 }
 
