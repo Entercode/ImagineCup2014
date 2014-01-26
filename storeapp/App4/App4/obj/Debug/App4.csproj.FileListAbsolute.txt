@@ -29,3 +29,34 @@ c:\users\江崎\documents\visual studio 2013\Projects\App4\App4\obj\Debug\qualif
 c:\users\江崎\documents\visual studio 2013\Projects\App4\App4\obj\Debug\qualifiers.txt.intermediate
 c:\users\江崎\documents\visual studio 2013\Projects\App4\App4\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 c:\users\江崎\documents\visual studio 2013\Projects\App4\App4\obj\Debug\ProjectArchitectures.txt
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\App.xbf
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\MainPage.xbf
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\App4.exe
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\App4.pdb
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\resources.pri
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\AppxManifest.xml
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\bin\Debug\App4.build.appxrecipe
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App.g.i.cs
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App.g.cs
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\MainPage.g.i.cs
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\MainPage.g.cs
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App.xaml
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\MainPage.xaml
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App.xbf
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\MainPage.xbf
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\XamlSaveStateFile.xml
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App4.exe
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\App4.pdb
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\priconfig.xml
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\priconfig.xml.intermediate
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\layout.resfiles
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\layout.resfiles.intermediate
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\resources.resfiles
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\resources.resfiles.intermediate
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\pri.resfiles
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\pri.resfiles.intermediate
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\qualifiers.txt
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\qualifiers.txt.intermediate
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\江崎\Desktop\Himagine\storeapp\App4\App4\obj\Debug\ProjectArchitectures.txt

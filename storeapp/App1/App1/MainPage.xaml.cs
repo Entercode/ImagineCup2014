@@ -31,7 +31,7 @@ namespace App1
         public MainPage()
         {
             this.InitializeComponent();
-            FoundDeviceList.Items.Add(PeerFinder.DisplayName);
+            textblock.Text+=PeerFinder.DisplayName;
         }
         
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -46,21 +46,35 @@ namespace App1
             //if (PeerFinder.AllowWiFiDirect) { }
 
 
-            /*PeerFinder.ConnectionRequested +=
-                  new TypedEventHandler<object, ConnectionRequestedEventArgs>
-                      (PeerFinder_ConnectionRequested);
+            PeerFinder.ConnectionRequested +=new TypedEventHandler<object, ConnectionRequestedEventArgs>(PeerFinder_ConnectionRequested);
             PeerFinder.Start();
-            */
+            
             //同じストアアプリが動いていて、Start()メソッドをコール済みのPCを探す
+            //peersはPeerFinderInformationの員スタンす
             var peers = await PeerFinder.FindAllPeersAsync();
 
-            FoundDeviceList.Items.Add(PeerFinder.DisplayName);
-            
+            if (peers.Count > 0)
+            {
+                for (int i = 0; i < peers.Count; i++)
+                {
+                    FoundDeviceList.Items.Add(peers[i].DisplayName);
+                }
+
+            }
+            else
+            {
+                FoundDeviceList.Items.Add("Device Not Found");
+                //var dialog = new MessageDialog("Device Not Found");
+                //await dialog.ShowAsync();
+            }
 
         }
-
-        
-
+        private void PeerFinder_ConnectionRequested(object sender,Windows.Networking.Proximity.ConnectionRequestedEventArgs e)
+            {
+              Windows.Networking.Proximity.PeerInformation requestingPeer;
+              requestingPeer = e.PeerInformation;
+            //WriteMessageText("Connection requested by " + requestingPeer.DisplayName + ". " + "Click 'Accept Connection' to connect.");
+            }
 
     }
 }

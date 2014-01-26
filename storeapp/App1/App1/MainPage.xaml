@@ -8,9 +8,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ComboBox x:Name="FoundDeviceList" HorizontalAlignment="Left" Margin="270,255,0,0" VerticalAlignment="Top" Width="auto">
-            <ComboBox Height="100" Width="120"/>
-        </ComboBox>
-        <Button x:Name="Button" Content="Search WiFiDirect Device"  HorizontalAlignment="Center" Click="Button_Click" Height="50" Width="251" FontSize="18" Margin="563,359,552,359"/>
+        <Button x:Name="Button" Content="Search Wi-Fi Direct Device"  HorizontalAlignment="Center" Click="Button_Click" Height="50" Width="250" FontSize="18" />
+        <ListBox x:Name="FoundDeviceList" HorizontalAlignment="Center" Height="200"  VerticalAlignment="Bottom" Width="300" FontFamily="Global User Interface" Margin="0,0,0,100" />
+        <TextBlock x:Name="textblock" HorizontalAlignment="Left" Margin="100,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="193" FontSize="14">
+        	<Run Text="Your DisplayName is  "/>
+        	<LineBreak/>
+        	<Run/>
+        </TextBlock>
     </Grid>
 </Page>
