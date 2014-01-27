@@ -9,6 +9,7 @@
 <link href="timeline.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<h1><%= UserId %>@<%= DeviceIdHash %>のタイムライン</h1>
     <form id="TimelineForm" runat="server">
 		<asp:ObjectDataSource ID="TimelineSource" runat="server" SelectMethod="GetTimeline" TypeName="PageRole.test.ListViewObject" OnSelecting="TimelineSource_Selecting"/>
 		<asp:ListView runat="server" ID="Timeline" DataSourceID="TimelineSource">

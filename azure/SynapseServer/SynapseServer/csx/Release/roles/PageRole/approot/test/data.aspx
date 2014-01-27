@@ -61,7 +61,7 @@
 			</LayoutTemplate>
 			<ItemTemplate>
 				<tr>
-					<td><a target="_blank" href='<%# string.Format("timeline.aspx?sid={0}", Eval("SessionId")) %>'>Timeline</a></td>
+					<td><a target="_blank" href='<%# string.Format("timeline.aspx?uid={0}&did_h={1}", Eval("UserId"), Eval("DeviceIdHash")) %>'>Timeline</a></td>
 					<td><%# Eval("UserId") %></td>
 					<td><%# Eval("BindId") %></td>
 					<td><%# Eval("DeviceIdHash") %></td>

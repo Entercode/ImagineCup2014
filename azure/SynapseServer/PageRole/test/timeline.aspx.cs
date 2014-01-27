@@ -7,6 +7,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Net;
 using System.Xml.Linq;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 using SynapseServer;
 
@@ -14,15 +15,33 @@ namespace PageRole.test
 {
 	public partial class timeline : System.Web.UI.Page
 	{
-		string sessionId;
+		string userId;
+		string deviceIdHash;
 		string url;
+
+		public string UserId
+		{
+			get
+			{
+				return userId;
+			}
+		}
+		public string DeviceIdHash
+		{
+			get
+			{
+				return deviceIdHash;
+			}
+		}
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			sessionId = Request.QueryString.Get(Helper.SessionId);
+			userId = Request.QueryString.Get(Helper.UserId);
+			deviceIdHash = Request.QueryString.Get(Helper.DeviceIdHash);
 			url = "http://" + Request.Url.Host + "/Get/Timeline.aspx";
-			if (string.IsNullOrEmpty(sessionId))
+			if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(deviceIdHash))
 			{
-				Response.Write("ログインしていないので表示できません。。。");
+				Response.Write("異常です。");
 				Response.End();
 			}
 		}
@@ -30,40 +49,40 @@ namespace PageRole.test
 		protected void TimelineSource_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
 		{
 			var param = e.InputParameters;
-			param.Add("SessionId", sessionId);
+			param.Add("UserId", userId);
+			param.Add("DeviceIdHash", deviceIdHash);
 			param.Add("Url", url);
 		}
 	}
 
 	public class ListViewObject
 	{
-		public static List<TweetData> GetTimeline(string SessionId, string Url)
+		public static List<TweetData> GetTimeline(string UserId, string DeviceIdHash, string Url)
 		{
 			var result = new List<TweetData>();
-			XDocument xml;
 			using (WebClientEx wc = new WebClientEx())
 			{
-				var cc = new CookieContainer();
-				cc.Add(new Cookie("sid", SessionId) { Domain = (new Uri(Url).Host) });
-				wc.CookieContainer = cc;
-				var col = new System.Collections.Specialized.NameValueCollection();
-				byte[] data = wc.UploadValues(Url, col);
-				if (data == null)
-				{
-					return result;
-				}
-				xml = XDocument.Parse(System.Text.Encoding.UTF8.GetString(data));
+				string query = "SELECT * FROM Timeline((SELECT BindId FROM AccountDevice WHERE UserId=@UserId AND DeviceIdHash = CONVERT(varbinary, @DeviceIdHash, 2)), @Param) ORDER BY TweetTime DESC";
+				Helper.ExecuteSqlQuery(query,
+					setAction: (param) =>
+					{
+						param.Add("@UserId", SqlDbType.VarChar).Value = UserId;
+						param.Add("@DeviceIdHash", SqlDbType.VarChar).Value = DeviceIdHash;
+						param.Add("@Param", SqlDbType.Float).Value = double.Parse(RoleEnvironment.GetConfigurationSettingValue("PassedTimeParameter"));
+					},
+					getAction: (reader) =>
+					{
+						while (reader.Read())
+						{
+							string userId = reader["UserId"] as string;
+							string nickname = reader["Nickname"] as string;
+							string tweetTime = reader["TweetTime"].ToString();
+							string tweet = reader["Tweet"] as string;
+							result.Add(new TweetData() { UserId = userId, Nickname = nickname, Time = tweetTime, Tweet = tweet, UserIdHash = Helper.BytesToString(Helper.StringHashing(userId)) });
+						}
+					});
+				return result;
 			}
-			var root = xml.Root; ;
-			result = root.Element("TweetData").Elements("Tweet").Select(x => new TweetData()
-			{
-				UserId = (string)x.Attribute("UserId"),
-				Nickname = (string)x.Attribute("Nickname"),
-				Time = Helper.StringConvertOfNumberToDateTime((string)x.Attribute("Time")),
-				Tweet = (string)x,
-				UserIdHash = Helper.BytesToString(Helper.StringHashing((string)x.Attribute("UserId")))
-			}).ToList();
-			return result;
 		}
 
 		class WebClientEx : WebClient
