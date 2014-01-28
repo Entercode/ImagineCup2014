@@ -7,11 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00AAA1" Offset="0"/>
+                <GradientStop Color="#FF00FFF3" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Button x:Name="Button" Content="Search Wi-Fi Direct Device"  HorizontalAlignment="Center" Click="Button_Click" Height="50" Width="250" FontSize="18" />
-        <ListBox x:Name="FoundDeviceList" HorizontalAlignment="Center" Height="200"  VerticalAlignment="Bottom" Width="300" FontFamily="Global User Interface" Margin="0,0,0,100" />
-        <TextBlock x:Name="textblock" HorizontalAlignment="Left" Margin="100,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="193" FontSize="14">
+        <ListBox x:Name="FoundDeviceList" HorizontalAlignment="Center" Height="300"  VerticalAlignment="Bottom" Width="800" FontFamily="Global User Interface" Margin="0,0,0,50" />
+        <TextBlock x:Name="textblock" HorizontalAlignment="Center" Margin="0,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="58" Width="1212" FontSize="14">
         	<Run Text="Your DisplayName is  "/>
+        	<LineBreak/>
+        	<Run/>
+        </TextBlock>
+        <TextBlock x:Name="MessageBlock" HorizontalAlignment="Center" Margin="0,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="206" Width="1212" FontSize="14" Foreground="White">
+        	<Run Text="Message:  "/>
         	<LineBreak/>
         	<Run/>
         </TextBlock>
