@@ -124,15 +124,21 @@ namespace App4.App4_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
+            _typeNameTable = new string[6];
             _typeNameTable[0] = "App4.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "Guid";
+            _typeNameTable[4] = "System.ValueType";
+            _typeNameTable[5] = "Object";
 
-            _typeTable = new global::System.Type[3];
+            _typeTable = new global::System.Type[6];
             _typeTable[0] = typeof(global::App4.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::System.Guid);
+            _typeTable[4] = typeof(global::System.ValueType);
+            _typeTable[5] = typeof(global::System.Object);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -182,6 +188,7 @@ namespace App4.App4_XamlTypeInfo
             case 0:   //  App4.MainPage
                 userType = new global::App4.App4_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_0_MainPage;
+                userType.AddMemberName("serviceUuid");
                 xamlType = userType;
                 break;
 
@@ -192,16 +199,51 @@ namespace App4.App4_XamlTypeInfo
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::App4.App4_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
+
+            case 3:   //  Guid
+                userType = new global::App4.App4_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 4:   //  System.ValueType
+                userType = new global::App4.App4_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 5:   //  Object
+                xamlType = new global::App4.App4_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
             }
             return xamlType;
         }
 
 
+        private object get_0_MainPage_serviceUuid(object instance)
+        {
+            var that = (global::App4.MainPage)instance;
+            return that.serviceUuid;
+        }
+        private void set_0_MainPage_serviceUuid(object instance, object Value)
+        {
+            var that = (global::App4.MainPage)instance;
+            that.serviceUuid = (global::System.Guid)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::App4.App4_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::App4.App4_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "App4.MainPage.serviceUuid":
+                userType = (global::App4.App4_XamlTypeInfo.XamlUserType)GetXamlTypeByName("App4.MainPage");
+                xamlMember = new global::App4.App4_XamlTypeInfo.XamlMember(this, "serviceUuid", "Guid");
+                xamlMember.Getter = get_0_MainPage_serviceUuid;
+                xamlMember.Setter = set_0_MainPage_serviceUuid;
+                break;
+            }
             return xamlMember;
         }
     }

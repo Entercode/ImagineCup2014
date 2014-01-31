@@ -15,14 +15,14 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Button x:Name="Button" Content="Search Wi-Fi Direct Device"  HorizontalAlignment="Center" Click="Button_Click" Height="50" Width="250" FontSize="18" Margin="540,82,576,636" />
-        <ListBox x:Name="FoundDeviceList" HorizontalAlignment="Center" Height="36"  VerticalAlignment="Bottom" Width="800" FontFamily="Global User Interface" Margin="283,0,283,50" />
-        <TextBlock x:Name="textblock" HorizontalAlignment="Center" Margin="77,38,938,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="58" Width="351" FontSize="14">
-        	<Run Text="Your DisplayName is  "/>
+        <TextBlock x:Name="textblock" HorizontalAlignment="Center" Margin="77,22,283,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="58" Width="1006" FontSize="14">
+        	<Run Text="Your Device Id is  "/>
         	<LineBreak/>
         	<Run/>
         </TextBlock>
         <TextBlock x:Name="MessageBlock" HorizontalAlignment="Center" Margin="77,134,77,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="485" Width="1212" FontSize="14" Foreground="White">
-        	<Run Text="Message:  "/>
+        	<Run Text="Message:"/>
+            
         	<LineBreak/>
         	<Run/>
         </TextBlock>

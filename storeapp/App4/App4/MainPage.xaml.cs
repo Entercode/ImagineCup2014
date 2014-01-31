@@ -38,7 +38,7 @@ namespace App4
         {
             //デバイスを検索 (特定のサービスを公開しているBLE機器を列挙)
             var devices = await DeviceInformation.FindAllAsync(
-                GattDeviceService.GetDeviceSelectorFromUuid(new Guid("00001101-0000-1000-8000-00805F9B34FB")));
+                GattDeviceService.GetDeviceSelectorFromUuid(service.Uuid));
             if(devices.Count > 0)
             {
                 //サービスを作成 (デバイス取得したIDをもとにサービスを扱うインスタンスを取得)
@@ -85,5 +85,7 @@ namespace App4
         }
         */
 
+
+        public Guid serviceUuid { get; set; }
     }
 }
