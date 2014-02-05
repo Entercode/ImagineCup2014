@@ -143,7 +143,7 @@ namespace SYNAPSE
             //暗号化前の文字列をバイナリ形式のバッファに変換する
 
             //IBuffer uid = CryptographicBuffer.ConvertStringToBinary(username.Text, BinaryStringEncoding.Utf8);
-            IBuffer pass = CryptographicBuffer.ConvertStringToBinary(password.Text, BinaryStringEncoding.Utf8);
+            IBuffer pass = CryptographicBuffer.ConvertStringToBinary(password.Password, BinaryStringEncoding.Utf8);
             IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
 
             //バッファからハッシュ化されたデータを取得する

@@ -49,5 +49,26 @@
         <TextBlock HorizontalAlignment="Left" Margin="93,36,0,0" Grid.Row="1" TextWrapping="Wrap" Text="つぶやく" VerticalAlignment="Top" Height="31" Width="130" FontSize="30"/>
         <TextBox x:Name="tweetBox" HorizontalAlignment="Left" Margin="93,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="330"  KeyUp="TweetDone"/>
         <Button Content="つぶやく" HorizontalAlignment="Left" Margin="350,241,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TweetButton_clik"/>
+        <Button x:Name="get" Content="Get" HorizontalAlignment="Left" Margin="1208,551,0,0" Grid.Row="1" VerticalAlignment="Top" Click="GetButton_clik"/>
+        <ListView x:Name="timeline" HorizontalAlignment="Left" Height="472" Margin="428,67,0,0" Grid.Row="1" VerticalAlignment="Top" Width="933">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Year}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Month}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Day}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Hour}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Minute}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Second}" Foreground="Chocolate"></TextBlock>
+                        </StackPanel>
+                        <TextBlock Text="{Binding NickName}" Foreground="Aqua"></TextBlock>
+                        <TextBlock Text="{Binding Tweet}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Image x:Name="testimage" HorizontalAlignment="Left" Height="64" Margin="179,340,0,0" Grid.Row="1" VerticalAlignment="Top" Width="65"/>
+        <Button Content="test" HorizontalAlignment="Left" Margin="171,417,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TestButton_clik"/>
     </Grid>
 </Page>

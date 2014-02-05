@@ -1,9 +1,13 @@
 ﻿using SYNAPSE.Common;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Net;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,11 +18,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Popups;
+using Windows.Security.Cryptography;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using Windows.Storage.FileProperties;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
+using Windows.Web.Http.Headers;
+using Windows.Networking.BackgroundTransfer;
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -35,6 +44,8 @@ namespace SYNAPSE
         private BitmapImage bitmapImage;
         private string sidValue;
         private string domainValue;
+        private string fileName;
+        
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -137,6 +148,9 @@ namespace SYNAPSE
             openPicker.FileTypeFilter.Add(".jpeg");
             //ファイルを一つ選べるようにする。
             StorageFile file = await openPicker.PickSingleFileAsync();
+            fileName = file.Name;
+            //var messageDialog = new MessageDialog(fileName);
+            //await messageDialog.ShowAsync();
             //画像の表示開始
             if(file != null)
             {
@@ -152,48 +166,125 @@ namespace SYNAPSE
                     return;
                 }
                 profileimage.Source = bitmapImage;
+
+                Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Profile.aspx");
+                //cookieの設定
                 
-
-            }
-
-        }
-
-        async private void SendButton_clik(object sender, RoutedEventArgs e)
-        {
-            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Profile.aspx");
-            try
-            {
-                //コンテンツの生成
-                HttpMultipartFormDataContent content = new HttpMultipartFormDataContent();
-                content.Add(new HttpStringContent(profileText.Text), "prf");
-                content.Add(new HttpStreamContent(filestream), "prfimg");
-
                 HttpCookie cookie = new HttpCookie("sid", domainValue, "");
                 cookie.Value = sidValue;
                 cookie.Secure = false;
                 cookie.HttpOnly = false;
                 HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
                 var replaced = filter.CookieManager.SetCookie(cookie, false);
-                
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post,targetAdresse);
+
+                string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+                byte[] boundaryByte = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\n");
+                BasicProperties bp = await file.GetBasicPropertiesAsync();
+                string formDataTemplate = "name = \"{0}\"\r\n\r\n{1}";
+                string headerTemplate = "name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, "prfimg", fileName, file.ContentType);
+                string formItem = string.Format(formDataTemplate, "prfimg", file);
+                byte[] fdata = new byte[bp.Size];
+                byte[] headerByte = System.Text.Encoding.UTF8.GetBytes(header);
+                byte[] formItemByte = System.Text.Encoding.UTF8.GetBytes(formItem);
+                byte[] trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
+
+                IInputStream istream = filestream.GetInputStreamAt(0);
+                DataReader reader = new DataReader(istream);
+                await reader.LoadAsync((uint)fdata.Length);
+                reader.ReadBytes(fdata);
+                //profileText.Text = System.Text.Encoding.UTF8.GetString(fdata,0,fdata.Length);
+
+                byte[] data = new byte[headerByte.Length + fdata.Length];
+                Array.Copy(headerByte, 0, data,0, headerByte.Length);
+                Array.Copy(fdata, 0, data,headerByte.Length, fdata.Length);
+
+                MemoryStream mem = new MemoryStream(data);
+                IInputStream rstream = mem.AsInputStream();
+
+                /*System.Net.Http.HttpContent hcontent = new System.Net.Http.ByteArrayContent(data);
+                System.Net.Http.HttpRequestMessage requestMessage = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post,targetAdresse);
+                System.Net.Http.MultipartFormDataContent content = new System.Net.Http.MultipartFormDataContent(boundary);
+                content.Add(hcontent);
+                requestMessage.Content = content;
+                System.Net.Http.HttpResponseMessage responseMessage;
+                System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                responseMessage = await client.SendAsync(requestMessage);
+                profileText.Text = await responseMessage.Content.ReadAsStringAsync();*/
+                //profileText.Text = await content.ReadAsStringAsync();
+
+                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, targetAdresse);
+                HttpMultipartFormDataContent content = new HttpMultipartFormDataContent(boundary);
+                HttpStreamContent stream = new HttpStreamContent(rstream);
+                HttpStringContent stringContent = new HttpStringContent("aaaaaaa");
+                content.Add(stream);
+                content.Add(stringContent, "prf");
                 requestMessage.Content = content;
 
-                HttpClient Client = new HttpClient();
-                HttpResponseMessage responseMessage;
-                //responseMessage = await Client.PostAsync(targetAdresse, content);
-                //result.Text = await responseMessage.Content.ReadAsStringAsync();
-                responseMessage = await Client.SendRequestAsync(requestMessage);
-                if(responseMessage == null)
-                {
-                    result.Text = "失敗\n";
-                }
-                result.Text = await responseMessage.Content.ReadAsStringAsync();
+                HttpResponseMessage response;
+                HttpClient client = new HttpClient();
+                //response = await client.SendRequestAsync(requestMessage);
+                //profileText.Text = await response.Content.ReadAsStringAsync();
+                profileText.Text = await requestMessage.Content.ReadAsStringAsync();
             }
-            catch
-            {
-                //return;
-            }
+              
+        }
 
+        async private void SendButton_clik(object sender, RoutedEventArgs e)
+        {
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Set/Profile.aspx");
+            //コンテンツの生成
+
+            //cookieの設定
+            /*HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            cookie.Value = sidValue;
+            cookie.Secure = false;
+            cookie.HttpOnly = false;
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var replaced = filter.CookieManager.SetCookie(cookie, false);
+
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundaryByte = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\n");
+            BasicProperties bp = await file.GetBasicPropertiesAsync();
+            string formDataTemplate = "name = \"{0}\"\r\n\r\n{1}";
+            string headerTemplate = "name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+            string header = string.Format(headerTemplate, "prfimg", fileName, file.ContentType);
+            string formItem = string.Format(formDataTemplate, "prfimg", file);
+            byte[] fdata = new byte[bp.Size];
+            byte[] headerByte = System.Text.Encoding.UTF8.GetBytes(header);
+            byte[] formItemByte = System.Text.Encoding.UTF8.GetBytes(formItem);
+            byte[] trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
+
+            IInputStream istream = filestream.GetInputStreamAt(0);
+            DataReader reader = new DataReader(istream);
+            await reader.LoadAsync((uint)fdata.Length);
+            reader.ReadBytes(fdata);
+            //profileText.Text = System.Text.Encoding.UTF8.GetString(fdata,0,fdata.Length);
+
+            byte[] data = new byte[formItemByte.Length + headerByte.Length + fdata.Length];
+            Array.Copy(formItemByte, 0, data, 0, formItemByte.Length);
+            Array.Copy(headerByte, 0, data, formItemByte.Length, headerByte.Length);
+            Array.Copy(fdata, 0, data, formItemByte.Length + headerByte.Length, fdata.Length);
+
+            MemoryStream mem = new MemoryStream(data);
+            IInputStream rstream = mem.AsInputStream();
+
+
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, targetAdresse);
+            HttpMultipartFormDataContent content = new HttpMultipartFormDataContent(boundary);
+            HttpStreamContent stream = new HttpStreamContent(rstream);
+            HttpStringContent stringContent = new HttpStringContent(profileText.Text);
+            content.Add(stream,"prfimg");
+            content.Add(stringContent,"prf");
+            requestMessage.Content = content;
+
+            HttpResponseMessage response;
+            HttpClient client = new HttpClient();
+            //response = await client.SendRequestAsync(requestMessage);
+            //profileText.Text = await response.Content.ReadAsStringAsync();
+            //profileText.Text = await content.ReadAsStringAsync();*/
         }
     }
+
 }
+

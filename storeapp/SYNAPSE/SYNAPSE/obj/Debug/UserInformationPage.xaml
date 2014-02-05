@@ -61,11 +61,11 @@
             <TextBox x:Name="username" TextWrapping="Wrap" Grid.Row="1" FontFamily="Global User Interface" FontSize="18" Margin="40,0"/>
             <TextBox x:Name="nickname" Grid.Row="3" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" HorizontalAlignment="Right" Width="486" Margin="0,0,40,0"/>
             <TextBox x:Name="mailad" Grid.Row="5" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" Margin="40,0"/>
-            <TextBox x:Name="password" Grid.Row="7" TextWrapping="Wrap" FontSize="18" Margin="40,0"/>
             <TextBlock TextWrapping="Wrap" Text="User Name" FontSize="36"/>
             <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Nick Name" FontSize="36"/>
             <TextBlock Grid.Row="4" TextWrapping="Wrap" Text="Mail" FontSize="36"/>
             <TextBlock Grid.Row="6" TextWrapping="Wrap" Text="Pass Word" FontSize="36"/>
+            <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="40,3,0,0" Grid.Row="7" VerticalAlignment="Top" Width="486"/>
         </Grid>
         <Button x:ConnectionId='1' x:Name="singup" Content="Sing Up" HorizontalAlignment="Left" Margin="634,438,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-2.579,-0.794"                          />
         <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="153,177,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-5.644,-12.615" Height="292" Width="212"/>

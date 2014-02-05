@@ -49,7 +49,7 @@
         <Image x:ConnectionId='1' x:Name="profileimage" Height="64" Grid.Row="1" Width="64" Margin="651,112,651,452" HorizontalAlignment="Center"                                          Source="Assets/Logo.png"/>
         <TextBox x:Name="profileText" Margin="438,197,428,241" Grid.Row="1" TextWrapping="Wrap" Width="500" HorizontalAlignment="Center"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="64" Margin="651,112,0,0" Grid.Row="1" VerticalAlignment="Top" Width="64"/>
-        <Button x:ConnectionId='2' Content="Send" HorizontalAlignment="Left" Margin="648,437,0,0" Grid.Row="1" VerticalAlignment="Top"                        />
+        <Button x:ConnectionId='2' Content="Send" HorizontalAlignment="Left" Margin="648,478,0,0" Grid.Row="1" VerticalAlignment="Top"                        />
         <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="1018,197,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="210" Width="136"/>
     </Grid>
 </Page>

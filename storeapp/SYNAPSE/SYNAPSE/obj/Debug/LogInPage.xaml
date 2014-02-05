@@ -60,9 +60,9 @@
                     <CompositeTransform SkewY="0.213" TranslateY="-0.743"/>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Pass Word" FontSize="40"/>
+            <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Password" FontSize="40"/>
             <TextBox x:Name="username" Grid.Row="1" TextWrapping="Wrap" Text=""/>
-            <TextBox x:Name="password" Grid.Row="3" TextWrapping="Wrap" Text=""/>
+            <PasswordBox x:Name="password" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Height="37" Width="400"/>
         </Grid>
         <Button x:ConnectionId='1' Content="OK" HorizontalAlignment="Left" Margin="645,456,0,0" Grid.Row="1" VerticalAlignment="Top"                           />
         <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="930,37,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="377" Width="379"/>

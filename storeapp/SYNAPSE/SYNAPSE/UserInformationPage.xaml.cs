@@ -147,7 +147,7 @@ namespace SYNAPSE
                 new KeyValuePair<string,string>("uid",username.Text),
                 new KeyValuePair<string,string>("nn",nickname.Text),
                 new KeyValuePair<string,string>("mail",mailad.Text),
-                new KeyValuePair<string,string>("pass",password.Text),
+                new KeyValuePair<string,string>("pass",password.Password),
                 new KeyValuePair<string,string>("did_h",did_h),
 
             });

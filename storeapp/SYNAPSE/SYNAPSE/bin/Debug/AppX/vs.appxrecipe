@@ -6,7 +6,7 @@
     <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
     <PackageArchitecture>neutral</PackageArchitecture>
     <PackageIdentityName>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff</PackageIdentityName>
-    <RegisteredManifestChecksum>A084F5690518582FABB2C13A50D2D691C029D432AC6BEFC9B3C0CC263450DD75</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>CC9F7197A70B03AD39F30784E8A6DEFCF934D6BCEA6510502205D9979F4995E0</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff_1.0.0.0_neutral__way6adnv8ekgy</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff_way6adnv8ekgy!App</RegisteredUserModeAppID>
     <RegisteredPackageID>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff</RegisteredPackageID>
@@ -17,13 +17,13 @@
     <AppXManifest Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2014-01-24T16:39:51.919</Modified>
+      <Modified>2014-02-02T14:50:20.582</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
       <PackagePath>SYNAPSE.exe</PackagePath>
-      <Modified>2014-01-26T15:50:28.627</Modified>
+      <Modified>2014-02-03T06:23:04.395</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
@@ -55,7 +55,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\LogInPage.xbf">
       <PackagePath>LogInPage.xbf</PackagePath>
-      <Modified>2014-01-22T09:20:59.238</Modified>
+      <Modified>2014-01-28T03:45:43.070</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
@@ -63,19 +63,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\Profile.xbf">
       <PackagePath>Profile.xbf</PackagePath>
-      <Modified>2014-01-23T17:08:11.344</Modified>
+      <Modified>2014-01-30T09:18:38.804</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
       <PackagePath>TimeLine.xbf</PackagePath>
-      <Modified>2014-01-26T15:50:28.368</Modified>
+      <Modified>2014-01-30T09:18:38.805</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
       <PackagePath>UserInformationPage.xbf</PackagePath>
-      <Modified>2014-01-16T09:50:33.408</Modified>
+      <Modified>2014-01-28T03:45:43.071</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2014-01-24T16:39:51.658</Modified>
+      <Modified>2014-02-02T14:50:19.963</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,10 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <Capability Name="musicLibrary" />
+    <Capability Name="picturesLibrary" />
+    <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClientServer" />
+    <DeviceCapability Name="proximity" />
   </Capabilities>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v4.5.1" />

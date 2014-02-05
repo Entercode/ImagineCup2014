@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -12,11 +13,14 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
+using Windows.Networking.BackgroundTransfer;
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -121,7 +125,7 @@ namespace SYNAPSE
         #endregion
 
 
-        async private void TweetDone(object sender, KeyRoutedEventArgs e)
+        private void TweetDone(object sender, KeyRoutedEventArgs e)
         {
             /*switch(e.Key)
             {
@@ -221,6 +225,59 @@ namespace SYNAPSE
             {
                 return;
             }
+            this.GetButton_clik(sender,e);
+        }
+
+        async private void GetButton_clik(object sender, RoutedEventArgs e)
+        {
+            //クッキーのセット
+            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            cookie.Value = sidValue;
+            cookie.Secure = false;
+            cookie.HttpOnly = false;
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var replaced = filter.CookieManager.SetCookie(cookie, false);
+
+            //タイムライン取得用のアドレス   
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx");
+            //プロフィール画像取得用のアドレス
+            Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx" + "?uid_h=" + "0A63580B9A92F8B78E0241F080AB4A6438756369");
+            HttpClient client = new HttpClient();
+
+            //xmlをゲット
+            HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
+            //プロフィール画像のゲット
+            HttpResponseMessage profileResponseMessage = await client.GetAsync(ProfileGetAdresse);
+            BitmapImage bitmapImage = new BitmapImage();
+            
+            
+            responseMessage.EnsureSuccessStatusCode();
+
+            XDocument document = XDocument.Parse(await responseMessage.Content.ReadAsStringAsync());
+            XElement root = document.Root;
+
+            timeline.ItemsSource = root.Element("TweetData").Elements("Tweet").Select(x => new
+            {
+                Tweet = x.Value,
+                NickName = x.Attribute("Nickname").Value,
+                Year = x.Attribute("Time").Value.Substring(0,4) + "年",
+                Month = x.Attribute("Time").Value.Substring(4,2) + "月",
+                Day = x.Attribute("Time").Value.Substring(6,2) + "日",
+                Hour = x.Attribute("Time").Value.Substring(8,2) + "時",
+                Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
+                Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
+            });
+        }
+
+        async private void TestButton_clik(object sender, RoutedEventArgs e)
+        {
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx" + "?uid_h=" + "0A63580B9A92F8B78E0241F080AB4A6438756369");
+            StorageFile destinationFile = await KnownFolders.PicturesLibrary.CreateFileAsync("test.png",CreationCollisionOption.ReplaceExisting);
+            BackgroundDownloader downloader = new BackgroundDownloader();
+            downloader.Method = "GET";
+            DownloadOperation downloaderOperation = downloader.CreateDownload(targetAdresse, destinationFile);
+            await downloaderOperation.StartAsync();
+
         }
     }
 }
