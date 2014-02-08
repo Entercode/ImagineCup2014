@@ -6,6 +6,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,12 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
-using Windows.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
-using Windows.System.Profile;
-using Windows.Storage;
-using Windows.Storage.Pickers;
+using Windows.Networking.Proximity;
 
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
@@ -128,9 +129,6 @@ namespace SYNAPSE
             await FileIO.WriteTextAsync(storageFile, id, UnicodeEncoding.Utf8);
             */
 
-            //デバイスIDをアプリデータとして保存
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values["did"] = id;
 
             HttpClient client = new HttpClient();
             HttpResponseMessage response;
@@ -141,6 +139,10 @@ namespace SYNAPSE
             IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
             var hash_did = algorithm.HashData(did);
             string did_h = CryptographicBuffer.EncodeToHexString(hash_did);
+
+            //デバイスIDをアプリデータとして保存
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values["did_h"] = did_h;
 
             HttpFormUrlEncodedContent content = new HttpFormUrlEncodedContent(new[]
             {

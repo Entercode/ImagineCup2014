@@ -21,6 +21,7 @@ using Windows.Storage.Streams;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using Windows.Networking.BackgroundTransfer;
+using Windows.Networking.Proximity;
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -64,6 +65,124 @@ namespace SYNAPSE
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            if (localSettings.Values.ContainsKey("did_h"))
+            {
+                PeerFinder.DisplayName = localSettings.Values["did_h"].ToString();
+            }
+            //peerFinderの開始
+            PeerFinder.Start();
+            //一定時間間隔に発生する処理の開始
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 5);
+            timer.Start();
+            timer.Tick += timer_Tick;
+        }
+
+        //一定時間間隔に行う処理
+        async void timer_Tick(object sender, object e)
+        {
+           
+            //すれ違い通信の開始
+            try
+            {
+                var peers = await PeerFinder.FindAllPeersAsync();
+                if (peers.Any())
+                {
+                    foreach (var i in peers)
+                    {
+                        HttpClient client = new HttpClient();
+                        //urlの設定
+                        Uri streetPassAdress = new Uri("http://synapse-server.cloudapp.net/Set/StreetPass.aspx");
+
+                        HttpResponseMessage responseMessage;
+                        HttpFormUrlEncodedContent streetPassContent = new HttpFormUrlEncodedContent(new[]
+                            {
+                                new KeyValuePair<string,string>("pdid_h",i.DisplayName),
+                                new KeyValuePair<string,string>("pt",DateTime.Now.ToString("yyyyMMddHHmmss"))
+                            });
+                        //クッキーのセット
+                        HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+                        cookie.Value = sidValue;
+                        cookie.Secure = false;
+                        cookie.HttpOnly = false;
+                        HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                        var replaced = filter.CookieManager.SetCookie(cookie, false);
+                        responseMessage = await client.PostAsync(streetPassAdress, streetPassContent);
+
+
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                //タイムラインの読み込み
+                timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLineBuffer.txt");
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                //タイムラインを文字列として格納
+                buf = await FileIO.ReadTextAsync(timeLineBuffer);
+                XDocument documentBuf = XDocument.Parse(buf);
+                XElement rootBuf = documentBuf.Root;
+
+                //クッキーのセット
+                HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+                cookie.Value = sidValue;
+                cookie.Secure = false;
+                cookie.HttpOnly = false;
+                HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                var replaced = filter.CookieManager.SetCookie(cookie, false);
+
+                //キャッシュが重複しないように
+                System.DateTime ntime = System.DateTime.Now;
+
+                //タイムライン取得用のアドレス   
+                Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx?" + ntime.ToString());
+
+                HttpClient client = new HttpClient();
+
+                //xmlをゲット
+                HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
+
+                responseMessage.EnsureSuccessStatusCode();
+                //比較用にタイムラインを読み込む
+                string bufCompare = await responseMessage.Content.ReadAsStringAsync();
+                XDocument documentCompare = XDocument.Parse(bufCompare);
+                XElement rootCompare = documentCompare.Root;
+
+                //タイムラインに変化があった場合のみ読み込む
+                if(rootCompare.Element("TweetData").Element("Tweet").Attribute("Time").Value.ToString()
+                    != rootBuf.Element("TweetData").Element("Tweet").Attribute("Time").Value.ToString())
+                {
+                    timeLineBuffer = await ApplicationData.Current.RoamingFolder.CreateFileAsync("timeLineBuffer.txt", CreationCollisionOption.ReplaceExisting);
+
+                    timeline.ItemsSource = rootCompare.Element("TweetData").Elements("Tweet").Select(x => new
+                    {
+                        Tweet = x.Value,
+                        NickName = x.Attribute("Nickname").Value,
+                        Year = x.Attribute("Time").Value.Substring(0, 4) + "年",
+                        Month = x.Attribute("Time").Value.Substring(4, 2) + "月",
+                        Day = x.Attribute("Time").Value.Substring(6, 2) + "日",
+                        Hour = x.Attribute("Time").Value.Substring(8, 2) + "時",
+                        Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
+                        Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
+                    });
+                }
+                await FileIO.WriteTextAsync(timeLineBuffer, bufCompare);
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>
@@ -81,14 +200,12 @@ namespace SYNAPSE
         {
             ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
             ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;
-            RoutedEventArgs esub = new RoutedEventArgs();
             try
             {
                timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLineBuffer.txt");
             }
             catch
             {
-                this.GetButton_clik(sender,esub);
             }
             if(localSid.Values.ContainsKey("sid"))
             {
@@ -266,7 +383,7 @@ namespace SYNAPSE
 
         async private void GetButton_clik(object sender, RoutedEventArgs e)
         {
-            //クッキーのセット
+            /*//クッキーのセット
             HttpCookie cookie = new HttpCookie("sid", domainValue, "");
             cookie.Value = sidValue;
             cookie.Secure = false;
@@ -280,14 +397,14 @@ namespace SYNAPSE
             //タイムライン取得用のアドレス   
             Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx?" + ntime.ToString());
             //プロフィール画像取得用のアドレス
-            Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx?=" +ntime.ToString() );
+            //Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx?=" +ntime.ToString() );
             HttpClient client = new HttpClient();
 
             //xmlをゲット
             HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
             //プロフィール画像のゲット
-            HttpResponseMessage profileResponseMessage = await client.GetAsync(ProfileGetAdresse);
-            BitmapImage bitmapImage = new BitmapImage();
+            //HttpResponseMessage profileResponseMessage = await client.GetAsync(ProfileGetAdresse);
+            //BitmapImage bitmapImage = new BitmapImage();
             
             
             responseMessage.EnsureSuccessStatusCode();
@@ -298,7 +415,7 @@ namespace SYNAPSE
 
             XDocument document = XDocument.Parse(buf);
             XElement root = document.Root;
-
+            
 
             timeline.ItemsSource = root.Element("TweetData").Elements("Tweet").Select(x => new
             {
@@ -310,7 +427,7 @@ namespace SYNAPSE
                 Hour = x.Attribute("Time").Value.Substring(8,2) + "時",
                 Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
                 Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
-            });
+            });*/
         }
 
         async private void TestButton_clik(object sender, RoutedEventArgs e)
@@ -328,5 +445,7 @@ namespace SYNAPSE
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+
+       
     }
 }

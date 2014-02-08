@@ -73,8 +73,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Image x:Name="testimage" HorizontalAlignment="Left" Height="64" Margin="179,340,0,0" Grid.Row="1" VerticalAlignment="Top" Width="65"/>
-        <Button Content="test" HorizontalAlignment="Left" Margin="171,417,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TestButton_clik"/>
-        <CaptureElement HorizontalAlignment="Left" Height="100" Margin="584,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Page>

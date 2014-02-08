@@ -144,19 +144,25 @@ namespace SYNAPSE
 
             //IBuffer uid = CryptographicBuffer.ConvertStringToBinary(username.Text, BinaryStringEncoding.Utf8);
             IBuffer pass = CryptographicBuffer.ConvertStringToBinary(password.Password, BinaryStringEncoding.Utf8);
-            IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
+            //IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
 
             //バッファからハッシュ化されたデータを取得する
 
             //var hash_uid = algorithm.HashData(uid);
             var hash_pass = algorithm.HashData(pass);
-            var hash_did = algorithm.HashData(did);
+            //var hash_did = algorithm.HashData(did);
 
             //ハッシュ化されたデータを16進数の文字列に変換
 
             //string uid_h = CryptographicBuffer.EncodeToHexString(hash_uid);
             string pass_h = CryptographicBuffer.EncodeToHexString(hash_pass);
-            string did_h = CryptographicBuffer.EncodeToHexString(hash_did);
+            string did_h = null;
+            //string did_h = CryptographicBuffer.EncodeToHexString(hash_did);
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            if(localSettings.Values.ContainsKey("did_h"))
+            {
+                did_h = localSettings.Values["did_h"].ToString();
+            }
             
             //送信するデータの生成
 
