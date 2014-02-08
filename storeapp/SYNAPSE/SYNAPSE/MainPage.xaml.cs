@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
+using Windows.Web.Http.Filters;
+using Windows.Storage;
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -27,6 +29,7 @@ namespace SYNAPSE
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private string sidValue, domainValue;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -67,6 +70,16 @@ namespace SYNAPSE
         /// セッション。ページに初めてアクセスするとき、状態は null になります。</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;
+            if (localSid.Values.ContainsKey("sid"))
+            {
+                sidValue = localSid.Values["sid"].ToString();
+            }
+            if (localDomain.Values.ContainsKey("Domain"))
+            {
+                domainValue = localDomain.Values["Domain"].ToString();
+            }
         }
 
         /// <summary>
@@ -122,6 +135,12 @@ namespace SYNAPSE
 
         async private void LogOutButton_clik(object sender, RoutedEventArgs e)
         {
+            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            cookie.Value = sidValue;
+            cookie.Secure = false;
+            cookie.HttpOnly = false;
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var replaced = filter.CookieManager.SetCookie(cookie, false);
             var Client = new HttpClient();
             HttpResponseMessage response;
 
@@ -134,6 +153,12 @@ namespace SYNAPSE
             catch
             {
             }
+            //クッキーデータの変更
+            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+            localSid.Values["sid"] = null;
+            StorageFile timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
+            string str ="";
+            await FileIO.WriteTextAsync(timeLineBuffer, str);
         }
 
         private void ProfileSettingButton_clik(object sender, RoutedEventArgs e)

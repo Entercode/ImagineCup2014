@@ -37,6 +37,8 @@ namespace SYNAPSE
         private string thisTime;
         private string sidValue;
         private string domainValue;
+        string buf;
+        StorageFile timeLineBuffer;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -75,10 +77,19 @@ namespace SYNAPSE
         /// <see cref="Frame.Navigate(Type, Object)"/> に渡されたナビゲーション パラメーターと、
         /// 前のセッションでこのページによって保存された状態の辞書を提供する
         /// セッション。ページに初めてアクセスするとき、状態は null になります。</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        async private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
             ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;
+            RoutedEventArgs esub = new RoutedEventArgs();
+            try
+            {
+               timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLineBuffer.txt");
+            }
+            catch
+            {
+                this.GetButton_clik(sender,esub);
+            }
             if(localSid.Values.ContainsKey("sid"))
             {
                 sidValue = localSid.Values["sid"].ToString();
@@ -87,6 +98,30 @@ namespace SYNAPSE
             {
                 domainValue = localDomain.Values["Domain"].ToString();
             }
+            try
+            {
+                buf = await FileIO.ReadTextAsync(timeLineBuffer);
+                XDocument document = XDocument.Parse(buf);
+                XElement root = document.Root;
+
+
+                timeline.ItemsSource = root.Element("TweetData").Elements("Tweet").Select(x => new
+                {
+                    Tweet = x.Value,
+                    NickName = x.Attribute("Nickname").Value,
+                    Year = x.Attribute("Time").Value.Substring(0, 4) + "年",
+                    Month = x.Attribute("Time").Value.Substring(4, 2) + "月",
+                    Day = x.Attribute("Time").Value.Substring(6, 2) + "日",
+                    Hour = x.Attribute("Time").Value.Substring(8, 2) + "時",
+                    Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
+                    Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
+                });
+            }
+            catch
+            {
+                
+            }
+
         }
 
         /// <summary>
@@ -97,8 +132,9 @@ namespace SYNAPSE
         /// <param name="sender">イベントのソース (通常、<see cref="NavigationHelper"/>)</param>
         /// <param name="e">シリアル化可能な状態で作成される空のディクショナリを提供するイベント データ
         ///。</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        async private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            await FileIO.WriteTextAsync(timeLineBuffer, buf);
         }
 
         #region NavigationHelper の登録
@@ -219,7 +255,7 @@ namespace SYNAPSE
                 HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
                 var replaced = filter.CookieManager.SetCookie(cookie, false);
                 responseMessage = await client.PostAsync(targetAdresse, content);
-                tweetBox.Text = await responseMessage.Content.ReadAsStringAsync();
+                //tweetBox.Text = await responseMessage.Content.ReadAsStringAsync();
             }
             catch
             {
@@ -238,10 +274,13 @@ namespace SYNAPSE
             HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
             var replaced = filter.CookieManager.SetCookie(cookie, false);
 
+            //キャッシュが重複しないように
+            System.DateTime ntime = System.DateTime.Now;
+
             //タイムライン取得用のアドレス   
-            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx");
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx?" + ntime.ToString());
             //プロフィール画像取得用のアドレス
-            Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx" + "?uid_h=" + "0A63580B9A92F8B78E0241F080AB4A6438756369");
+            Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx?=" +ntime.ToString() );
             HttpClient client = new HttpClient();
 
             //xmlをゲット
@@ -252,9 +291,14 @@ namespace SYNAPSE
             
             
             responseMessage.EnsureSuccessStatusCode();
+            buf = await responseMessage.Content.ReadAsStringAsync();
+            //ファイルにbufを保存
+            timeLineBuffer = await ApplicationData.Current.RoamingFolder.CreateFileAsync("timeLineBuffer.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(timeLineBuffer,buf);
 
-            XDocument document = XDocument.Parse(await responseMessage.Content.ReadAsStringAsync());
+            XDocument document = XDocument.Parse(buf);
             XElement root = document.Root;
+
 
             timeline.ItemsSource = root.Element("TweetData").Elements("Tweet").Select(x => new
             {
@@ -278,6 +322,11 @@ namespace SYNAPSE
             DownloadOperation downloaderOperation = downloader.CreateDownload(targetAdresse, destinationFile);
             await downloaderOperation.StartAsync();
 
+        }
+
+        private void MainPageButton_clik(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }

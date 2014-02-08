@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 // 空のアプリケーション テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234227 を参照してください
 
@@ -39,9 +40,12 @@ namespace SYNAPSE
         /// アプリケーションが特定のファイルを開くために呼び出されたときなどに使用されます。
         /// </summary>
         /// <param name="e">起動要求とプロセスの詳細を表示します。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        async protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            if(e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                await SYNAPSE.Common.SuspensionManager.RestoreAsync();
+            }
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -72,6 +76,17 @@ namespace SYNAPSE
                 Window.Current.Content = rootFrame;
             }
 
+            //セッションIDの復元
+            string id = null;
+            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+            if (localSid.Values.ContainsKey("sid"))
+            {
+                id = localSid.Values["sid"].ToString();
+            }
+            if(id != null)
+            {
+                rootFrame.Navigate(typeof(TimeLine),e.Arguments);
+            }
             if (rootFrame.Content == null)
             {
                 // ナビゲーションの履歴スタックが復元されていない場合、最初のページに移動します。
@@ -79,6 +94,7 @@ namespace SYNAPSE
                 // 作成します
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+
             // 現在のウィンドウがアクティブであることを確認します
             Window.Current.Activate();
         }

@@ -14,6 +14,11 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
+    <Page.TopAppBar>
+        <CommandBar>
+            <AppBarButton Label="Main Page" Icon="Back" Click="MainPageButton_clik"/>
+        </CommandBar>
+    </Page.TopAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -70,5 +75,6 @@
         </ListView>
         <Image x:Name="testimage" HorizontalAlignment="Left" Height="64" Margin="179,340,0,0" Grid.Row="1" VerticalAlignment="Top" Width="65"/>
         <Button Content="test" HorizontalAlignment="Left" Margin="171,417,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TestButton_clik"/>
+        <CaptureElement HorizontalAlignment="Left" Height="100" Margin="584,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Page>
