@@ -40,6 +40,7 @@ namespace SYNAPSE
         private string domainValue;
         string buf;
         StorageFile timeLineBuffer;
+        Dictionary<string, string> deviceBuffer = new Dictionary<string, string>();
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -73,10 +74,37 @@ namespace SYNAPSE
             //peerFinderの開始
             PeerFinder.Start();
             //一定時間間隔に発生する処理の開始
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 5);
-            timer.Start();
-            timer.Tick += timer_Tick;
+            DispatcherTimer sendTimer = new DispatcherTimer();
+            DispatcherTimer searchTimer = new DispatcherTimer();
+            sendTimer.Interval = new TimeSpan(0, 0, 5, 0);
+            searchTimer.Interval = new TimeSpan(0, 0, 10);
+            sendTimer.Start();
+            searchTimer.Start();
+            sendTimer.Tick += timer_Tick;
+            searchTimer.Tick += searchTimer_Tick;
+        }
+
+        async void searchTimer_Tick(object sender, object e)
+        {
+            try
+            {
+                var peers = await PeerFinder.FindAllPeersAsync();
+                if(peers.Any())
+                {
+                    foreach(var i in peers)
+                    {
+                        if(!deviceBuffer.ContainsKey(i.DisplayName))
+                        {
+                            deviceBuffer.Add(i.DisplayName, DateTime.Now.ToString("yyyyMMddHHmmss"));
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
         }
 
         //一定時間間隔に行う処理
@@ -86,7 +114,30 @@ namespace SYNAPSE
             //すれ違い通信の開始
             try
             {
-                var peers = await PeerFinder.FindAllPeersAsync();
+                foreach(var i in deviceBuffer)
+                {
+                    HttpClient client = new HttpClient();
+                    //urlの設定
+                    Uri streetPassAdress = new Uri("http://synapse-server.cloudapp.net/Set/StreetPass.aspx");
+
+                    HttpResponseMessage responseMessage;
+                    HttpFormUrlEncodedContent streetPassContent = new HttpFormUrlEncodedContent(new[]
+                            {
+                                new KeyValuePair<string,string>("pdid_h",i.Key),
+                                new KeyValuePair<string,string>("pt",i.Value)
+                            });
+                    //クッキーのセット
+                    HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+                    cookie.Value = sidValue;
+                    cookie.Secure = false;
+                    cookie.HttpOnly = false;
+                    HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                    var replaced = filter.CookieManager.SetCookie(cookie, false);
+                    responseMessage = await client.PostAsync(streetPassAdress, streetPassContent);
+                    tweetBox.Text = i.Key;
+                }
+                deviceBuffer.Clear();
+                /*var peers = await PeerFinder.FindAllPeersAsync();
                 if (peers.Any())
                 {
                     foreach (var i in peers)
@@ -109,10 +160,11 @@ namespace SYNAPSE
                         HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
                         var replaced = filter.CookieManager.SetCookie(cookie, false);
                         responseMessage = await client.PostAsync(streetPassAdress, streetPassContent);
+                        tweetBox.Text = i.DisplayName;
 
 
                     }
-                }
+                }*/
             }
             catch
             {
