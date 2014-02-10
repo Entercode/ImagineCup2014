@@ -378,7 +378,8 @@ namespace SYNAPSE
             {
                 return;
             }
-            this.GetButton_clik(sender,e);
+            tweetMessage();
+            //this.GetButton_clik(sender,e);
         }
 
         async private void GetButton_clik(object sender, RoutedEventArgs e)
@@ -446,6 +447,54 @@ namespace SYNAPSE
             this.Frame.Navigate(typeof(MainPage));
         }
 
+        async void tweetMessage()
+        {
+            //クッキーのセット
+            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            cookie.Value = sidValue;
+            cookie.Secure = false;
+            cookie.HttpOnly = false;
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var replaced = filter.CookieManager.SetCookie(cookie, false);
+
+            //キャッシュが重複しないように
+            System.DateTime ntime = System.DateTime.Now;
+
+            //タイムライン取得用のアドレス   
+            Uri targetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/Timeline.aspx?" + ntime.ToString());
+            //プロフィール画像取得用のアドレス
+            //Uri ProfileGetAdresse = new Uri("http://synapse-server.cloudapp.net/Get/ProfileImage.aspx?=" +ntime.ToString() );
+            HttpClient client = new HttpClient();
+
+            //xmlをゲット
+            HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
+            //プロフィール画像のゲット
+            //HttpResponseMessage profileResponseMessage = await client.GetAsync(ProfileGetAdresse);
+            //BitmapImage bitmapImage = new BitmapImage();
+            
+            
+            responseMessage.EnsureSuccessStatusCode();
+            buf = await responseMessage.Content.ReadAsStringAsync();
+            //ファイルにbufを保存
+            timeLineBuffer = await ApplicationData.Current.RoamingFolder.CreateFileAsync("timeLineBuffer.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(timeLineBuffer,buf);
+
+            XDocument document = XDocument.Parse(buf);
+            XElement root = document.Root;
+            
+
+            timeline.ItemsSource = root.Element("TweetData").Elements("Tweet").Select(x => new
+            {
+                Tweet = x.Value,
+                NickName = x.Attribute("Nickname").Value,
+                Year = x.Attribute("Time").Value.Substring(0,4) + "年",
+                Month = x.Attribute("Time").Value.Substring(4,2) + "月",
+                Day = x.Attribute("Time").Value.Substring(6,2) + "日",
+                Hour = x.Attribute("Time").Value.Substring(8,2) + "時",
+                Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
+                Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
+            });
+        }
        
     }
 }
