@@ -12,11 +12,18 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">SYNAPSE</x:String>
     </Page.Resources>
     <Page.TopAppBar>
         <CommandBar>
-            <AppBarButton Label="Main Page" Icon="Back" Click="MainPageButton_clik"/>
+            <AppBarButton Label="設定" Icon="Setting">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Profile" Click="MenuFlyoutItem_Click"></MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Log Out" Click="MenuFlyoutItem_Click_1"></MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
         </CommandBar>
     </Page.TopAppBar>
 
@@ -25,7 +32,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FF0099FF">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -47,15 +54,21 @@
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
+                        AutomationProperties.ItemType="Navigation Button" BorderBrush="White" Foreground="White" Background="Transparent"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" Foreground="White"/>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="93,36,0,0" Grid.Row="1" TextWrapping="Wrap" Text="つぶやく" VerticalAlignment="Top" Height="31" Width="130" FontSize="30"/>
-        <TextBox x:Name="tweetBox" HorizontalAlignment="Left" Margin="93,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="330"  KeyUp="TweetDone"/>
-        <Button Content="つぶやく" HorizontalAlignment="Left" Margin="350,241,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TweetButton_clik"/>
-        <Button x:Name="get" Content="Get" HorizontalAlignment="Left" Margin="1208,551,0,0" Grid.Row="1" VerticalAlignment="Top" Click="GetButton_clik"/>
-        <ListView x:Name="timeline" HorizontalAlignment="Left" Height="472" Margin="428,67,0,0" Grid.Row="1" VerticalAlignment="Top" Width="933">
+        <TextBlock HorizontalAlignment="Left" Margin="93,36,0,0" Grid.Row="1" TextWrapping="Wrap" Text="つぶやく" VerticalAlignment="Top" Height="31" Width="130" FontSize="30" Foreground="White"/>
+        <TextBox x:Name="tweetBox" HorizontalAlignment="Left" Margin="93,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="330"  KeyUp="TweetDone" Background="#F2F2F2F2"/>
+        <Button Content="つぶやく" HorizontalAlignment="Left" Margin="346,241,0,0" Grid.Row="1" VerticalAlignment="Top" Click="TweetButton_clik" Background="Transparent" BorderBrush="White" Foreground="White" BorderThickness="2"/>
+        <ListView x:Name="timeline" HorizontalAlignment="Left" Height="472" Margin="428,67,0,0" Grid.Row="1" VerticalAlignment="Top" Width="826" Foreground="White">
+            <ListView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0099FF" Offset="1"/>
+                    <GradientStop Color="#F2F2F2F2" Offset="0.936"/>
+                    <GradientStop Color="#F2F2F2F2" Offset="0.845"/>
+                </LinearGradientBrush>
+            </ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -73,5 +86,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBlock HorizontalAlignment="Left" Margin="428,24,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Timeline" VerticalAlignment="Top" FontSize="36" Foreground="White"/>
     </Grid>
 </Page>

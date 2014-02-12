@@ -41,6 +41,7 @@ namespace SYNAPSE
         string buf;
         StorageFile timeLineBuffer;
         Dictionary<string, string> deviceBuffer = new Dictionary<string, string>();
+        Frame rootFrame;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -63,6 +64,7 @@ namespace SYNAPSE
         public TimeLine()
         {
             this.InitializeComponent();
+            rootFrame = Window.Current.Content as Frame;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -134,7 +136,7 @@ namespace SYNAPSE
                     HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
                     var replaced = filter.CookieManager.SetCookie(cookie, false);
                     responseMessage = await client.PostAsync(streetPassAdress, streetPassContent);
-                    tweetBox.Text = i.Key;
+                    //tweetBox.Text = i.Key;
                 }
                 deviceBuffer.Clear();
                 /*var peers = await PeerFinder.FindAllPeersAsync();
@@ -303,7 +305,14 @@ namespace SYNAPSE
         ///。</param>
         async private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            await FileIO.WriteTextAsync(timeLineBuffer, buf);
+            try
+            {
+                await FileIO.WriteTextAsync(timeLineBuffer, buf);
+            }
+            catch
+            {
+
+            }
         }
 
         #region NavigationHelper の登録
@@ -546,6 +555,47 @@ namespace SYNAPSE
                 Minute = x.Attribute("Time").Value.Substring(10, 2) + "分",
                 Second = x.Attribute("Time").Value.Substring(12, 2) + "秒",
             });
+        }
+
+        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            rootFrame.Navigate(typeof(Profile));
+
+        }
+
+        async private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            cookie.Value = sidValue;
+            cookie.Secure = false;
+            cookie.HttpOnly = false;
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var replaced = filter.CookieManager.SetCookie(cookie, false);
+            var Client = new HttpClient();
+            HttpResponseMessage response;
+
+            Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogOut.aspx");
+            try
+            {
+                response = await Client.PostAsync(ressorceAddress, new HttpStringContent(""));
+                //result.Text = await response.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+            }
+            //クッキーデータの変更
+            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+            localSid.Values["sid"] = null;
+            try
+            {
+                timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
+                string str = "";
+                await FileIO.WriteTextAsync(timeLineBuffer, str);
+            }
+            catch
+            {
+            }
+            rootFrame.Navigate(typeof(LogInPage));
         }
        
     }

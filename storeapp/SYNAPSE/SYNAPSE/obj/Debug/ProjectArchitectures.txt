@@ -1,1 +1,1 @@
-C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\SYNAPSE.csproj;neutral
+C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\SYNAPSE.csproj;neutral

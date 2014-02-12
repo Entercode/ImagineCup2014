@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using Windows.Security.Cryptography;
@@ -37,6 +38,7 @@ namespace SYNAPSE
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         string id;
+        Frame rootFrame;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -62,6 +64,7 @@ namespace SYNAPSE
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            rootFrame = Window.Current.Content as Frame;
         }
 
         /// <summary>
@@ -122,6 +125,18 @@ namespace SYNAPSE
 
         async private void LogInOKButton_clik(object sender, RoutedEventArgs e)
         {
+            if(username.Text == "")
+            {
+                var messageDialog = new MessageDialog("ユーザーネームが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+            if(password.Password == "")
+            {
+                var messageDialog = new MessageDialog("パスワードが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
             var Client = new HttpClient();
             HttpResponseMessage response;
 
@@ -162,6 +177,19 @@ namespace SYNAPSE
             if(localSettings.Values.ContainsKey("did_h"))
             {
                 did_h = localSettings.Values["did_h"].ToString();
+            }
+            else
+            {
+                //デバイスIDの取得開始
+                var token = HardwareIdentification.GetPackageSpecificToken(null);
+                var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(token.Id);
+                byte[] bytes = new byte[token.Id.Length];
+                dataReader.ReadBytes(bytes);
+                var id = BitConverter.ToString(bytes);
+                IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
+                var hash_did = algorithm.HashData(did);
+                did_h = CryptographicBuffer.EncodeToHexString(hash_did);
+                localSettings.Values["did_h"] = did_h;
             }
             
             //送信するデータの生成
@@ -207,7 +235,12 @@ namespace SYNAPSE
                 localSid.Values["sid"] = cookie.Value;
                 localDomain.Values["Domain"] = cookie.Domain;
             }
+            rootFrame.Navigate(typeof(TimeLine));
+        }
 
+        private void GotoSingUpButton_clik(object sender, RoutedEventArgs e)
+        {
+            rootFrame.Navigate(typeof(UserInformationPage));
         }
     }
 }

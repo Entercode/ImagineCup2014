@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">ユーザー登録</x:String>
+        <x:String x:Key="AppName">Sign Up</x:String>
     </Page.Resources>
 
     <!--
@@ -20,7 +20,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FF0099FF">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -42,11 +42,11 @@
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
+                        AutomationProperties.ItemType="Navigation Button" Background="Cyan" BorderBrush="White" Foreground="White"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Global User Interface"/>
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Global User Interface" Foreground="White"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="400,50,400,258">
+        <Grid Grid.Row="1" Margin="400,50,400,177">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="35"/>
@@ -56,18 +56,22 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="35"/>
-                <RowDefinition/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="1.94"/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="username" TextWrapping="Wrap" Grid.Row="1" FontFamily="Global User Interface" FontSize="18" Margin="40,0"/>
-            <TextBox x:Name="nickname" Grid.Row="3" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" HorizontalAlignment="Right" Width="486" Margin="0,0,40,0"/>
-            <TextBox x:Name="mailad" Grid.Row="5" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" Margin="40,0"/>
-            <TextBlock TextWrapping="Wrap" Text="User Name" FontSize="36"/>
-            <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Nick Name" FontSize="36"/>
-            <TextBlock Grid.Row="4" TextWrapping="Wrap" Text="Mail" FontSize="36"/>
-            <TextBlock Grid.Row="6" TextWrapping="Wrap" Text="Pass Word" FontSize="36"/>
-            <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="40,3,0,0" Grid.Row="7" VerticalAlignment="Top" Width="486"/>
+            <TextBox x:Name="username" TextWrapping="Wrap" Grid.Row="1" FontFamily="Global User Interface" FontSize="18" Margin="40,0" Background="#F2F2F2F2"/>
+            <TextBox x:Name="nickname" Grid.Row="3" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" HorizontalAlignment="Right" Width="486" Margin="0,0,40,0" Background="#F2F2F2F2"/>
+            <TextBox x:Name="mailad" Grid.Row="5" TextWrapping="Wrap" FontFamily="Global User Interface" FontSize="18" Margin="40,0" Background="#F2F2F2F2"/>
+            <TextBlock TextWrapping="Wrap" Text="User Name" FontSize="36" Foreground="White"/>
+            <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Nick Name" FontSize="36" Foreground="White"/>
+            <TextBlock Grid.Row="4" TextWrapping="Wrap" Text="Mail" FontSize="36" Foreground="White"/>
+            <TextBlock Grid.Row="6" TextWrapping="Wrap" Text="Password" FontSize="36" Foreground="White"/>
+            <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="40,3,0,0" Grid.Row="7" VerticalAlignment="Top" Width="486" Background="#F2F2F2F2"/>
+            <TextBlock Grid.Row="8" TextWrapping="Wrap" Text="Password(Check)" FontSize="36" Foreground="White"/>
+            <PasswordBox x:Name="passwordCheck" Grid.Row="9" Grid.RowSpan="2" Margin="40,0,40,-0.06" Background="#F2F2F2F2"/>
         </Grid>
-        <Button x:Name="singup" Content="Sing Up" HorizontalAlignment="Left" Margin="634,438,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-2.579,-0.794" Click="SignUpButton_clik"/>
+        <Button x:Name="singup" Content="Sing Up" HorizontalAlignment="Left" Margin="640,491,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-2.579,-0.794" Click="SignUpButton_clik"/>
         <TextBlock x:Name="result" HorizontalAlignment="Left" Margin="153,177,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-5.644,-12.615" Height="292" Width="212"/>
     </Grid>
 </Page>

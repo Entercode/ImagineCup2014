@@ -19,9 +19,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using Windows.Networking.Proximity;
+using System.Threading.Tasks;
 
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
@@ -36,6 +38,7 @@ namespace SYNAPSE
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        Frame rootFrame;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -61,6 +64,7 @@ namespace SYNAPSE
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            rootFrame = Window.Current.Content as Frame;
         }
 
         /// <summary>
@@ -115,6 +119,37 @@ namespace SYNAPSE
 
         async private void SignUpButton_clik(object sender, RoutedEventArgs e)
         {
+            //例外処理
+            if(username.Text == "")
+            {
+                var messageDialog = new MessageDialog("ユーザーネームが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+            if(nickname.Text == "")
+            {
+                var messageDialog = new MessageDialog("ニックネームが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+            if(mailad.Text == "")
+            {
+                var messageDialog = new MessageDialog("メールアドレスが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+            if(password.Password == "")
+            {
+                var messageDialog = new MessageDialog("パスワードが入力されていません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+            if(password.Password != passwordCheck.Password)
+            {
+                var messageDialog = new MessageDialog("パスワードが一致しません", "エラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
             //デバイスIDの取得開始
             var token = HardwareIdentification.GetPackageSpecificToken(null);
             var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(token.Id);
@@ -137,8 +172,11 @@ namespace SYNAPSE
             //ハッシュ生成
             var algorithm = HashAlgorithmProvider.OpenAlgorithm("SHA1");
             IBuffer did = CryptographicBuffer.ConvertStringToBinary(id, BinaryStringEncoding.Utf8);
+            IBuffer pass = CryptographicBuffer.ConvertStringToBinary(password.Password, BinaryStringEncoding.Utf8);
             var hash_did = algorithm.HashData(did);
+            var hash_pass = algorithm.HashData(pass);
             string did_h = CryptographicBuffer.EncodeToHexString(hash_did);
+            string pass_h = CryptographicBuffer.EncodeToHexString(hash_pass);
 
             //デバイスIDをアプリデータとして保存
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
@@ -157,14 +195,32 @@ namespace SYNAPSE
             try
             {
                 response = await client.PostAsync(ressoceAddress, content);
-                result.Text = await response.Content.ReadAsStringAsync();
+                //result.Text = await response.Content.ReadAsStringAsync();
             }
             catch
             {
-                result.Text = "ユーザー登録失敗\n";
+                //result.Text = "ユーザー登録失敗\n";
                 return;
             }
+            client.Dispose();
+            Uri loginAddress = new Uri("http://synapse-server.cloudapp.net/Set/Login.aspx");
+            HttpFormUrlEncodedContent loginContent = new HttpFormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string,string>("uid",username.Text),
+                new KeyValuePair<string,string>("pass_h",pass_h),
+                new KeyValuePair<string,string>("did_h",did_h),
 
+            });
+            try
+            {
+                
+                response = await client.PostAsync(loginAddress, loginContent);
+            }
+            catch
+            {
+
+            }
+            rootFrame.Navigate(typeof(TimeLine));
         }
     }
 }

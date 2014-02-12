@@ -8,53 +8,53 @@
     <PackageIdentityName>8bf5b55f-85e9-4ce2-a879-c2a42c2463ff</PackageIdentityName>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
       <PackagePath>SYNAPSE.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\SmallLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Assets\SmallLogo.scale-100.png">
       <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\Common\ReadMe.txt">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Common\ReadMe.txt">
       <PackagePath>Common\ReadMe.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\LogInPage.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\LogInPage.xbf">
       <PackagePath>LogInPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\Profile.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\Profile.xbf">
       <PackagePath>Profile.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
       <PackagePath>TimeLine.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
       <PackagePath>UserInformationPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\tomoki\documents\visual studio 2013\Projects\SYNAPSE\SYNAPSE\bin\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

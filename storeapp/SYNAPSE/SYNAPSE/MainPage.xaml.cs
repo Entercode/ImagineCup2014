@@ -176,5 +176,6 @@ namespace SYNAPSE
                 this.Frame.Navigate(typeof(TimeLine));
             }
         }
+
     }
 }
