@@ -22,6 +22,8 @@ using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Networking.Proximity;
+using System.Threading.Tasks;
+
 
 // 基本ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234237 を参照してください
 
@@ -572,9 +574,14 @@ namespace SYNAPSE
             HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
             var replaced = filter.CookieManager.SetCookie(cookie, false);
             var Client = new HttpClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = null;
 
             Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogOut.aspx");
+
+            //クッキーデータの変更
+            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+            localSid.Values["sid"] = null;
+
             try
             {
                 response = await Client.PostAsync(ressorceAddress, new HttpStringContent(""));
@@ -583,17 +590,31 @@ namespace SYNAPSE
             catch
             {
             }
-            //クッキーデータの変更
-            ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
-            localSid.Values["sid"] = null;
-            try
+
+            //非同期処理が完了したかどうかの判定
+            while(true)
             {
-                timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
-                string str = "";
-                await FileIO.WriteTextAsync(timeLineBuffer, str);
+                if(response.IsSuccessStatusCode)
+                {
+                     break;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
-            catch
+            string x = await response.Content.ReadAsStringAsync();
+            while (true)
             {
+                if (x.Contains("Logout successed"))
+                {
+                    break;
+                }
+                else if (x.Contains("Error has occured"))
+                {
+                    var message = new MessageDialog("ログアウトに失敗しました。", "エラー");
+                    await message.ShowAsync();
+                    return;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+
             }
             rootFrame.Navigate(typeof(LogInPage));
         }

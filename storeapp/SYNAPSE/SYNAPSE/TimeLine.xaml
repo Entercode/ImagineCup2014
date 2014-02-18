@@ -73,15 +73,15 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Year}" Foreground="Chocolate"></TextBlock>
+                            <TextBlock Text="{Binding Year}" Foreground="Chocolate" ></TextBlock>
                             <TextBlock Text="{Binding Month}" Foreground="Chocolate"></TextBlock>
                             <TextBlock Text="{Binding Day}" Foreground="Chocolate"></TextBlock>
                             <TextBlock Text="{Binding Hour}" Foreground="Chocolate"></TextBlock>
                             <TextBlock Text="{Binding Minute}" Foreground="Chocolate"></TextBlock>
                             <TextBlock Text="{Binding Second}" Foreground="Chocolate"></TextBlock>
                         </StackPanel>
-                        <TextBlock Text="{Binding NickName}" Foreground="Aqua"></TextBlock>
-                        <TextBlock Text="{Binding Tweet}"></TextBlock>
+                        <TextBlock Text="{Binding NickName}" Foreground="DarkBlue" FontSize="20"></TextBlock>
+                        <TextBlock Text="{Binding Tweet}" Foreground="Black" FontSize="30" TextWrapping="Wrap"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

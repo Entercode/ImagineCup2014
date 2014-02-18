@@ -22,6 +22,7 @@ using Windows.Storage.Streams;
 using SYNAPSE;
 using Windows.System.Profile;
 using Windows.Storage;
+using System.Threading.Tasks;
 
 
 
@@ -39,6 +40,7 @@ namespace SYNAPSE
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         string id;
         Frame rootFrame;
+        StorageFile timeLineBuffer;
 
         /// <summary>
         /// これは厳密に型指定されたビュー モデルに変更できます。
@@ -78,7 +80,7 @@ namespace SYNAPSE
         /// <see cref="Frame.Navigate(Type, Object)"/> に渡されたナビゲーション パラメーターと、
         /// 前のセッションでこのページによって保存された状態の辞書を提供する
         /// セッション。ページに初めてアクセスするとき、状態は null になります。</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        async private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             //デバイスIDを復元
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
@@ -86,6 +88,9 @@ namespace SYNAPSE
             {
                id = localSettings.Values["did"].ToString();
             }
+            timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
+            string str = "";
+            await FileIO.WriteTextAsync(timeLineBuffer, str);
         }
 
         /// <summary>
@@ -138,7 +143,7 @@ namespace SYNAPSE
                 return;
             }
             var Client = new HttpClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = null;
 
             Uri ressorceAddress = new Uri("http://synapse-server.cloudapp.net/Set/LogIn.aspx");
             string str;
@@ -206,13 +211,37 @@ namespace SYNAPSE
                 //通信開始
                 
                 response = await Client.PostAsync(ressorceAddress, content);
-                str = await response.Content.ReadAsStringAsync();
-                result.Text = str;
+                //result.Text = str;
             }
             catch
             {
-                result.Text = "ログイン失敗\n";
-                return;
+                //result.Text = "ログイン失敗\n";
+                //return;
+            }
+
+            //非同期処理が完了したかどうかの判定
+            while(true)
+            {
+                if(response.IsSuccessStatusCode)
+                {
+                    break;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+            }
+
+            str = await response.Content.ReadAsStringAsync();
+            while(true)
+            {
+                if (str.Contains("Login successed"))
+                {
+                    break;
+                }else if(str.Contains("Error has occured"))
+                {
+                    var message = new MessageDialog("ログアウトに失敗しました。", "エラー");
+                    await message.ShowAsync();
+                    return;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
 
             //cookieの取得
@@ -241,6 +270,11 @@ namespace SYNAPSE
         private void GotoSingUpButton_clik(object sender, RoutedEventArgs e)
         {
             rootFrame.Navigate(typeof(UserInformationPage));
+        }
+
+        private void pageTitle_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

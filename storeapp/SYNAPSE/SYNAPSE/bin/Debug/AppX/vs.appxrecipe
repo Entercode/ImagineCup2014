@@ -23,7 +23,7 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\SYNAPSE.exe">
       <PackagePath>SYNAPSE.exe</PackagePath>
-      <Modified>2014-02-12T07:30:46.896</Modified>
+      <Modified>2014-02-18T18:42:09.529</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
@@ -55,7 +55,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\LogInPage.xbf">
       <PackagePath>LogInPage.xbf</PackagePath>
-      <Modified>2014-02-12T07:30:46.563</Modified>
+      <Modified>2014-02-18T18:42:09.247</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
@@ -67,7 +67,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\TimeLine.xbf">
       <PackagePath>TimeLine.xbf</PackagePath>
-      <Modified>2014-02-12T06:44:37.629</Modified>
+      <Modified>2014-02-18T18:37:30.327</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tomoki\Desktop\Himagine-feature-storeapp\storeapp\SYNAPSE\SYNAPSE\bin\Debug\UserInformationPage.xbf">
       <PackagePath>UserInformationPage.xbf</PackagePath>

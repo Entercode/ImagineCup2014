@@ -194,6 +194,7 @@ namespace SYNAPSE
 
             try
             {
+                //await singUpAsync(ressoceAddress, content);
                 response = await client.PostAsync(ressoceAddress, content);
                 //result.Text = await response.Content.ReadAsStringAsync();
             }
@@ -202,8 +203,8 @@ namespace SYNAPSE
                 //result.Text = "ユーザー登録失敗\n";
                 return;
             }
-            client.Dispose();
             Uri loginAddress = new Uri("http://synapse-server.cloudapp.net/Set/Login.aspx");
+            HttpResponseMessage loginResponse = null;
             HttpFormUrlEncodedContent loginContent = new HttpFormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string,string>("uid",username.Text),
@@ -213,14 +214,63 @@ namespace SYNAPSE
             });
             try
             {
-                
-                response = await client.PostAsync(loginAddress, loginContent);
+                loginResponse = await client.PostAsync(loginAddress, loginContent);
+                //RunAsync(response, loginAddress, loginContent);
             }
             catch
             {
 
             }
+
+            //非同期処理が完了したかどうかの処理
+            while(true)
+            {
+                
+                if(loginResponse.IsSuccessStatusCode)
+                {
+                    break;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+            }
+            string x = await loginResponse.Content.ReadAsStringAsync();
+            while(true)
+            {
+                if(x.Contains("Login successed"))
+                {
+                    break;
+                }
+                else if (x.Contains("Error has occured"))
+                {
+                    var message = new MessageDialog("サインアップに失敗しました。","エラー");
+                    await message.ShowAsync();
+                    return;
+                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+
+            }
+            //cookieの取得
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(loginAddress);
+
+            foreach (HttpCookie cookie in cookieCollection)
+            {
+                result.Text += "--------------------\r\n";
+                result.Text += "Name: " + cookie.Name + "\r\n";
+                result.Text += "Domain: " + cookie.Domain + "\r\n";
+                result.Text += "Path: " + cookie.Path + "\r\n";
+                result.Text += "Value: " + cookie.Value + "\r\n";
+                result.Text += "Expires: " + cookie.Expires + "\r\n";
+                result.Text += "Secure: " + cookie.Secure + "\r\n";
+                result.Text += "HttpOnly: " + cookie.HttpOnly + "\r\n";
+                //valueｎ保存
+                ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
+                ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;
+                localSid.Values["sid"] = cookie.Value;
+                localDomain.Values["Domain"] = cookie.Domain;
+            }
+            //result.Text = await loginResponse.Content.ReadAsStringAsync();
             rootFrame.Navigate(typeof(TimeLine));
         }
+
     }
 }
