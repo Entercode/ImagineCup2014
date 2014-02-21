@@ -80,8 +80,8 @@ namespace SYNAPSE
             //一定時間間隔に発生する処理の開始
             DispatcherTimer sendTimer = new DispatcherTimer();
             DispatcherTimer searchTimer = new DispatcherTimer();
-            sendTimer.Interval = new TimeSpan(0, 0, 5, 0);
-            searchTimer.Interval = new TimeSpan(0, 0, 10);
+            sendTimer.Interval = new TimeSpan(0, 0, 0, 30);
+            searchTimer.Interval = new TimeSpan(0, 0, 0, 10);
             sendTimer.Start();
             searchTimer.Start();
             sendTimer.Tick += timer_Tick;
@@ -138,6 +138,15 @@ namespace SYNAPSE
                     HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
                     var replaced = filter.CookieManager.SetCookie(cookie, false);
                     responseMessage = await client.PostAsync(streetPassAdress, streetPassContent);
+
+                    //wifiに接続されているか確認
+                    if (responseMessage == null)
+                    {
+                        var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                        await messageDialog.ShowAsync();
+                        return;
+                    }
+
                     //tweetBox.Text = i.Key;
                 }
                 deviceBuffer.Clear();
@@ -208,6 +217,14 @@ namespace SYNAPSE
 
                 //xmlをゲット
                 HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
+
+                //wifiに接続されているか確認
+                if (responseMessage == null)
+                {
+                    var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                    await messageDialog.ShowAsync();
+                    return;
+                }
 
                 responseMessage.EnsureSuccessStatusCode();
                 //比較用にタイムラインを読み込む
@@ -531,6 +548,15 @@ namespace SYNAPSE
 
             //xmlをゲット
             HttpResponseMessage responseMessage = await client.GetAsync(targetAdresse);
+
+            //wifiに接続されているか確認
+            if (responseMessage == null)
+            {
+                var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+
             //プロフィール画像のゲット
             //HttpResponseMessage profileResponseMessage = await client.GetAsync(ProfileGetAdresse);
             //BitmapImage bitmapImage = new BitmapImage();
@@ -589,6 +615,15 @@ namespace SYNAPSE
             }
             catch
             {
+                
+            }
+
+            //wifiにつながれているかどうか確認
+            if(response == null)
+            {
+                var messageDialog = new MessageDialog("端末がインターネットにつながれていません", "ネットワークエラー");
+                await messageDialog.ShowAsync();
+                return;
             }
 
             //非同期処理が完了したかどうかの判定

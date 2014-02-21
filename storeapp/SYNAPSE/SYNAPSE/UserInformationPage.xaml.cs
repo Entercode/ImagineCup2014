@@ -222,6 +222,14 @@ namespace SYNAPSE
 
             }
 
+            //wifiに接続されているか確認
+            if (loginResponse == null)
+            {
+                var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+
             //非同期処理が完了したかどうかの処理
             while(true)
             {
@@ -254,14 +262,6 @@ namespace SYNAPSE
 
             foreach (HttpCookie cookie in cookieCollection)
             {
-                result.Text += "--------------------\r\n";
-                result.Text += "Name: " + cookie.Name + "\r\n";
-                result.Text += "Domain: " + cookie.Domain + "\r\n";
-                result.Text += "Path: " + cookie.Path + "\r\n";
-                result.Text += "Value: " + cookie.Value + "\r\n";
-                result.Text += "Expires: " + cookie.Expires + "\r\n";
-                result.Text += "Secure: " + cookie.Secure + "\r\n";
-                result.Text += "HttpOnly: " + cookie.HttpOnly + "\r\n";
                 //valueｎ保存
                 ApplicationDataContainer localSid = ApplicationData.Current.LocalSettings;
                 ApplicationDataContainer localDomain = ApplicationData.Current.LocalSettings;

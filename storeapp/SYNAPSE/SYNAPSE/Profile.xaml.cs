@@ -133,8 +133,9 @@ namespace SYNAPSE
 
         #endregion
 
-        async private void ProfileImage_doubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
+        //async private void ProfileImage_doubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        //{
+            /*
             //ファイルピッカーオブジェクトの生成
             FileOpenPicker openPicker = new FileOpenPicker();
             //ディレクトリの設定
@@ -213,6 +214,7 @@ namespace SYNAPSE
                 profileText.Text = await responseMessage.Content.ReadAsStringAsync();*/
                 //profileText.Text = await content.ReadAsStringAsync();
 
+            /*
                 HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, targetAdresse);
                 HttpMultipartFormDataContent content = new HttpMultipartFormDataContent(boundary);
                 HttpStreamContent stream = new HttpStreamContent(rstream);
@@ -227,8 +229,8 @@ namespace SYNAPSE
                 //profileText.Text = await response.Content.ReadAsStringAsync();
                 profileText.Text = await requestMessage.Content.ReadAsStringAsync();
             }
-              
-        }
+             */ 
+        //}
 
         async private void SendButton_clik(object sender, RoutedEventArgs e)
         {
@@ -236,53 +238,45 @@ namespace SYNAPSE
             //コンテンツの生成
 
             //cookieの設定
-            /*HttpCookie cookie = new HttpCookie("sid", domainValue, "");
+            HttpCookie cookie = new HttpCookie("sid", domainValue, "");
             cookie.Value = sidValue;
             cookie.Secure = false;
             cookie.HttpOnly = false;
             HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
             var replaced = filter.CookieManager.SetCookie(cookie, false);
 
-            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundaryByte = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\n");
-            BasicProperties bp = await file.GetBasicPropertiesAsync();
-            string formDataTemplate = "name = \"{0}\"\r\n\r\n{1}";
-            string headerTemplate = "name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            string header = string.Format(headerTemplate, "prfimg", fileName, file.ContentType);
-            string formItem = string.Format(formDataTemplate, "prfimg", file);
-            byte[] fdata = new byte[bp.Size];
-            byte[] headerByte = System.Text.Encoding.UTF8.GetBytes(header);
-            byte[] formItemByte = System.Text.Encoding.UTF8.GetBytes(formItem);
-            byte[] trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
+            HttpResponseMessage profileResponse;
+            HttpClient clinet = new HttpClient();
 
-            IInputStream istream = filestream.GetInputStreamAt(0);
-            DataReader reader = new DataReader(istream);
-            await reader.LoadAsync((uint)fdata.Length);
-            reader.ReadBytes(fdata);
-            //profileText.Text = System.Text.Encoding.UTF8.GetString(fdata,0,fdata.Length);
+            HttpFormUrlEncodedContent profileContent = new HttpFormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string,string>("prf",profileText.Text),
+            });
 
-            byte[] data = new byte[formItemByte.Length + headerByte.Length + fdata.Length];
-            Array.Copy(formItemByte, 0, data, 0, formItemByte.Length);
-            Array.Copy(headerByte, 0, data, formItemByte.Length, headerByte.Length);
-            Array.Copy(fdata, 0, data, formItemByte.Length + headerByte.Length, fdata.Length);
+            profileResponse = await clinet.PostAsync(targetAdresse, profileContent);
 
-            MemoryStream mem = new MemoryStream(data);
-            IInputStream rstream = mem.AsInputStream();
+            //wifiがつながれているか確認
+            if (profileContent == null)
+            {
+                var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
 
+            if(profileResponse.IsSuccessStatusCode)
+            {
+                string str = await profileResponse.Content.ReadAsStringAsync();
+                if(str.Contains("Edited profile"))
+                {
 
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, targetAdresse);
-            HttpMultipartFormDataContent content = new HttpMultipartFormDataContent(boundary);
-            HttpStreamContent stream = new HttpStreamContent(rstream);
-            HttpStringContent stringContent = new HttpStringContent(profileText.Text);
-            content.Add(stream,"prfimg");
-            content.Add(stringContent,"prf");
-            requestMessage.Content = content;
-
-            HttpResponseMessage response;
-            HttpClient client = new HttpClient();
-            //response = await client.SendRequestAsync(requestMessage);
-            //profileText.Text = await response.Content.ReadAsStringAsync();
-            //profileText.Text = await content.ReadAsStringAsync();*/
+                }else if(str.Contains("Error has occured"))
+                {
+                    var messageDialog = new MessageDialog("プロフィールの更新に失敗しました", "ネットワークエラー");
+                    await messageDialog.ShowAsync();
+                    return;
+                }
+            }
+            
         }
     }
 

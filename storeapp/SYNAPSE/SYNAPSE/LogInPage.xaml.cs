@@ -88,9 +88,16 @@ namespace SYNAPSE
             {
                id = localSettings.Values["did"].ToString();
             }
-            timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
-            string str = "";
-            await FileIO.WriteTextAsync(timeLineBuffer, str);
+            try
+            {
+                timeLineBuffer = await ApplicationData.Current.RoamingFolder.GetFileAsync("timeLinebuffer.txt");
+                string str = "";
+                await FileIO.WriteTextAsync(timeLineBuffer, str);
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>
@@ -219,6 +226,14 @@ namespace SYNAPSE
                 //return;
             }
 
+            //wifiにつながれているか判断
+            if(response == null)
+            {
+                var messageDialog = new MessageDialog("端末がインターネットにつながっていません", "ネットワークエラー");
+                await messageDialog.ShowAsync();
+                return;
+            }
+
             //非同期処理が完了したかどうかの判定
             while(true)
             {
@@ -237,7 +252,7 @@ namespace SYNAPSE
                     break;
                 }else if(str.Contains("Error has occured"))
                 {
-                    var message = new MessageDialog("ログアウトに失敗しました。", "エラー");
+                    var message = new MessageDialog("ログインに失敗しました。", "エラー");
                     await message.ShowAsync();
                     return;
                 }
