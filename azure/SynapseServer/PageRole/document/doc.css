@@ -1,0 +1,25 @@
+﻿body {
+	background-color:#F5F5F5;
+	font-family:'Yu Mincho','YuMincho','游明朝体','游明朝', serif;
+}
+
+h1,h2,h3,h4{
+	font-family:'Yu Gothic','YuGothic','游ゴシック体','游ゴシック',sans-serif;
+}
+
+h3{
+	margin-top:20px;
+	padding:5px;
+	border-left:5px solid lightblue;
+	border-bottom:1px solid lightblue;
+}
+
+h2 + p, h3 + p, h3 + p + a{
+	margin-left:1em;
+}
+h3 + p + ol{
+	margin-left:3em;
+}
+p.date{
+	float:right;
+}

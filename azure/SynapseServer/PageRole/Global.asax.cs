@@ -38,6 +38,16 @@ namespace PageRole
 				return;
 			}
 
+			if (Request.FilePath.Contains("/document/"))
+			{
+				return;
+			}
+
+			if ("/".Equals(Request.FilePath))
+			{
+				return;
+			}
+
 			if (Request.FilePath.Contains("/Get/") && "GET".Equals(Request.HttpMethod))
 			{
 				return;
