@@ -22,6 +22,15 @@ namespace PageRole.test {
         protected global::System.Web.UI.HtmlControls.HtmlForm AccountTableForm;
         
         /// <summary>
+        /// Logout コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Logout;
+        
+        /// <summary>
         /// AccountSource コントロール。
         /// </summary>
         /// <remarks>

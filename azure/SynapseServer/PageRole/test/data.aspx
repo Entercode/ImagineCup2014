@@ -9,8 +9,8 @@
 <link href="data.css" rel="stylesheet" type="text/css" />
 </head>
 <body style="font-family: monospace">
-	<a href="data.aspx">更新</a>
 	<form id="AccountTableForm" runat="server">
+	<a href="data.aspx">更新</a><asp:Button ID="Logout" OnClick="Logout_Click" runat="server" Text="ログアウト" />
 		<h2>Account(アカウント情報)</h2>
 		<asp:ObjectDataSource ID="AccountSource" runat="server" SelectMethod="GetAccounts" TypeName="PageRole.test.GridViewObject" DeleteMethod="DeleteAccount" OnDeleting="DataDeleting">
 			<DeleteParameters><asp:Parameter Name="UserId" Type="String" /></DeleteParameters>

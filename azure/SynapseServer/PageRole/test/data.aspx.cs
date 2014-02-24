@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using SynapseServer;
+using System.Web.Security;
 
 namespace PageRole.test
 {
@@ -37,6 +38,12 @@ namespace PageRole.test
 		}
 
 		private string message = "無し";
+
+		protected void Logout_Click(object sender, EventArgs e)
+		{
+			FormsAuthentication.SignOut();
+			Response.Redirect("../");
+		}
 	}
 
 	public class GridViewObject
@@ -139,7 +146,7 @@ namespace PageRole.test
 		{
 			var result = new List<StreetPassInformation>();
 
-			string query = "SELECT * FROM StreetPass";
+			string query = "SELECT * FROM StreetPass ORDER BY PassedTime";
 
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
@@ -227,7 +234,8 @@ namespace PageRole.test
 			string query
 				= "SELECT A.UserId, A.Nickname, T.Tweet, T.ClientTweetTime, T.BindId, T.ServerRecievedTime "
 				+ "FROM Tweet T, AccountDevice D, Account A "
-				+ "WHERE T.BindId = D.BindId AND D.UserId = A.UserId";
+				+ "WHERE T.BindId = D.BindId AND D.UserId = A.UserId "
+				+ "ORDER BY ServerRecievedTime";
 
 			Helper.ExecuteSqlQuery(query,
 				getAction: (reader) =>
