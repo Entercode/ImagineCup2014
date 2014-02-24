@@ -20,16 +20,17 @@ namespace PageRole.Get
 			{
 				Response.StatusCode = 404;
 				Response.End();
+				return;
 			}
-
-			string profileImageQuery = "SELECT ImageType,ImageBinary FROM AccountProfile WHERE HASHBYTES('SHA1', UserId) = CONVERT(varbinary, @UserId, 2)";
 
 			try
 			{
+				string profileImageQuery = "SELECT ImageType,ImageBinary FROM AccountProfile WHERE HASHBYTES('SHA1', UserId) = CONVERT(varbinary, @UserIdHash, 2)";
+
 				Helper.ExecuteSqlQuery(profileImageQuery,
 					setAction: (param) =>
 					{
-						param.Add("@UserId", SqlDbType.VarChar, 40).Value = userIdHash;
+						param.Add("@UserIdHash", SqlDbType.VarChar, 40).Value = userIdHash;
 					},
 					getAction: (reader) =>
 					{

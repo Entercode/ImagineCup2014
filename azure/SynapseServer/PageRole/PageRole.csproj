@@ -151,9 +151,15 @@
     <None Include="App_Data\LocalDb_log.ldf">
       <DependentUpon>LocalDb.mdf</DependentUpon>
     </None>
+    <Content Include="document\agreement.html" />
+    <Content Include="document\copyright.html" />
+    <Content Include="document\doc.css" />
+    <Content Include="document\privacy.html" />
     <Content Include="Get\IsLogin.aspx" />
+    <Content Include="Get\Profile.aspx" />
     <Content Include="Get\ProfileImage.aspx" />
     <Content Include="Get\Timeline.aspx" />
+    <Content Include="index.html" />
     <Content Include="Set\Profile.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Set\Login.aspx" />
@@ -164,6 +170,7 @@
     <Content Include="test\data.aspx" />
     <Content Include="Set\Tweet.aspx" />
     <Content Include="test\data.css" />
+    <Content Include="test\DevLogin.aspx" />
     <Content Include="test\timeline.aspx" />
     <Content Include="test\timeline.css" />
     <Content Include="Web.config">
@@ -191,6 +198,13 @@
     </Compile>
     <Compile Include="Get\IsLogin.aspx.designer.cs">
       <DependentUpon>IsLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Get\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Get\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Get\ProfileImage.aspx.cs">
       <DependentUpon>ProfileImage.aspx</DependentUpon>
@@ -258,6 +272,13 @@
     </Compile>
     <Compile Include="Set\Tweet.aspx.designer.cs">
       <DependentUpon>Tweet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test\DevLogin.aspx.cs">
+      <DependentUpon>DevLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test\DevLogin.aspx.designer.cs">
+      <DependentUpon>DevLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="test\timeline.aspx.cs">
       <DependentUpon>timeline.aspx</DependentUpon>

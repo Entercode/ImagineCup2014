@@ -61,10 +61,16 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Releas
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\Microsoft.Data.OData.resources.dll
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\bin\zh-Hant\System.Spatial.resources.dll
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\document\agreement.html
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\document\copyright.html
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\document\doc.css
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\document\privacy.html
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\IsLogin.aspx
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\Profile.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\ProfileImage.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Get\Timeline.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Global.asax
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\index.html
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\packages.config
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Set\Login.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Set\Logout.aspx
@@ -74,6 +80,7 @@ d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Releas
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Set\Tweet.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\data.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\data.css
+d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\DevLogin.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\timeline.aspx
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\test\timeline.css
 d:\mydocument\visual studio 2012\Projects\SynapseServer\SynapseServer\obj\Release\PageRole\Web.config
