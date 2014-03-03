@@ -1,15 +1,15 @@
 ﻿CREATE FUNCTION [dbo].[StreetPassRating]
 (
-	@Time datetime2(2),
-	@Parameter float
+	@Time DATETIME2(2),
+	@Parameter FLOAT
 )
 RETURNS float
 AS
 BEGIN
-	DECLARE @second int;
-	DECLARE @result float;
-	DECLARE @x_first float;
-	DECLARE @x_second float;
+	DECLARE @second INT;
+	DECLARE @result FLOAT;
+	DECLARE @x_first FLOAT;
+	DECLARE @x_second FLOAT;
 
 	SET @second = DATEDIFF(SECOND, @Time, DATEADD(HOUR, 9, GETDATE()));/*UTF->Tokyo*/
 

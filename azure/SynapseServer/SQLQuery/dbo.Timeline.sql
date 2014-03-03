@@ -21,8 +21,8 @@ BEGIN
 	
 	INSERT @result
 	SELECT T.UserId, T.Nickname, T.ClientTweetTime, T.Tweet
-	FROM @allTweets T, NearBindId(@UserBindId, @Param) N
-	WHERE T.BindId = N.NearBindId AND T.ClientTweetTime > N.PassedTime
+	FROM @allTweets T, dbo.NearBindId(@UserBindId, @Param) N
+	WHERE T.BindId = N.NearBindId AND T.ClientTweetTime > N.FirstPassedTime
 	UNION
 	SELECT T.UserId, T.Nickname, T.ClientTweetTime, T.Tweet
 	FROM @allTweets T
