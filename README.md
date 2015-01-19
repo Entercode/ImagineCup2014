@@ -1,4 +1,4 @@
-Himagine
+ImagineCup2014
 ========
 
 For 2014 HimagineCup
